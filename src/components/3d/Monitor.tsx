@@ -5,10 +5,15 @@ import React, {
   useEffect,
   useMemo,
   useState,
+  useRef
 } from "react";
 import { Center, useGLTF, Html } from "@react-three/drei";
 import { createPortal } from "@react-three/fiber";
 import * as THREE from "three";
+import { gsap } from "gsap";
+import { useGSAP } from "@gsap/react";
+
+gsap.registerPlugin(useGSAP);
 
 export const Monitor = forwardRef<THREE.Group, any>((props, ref) => {
   const { scene } = useGLTF("/models/monitor.glb");
@@ -76,38 +81,6 @@ export const Monitor = forwardRef<THREE.Group, any>((props, ref) => {
     };
   }, [screenMesh]);
 
-  const [waveKey, setWaveKey] = useState(0);
-
-  const handleReplayWave = () => {
-    setWaveKey((prev) => prev + 1);
-  };
-
-  // Helper to render words split into staggered wavy characters with individual gradient strokes
-  const renderWavyWord = (word: string, startIdx: number, totalCount: number, isAccent = false) => {
-    return (
-      <span className="wavy-word" key={`${word}-${startIdx}`}>
-        {word.split('').map((char, i) => {
-          const globalIdx = startIdx + i;
-          const pos = globalIdx / Math.max(totalCount - 1, 1);
-          const charStroke = '#ffc582ff';
-          const delay = pos * 1.0;
-          return (
-            <span
-              key={i}
-              className={`wavy-char ${isAccent ? 'accent-orange' : ''}`}
-              style={{
-                '--char-stroke': charStroke,
-                animationDelay: `${delay.toFixed(3)}s`,
-              } as React.CSSProperties}
-            >
-              {char}
-            </span>
-          );
-        })}
-      </span>
-    );
-  };
-
   useEffect(() => {
     scene.traverse((child) => {
       if (!(child instanceof THREE.Mesh)) return;
@@ -170,124 +143,7 @@ export const Monitor = forwardRef<THREE.Group, any>((props, ref) => {
             rotation={screenLayout.rotation}
             zIndexRange={[100, 0]}
           >
-            <div
-              className="w-[1024px] bg-[#ffffff] flex flex-col items-center pt-32 font-sans relative overflow-hidden"
-              style={{ 
-                height: screenLayout.pxHeight,
-                backgroundImage: `
-                  radial-gradient(ellipse 100% 70% at 50% 18%, #ffffff 0%, rgba(255, 255, 255, 0.98) 40%, rgba(255, 250, 244, 0.8) 65%, transparent 100%),
-                  radial-gradient(130% 90% at 50% 45%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 245, 235, 0.65) 50%, rgba(254, 222, 192, 0.35) 100%),
-                  linear-gradient(180deg, #ffffff 0%, #fffdfa 25%, #fef5ec 60%, #fbd5b5 100%)
-                `
-              }}
-            >
-              {/* Atmospheric lighting and glow layers */}
-              <div 
-                className="absolute top-0 left-0 right-0 bottom-0 pointer-events-none z-[1]" 
-                style={{ background: 'radial-gradient(ellipse 85% 65% at 20% 15%, rgba(255, 255, 255, 0.95) 0%, rgba(255, 248, 238, 0.7) 45%, transparent 80%)' }} 
-                aria-hidden="true" 
-              />
-              <div 
-                className="absolute bottom-[24%] left-1/2 -translate-x-1/2 w-full max-w-[1600px] h-[380px] pointer-events-none z-[1] blur-[24px]" 
-                style={{ background: 'radial-gradient(ellipse 80% 55% at 50% 65%, rgba(255, 236, 206, 0.9) 0%, rgba(255, 202, 154, 0.5) 45%, transparent 80%)' }} 
-                aria-hidden="true" 
-              />
-
-              {/* Orange Field Landscape Background */}
-              <div className="absolute bottom-0 left-0 right-0 w-full h-full pointer-events-none z-[2] overflow-hidden" aria-hidden="true">
-                <img
-                  src="/images/Orange Filed.png"
-                  alt="Webnox AI Landscape - Orange Field"
-                  className="w-full h-full object-cover object-bottom pointer-events-none select-none saturate-[1.08] brightness-[1.05]"
-                />
-              </div>
-
-              <div className="relative z-10 flex flex-col items-center justify-center text-center px-6 w-full max-w-[1240px] m-auto">
-                {/* Trusted by Many Pill Badge */}
-                <div className="trusted-badge-container">
-                  <div className="trusted-badge" role="status">
-                    <div className="trusted-avatars" aria-hidden="true">
-                      <span className="avatar-wrapper">
-                        <img src="/images/Frame 5.png" alt="Partner logo 1" className="avatar-icon" />
-                      </span>
-                      <span className="avatar-wrapper">
-                        <img src="/images/Frame 6.png" alt="Partner logo 2" className="avatar-icon" />
-                      </span>
-                      <span className="avatar-wrapper">
-                        <img src="/images/Frame 7.png" alt="Partner logo 3" className="avatar-icon" />
-                      </span>
-                      <span className="avatar-wrapper">
-                        <img src="/images/Frame 8.png" alt="Partner logo 4" className="avatar-icon" />
-                      </span>
-                    </div>
-                    <span className="trusted-text">Trusted by Many</span>
-                  </div>
-                </div>
-
-                {/* Hero Title */}
-                <h1
-                  className="hero-title"
-                  key={waveKey}
-                  onMouseEnter={handleReplayWave}
-                  aria-label="AI Native Company Building AI Solutions"
-                >
-                  <div className="title-row first-row" aria-hidden="true">
-                    {renderWavyWord('AI', 0, 15, true)}{' '}
-                    {renderWavyWord('Native', 2, 15)}{' '}
-                    {renderWavyWord('Company', 8, 15)}
-                  </div>
-                  <div className="title-row second-row" aria-hidden="true">
-                    {renderWavyWord('Building', 0, 20)}
-                    <div
-                      className="creation-capsule"
-                      aria-label="Human and AI collaboration symbol"
-                      style={{ animationDelay: '0.43s' }}
-                    >
-                      <div className="capsule-hand human-hand">
-                        <img
-                          src="/images/Human hand.png"
-                          alt="Human hand"
-                          className="hand-asset"
-                        />
-                      </div>
-                      <div className="capsule-center-logo">
-                        <img
-                          src="/images/Logo glow 1.1.png"
-                          alt="Webnox infinity emblem"
-                          className="logo-glow-asset"
-                        />
-                      </div>
-                      <div className="capsule-hand robo-hand">
-                        <img
-                          src="/images/Robo hand.png"
-                          alt="Robotic hand"
-                          className="hand-asset"
-                        />
-                      </div>
-                    </div>
-                    {renderWavyWord('AI', 9, 20)}{' '}
-                    {renderWavyWord('Solutions', 11, 20)}
-                  </div>
-                </h1>
-
-                {/* Hero Subtitle Description */}
-                <p className="hero-description">
-                  Build software, AI agents, applications and digital products with Webnox. We provide<br className="hero-desc-br" />
-                  AI development services that turn business ideas into production-ready AI solutions.
-                </p>
-
-                {/* Primary Action Button */}
-                <div className="hero-action-group">
-                  <button
-                    type="button"
-                    className="cta-pill-button"
-                    id="build-ai-solution-cta"
-                  >
-                    Build Your AI Solution
-                  </button>
-                </div>
-              </div>
-            </div>
+            <HeroScreenContent pxHeight={screenLayout.pxHeight} />
           </Html>,
           screenMesh
         )}
@@ -297,5 +153,240 @@ export const Monitor = forwardRef<THREE.Group, any>((props, ref) => {
 });
 
 Monitor.displayName = "Monitor";
+
+const HeroScreenContent = ({ pxHeight }: { pxHeight: number }) => {
+  const heroContainerRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(() => {
+    if (!heroContainerRef.current) return;
+
+    // Normal characters: stroke to fill
+    gsap.fromTo('.rgmPrelChar:not(.accent-sweep)', {
+      opacity: 0,
+      color: 'transparent',
+      WebkitTextStroke: '1.2px rgba(18, 20, 26, 1)'
+    }, {
+      opacity: 1,
+      color: '#12141a',
+      WebkitTextStroke: '0px rgba(18, 20, 26, 0)',
+      duration: 1.0,
+      ease: 'power3.out',
+      stagger: 0.05,
+    });
+
+    // Accent characters: stroke to fill (keep orange after)
+    gsap.fromTo('.rgmPrelChar.accent-orange', {
+      opacity: 0,
+      color: 'transparent',
+      WebkitTextStroke: '1.2px rgba(255, 114, 48, 1)'
+    }, {
+      opacity: 1,
+      color: '#FF7230',
+      WebkitTextStroke: '0px rgba(255, 114, 48, 0)',
+      duration: 1.0,
+      ease: 'power3.out',
+      stagger: 0.05,
+    });
+
+    // Animate capsule: circle pop-in -> expand to capsule
+    const capsuleTl = gsap.timeline({ delay: 2.8 }); // Wait for text animation to finish
+    
+    // Pop in as a circle (52px width to match height) and push text apart
+    capsuleTl.fromTo('.creation-capsule', {
+      scale: 0,
+      autoAlpha: 0,
+      width: '0px',
+      margin: '0px -8px',
+      filter: 'blur(8px)',
+    }, {
+      scale: 1,
+      autoAlpha: 1,
+      width: '52px',
+      margin: '0px 10px',
+      filter: 'blur(0px)',
+      duration: 0.6,
+      ease: 'back.out(1.5)',
+    });
+    
+    // Expand to full capsule width
+    capsuleTl.to('.creation-capsule', {
+      width: '150px',
+      duration: 0.8,
+      ease: 'power3.inOut',
+    }, '+=0.2');
+    
+    // Fade in hands while expanding
+    capsuleTl.fromTo('.capsule-hand', {
+      opacity: 0,
+      scale: 0.5,
+    }, {
+      opacity: 1,
+      scale: 1,
+      duration: 0.6,
+      ease: 'power2.out',
+    }, '<'); // '<' means start at the same time as the previous animation (width expansion)
+
+    // Reveal description
+    gsap.from('.hero-description', {
+      opacity: 0,
+      y: 20,
+      duration: 1.2,
+      ease: 'power3.out',
+      delay: 2.4, // Reveal slightly before capsule finishes
+    });
+
+    // Reveal CTA button
+    gsap.from('.hero-action-group', {
+      opacity: 0,
+      y: 20,
+      duration: 1.2,
+      ease: 'power3.out',
+      delay: 2.6,
+    });
+
+  }, { scope: heroContainerRef });
+
+  // Helper to render words split into animated rgmPrelChar characters
+  const renderRgmChars = (word: string, isAccent = false) => {
+    return (
+      <span className="inline-block whitespace-nowrap px-[0.15em] mx-[-0.15em]" aria-hidden="true">
+        {word.split('').map((char, i) => (
+          <div 
+            key={i}
+            className={`rgmPrelChar ${isAccent ? 'accent-orange' : ''}`} 
+            style={{ 
+              position: 'relative', 
+              display: 'inline-block',
+              opacity: 0,
+              color: 'transparent',
+              WebkitTextStroke: `1px ${isAccent ? '#FF7230' : '#12141a'}`
+            }}
+          >
+            {char === ' ' ? '\u00A0' : char}
+          </div>
+        ))}
+      </span>
+    );
+  };
+
+  return (
+    <div
+      className="w-[1024px] bg-[#ffffff] flex flex-col items-center  font-sans relative overflow-hidden"
+      style={{ 
+        height: pxHeight,
+        backgroundImage: `
+          radial-gradient(ellipse 100% 70% at 50% 18%, #ffffff 0%, rgba(255, 255, 255, 0.98) 40%, rgba(255, 250, 244, 0.8) 65%, transparent 100%),
+          radial-gradient(130% 90% at 50% 45%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 245, 235, 0.65) 50%, rgba(254, 222, 192, 0.35) 100%),
+          linear-gradient(180deg, #ffffff 0%, #fffdfa 25%, #fef5ec 60%, #fbd5b5 100%)
+        `
+      }}
+    >
+      {/* Atmospheric lighting and glow layers */}
+      <div 
+        className="absolute top-0 left-0 right-0 bottom-0 pointer-events-none z-[1]" 
+        style={{ background: 'radial-gradient(ellipse 85% 65% at 20% 15%, rgba(255, 255, 255, 0.95) 0%, rgba(255, 248, 238, 0.7) 45%, transparent 80%)' }} 
+        aria-hidden="true" 
+      />
+      <div 
+        className="absolute bottom-[24%] left-1/2 -translate-x-1/2 w-full max-w-[1600px] h-[380px] pointer-events-none z-[1] blur-[24px]" 
+        style={{ background: 'radial-gradient(ellipse 80% 55% at 50% 65%, rgba(255, 236, 206, 0.9) 0%, rgba(255, 202, 154, 0.5) 45%, transparent 80%)' }} 
+        aria-hidden="true" 
+      />
+
+      {/* Orange Field Landscape Background */}
+      <div className="absolute bottom-0 left-0 right-0 w-full h-full pointer-events-none z-[2] overflow-hidden" aria-hidden="true">
+        <img
+          src="/images/Orange Filed.png"
+          alt="Webnox AI Landscape - Orange Field"
+          className="w-full h-full object-cover object-bottom pointer-events-none select-none saturate-[1.08] brightness-[1.05]"
+        />
+      </div>
+
+      <div ref={heroContainerRef} className="relative z-10 flex flex-col items-center justify-center text-center px-6 w-full max-w-[1240px] mt-28 mb-auto">
+        {/* Trusted by Many Pill Badge */}
+        <div className="trusted-badge-container">
+          <div className="trusted-badge" role="status">
+            <div className="trusted-avatars" aria-hidden="true">
+              <span className="avatar-wrapper">
+                <img src="/images/Frame 5.png" alt="Partner logo 1" className="avatar-icon" />
+              </span>
+              <span className="avatar-wrapper">
+                <img src="/images/Frame 6.png" alt="Partner logo 2" className="avatar-icon" />
+              </span>
+              <span className="avatar-wrapper">
+                <img src="/images/Frame 7.png" alt="Partner logo 3" className="avatar-icon" />
+              </span>
+              <span className="avatar-wrapper">
+                <img src="/images/Frame 8.png" alt="Partner logo 4" className="avatar-icon" />
+              </span>
+            </div>
+            <span className="trusted-text">Trusted by Many</span>
+          </div>
+        </div>
+
+        {/* Hero Title */}
+        <h1
+          className="hero-title"
+          aria-label="AI Native Company Building AI Solutions"
+        >
+          <div className="title-row first-row" aria-hidden="true">
+            {renderRgmChars('AI', true)}{' '}
+            {renderRgmChars('Native')}{' '}
+            {renderRgmChars('Company')}
+          </div>
+          <div className="title-row second-row" aria-hidden="true">
+            {renderRgmChars('Building')}
+            <div
+              className="creation-capsule"
+              aria-label="Human and AI collaboration symbol"
+              style={{ visibility: 'hidden', width: 0, margin: '0 -8px' }}
+            >
+              <div className="capsule-hand human-hand">
+                <img
+                  src="/images/Human hand.png"
+                  alt="Human hand"
+                  className="hand-asset"
+                />
+              </div>
+              <div className="capsule-center-logo">
+                <img
+                  src="/images/Logo glow 1.1.png"
+                  alt="Webnox infinity emblem"
+                  className="logo-glow-asset"
+                />
+              </div>
+              <div className="capsule-hand robo-hand">
+                <img
+                  src="/images/Robo hand.png"
+                  alt="Robotic hand"
+                  className="hand-asset"
+                />
+              </div>
+            </div>
+            {renderRgmChars('AI')}{' '}
+            {renderRgmChars('Solutions')}
+          </div>
+        </h1>
+
+        {/* Hero Subtitle Description */}
+        <p className="hero-description">
+          Build software, AI agents, applications and digital products with Webnox. We provide<br className="hero-desc-br" />
+          AI development services that turn business ideas into production-ready AI solutions.
+        </p>
+
+        {/* Primary Action Button */}
+        <div className="hero-action-group">
+          <button
+            type="button"
+            className="cta-pill-button"
+            id="build-ai-solution-cta"
+          >
+            Build Your AI Solution
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 useGLTF.preload("/models/monitor.glb");

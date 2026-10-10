@@ -22,6 +22,11 @@ export default function SmoothScroll({ children }: { children: ReactNode }) {
     lenisRef.current = lenis;
 
     lenis.on("scroll", ScrollTrigger.update);
+    
+    // Sync Lenis with ScrollTrigger's height calculations (especially for pin spacers)
+    ScrollTrigger.addEventListener("refresh", () => {
+      lenis.resize();
+    });
 
     gsap.ticker.add((time) => {
       lenis.raf(time * 1000);
