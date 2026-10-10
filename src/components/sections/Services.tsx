@@ -44,6 +44,17 @@ function computeLayout(W: number, H: number) {
   return { pos, rx, rz };
 }
 
+// Where each card lands when everything is pulled together into the center circle
+const COLLAGE = [
+  { x: -26, y: -14, r: -8, z: 1 },
+  { x: 24, y: -22, r: 6, z: 2 },
+  { x: 0, y: 0, r: 0, z: 5 },
+  { x: -6, y: 24, r: -5, z: 3 },
+  { x: 28, y: 16, r: 9, z: 4 },
+];
+const PIN_SCROLL_LENGTH = 2600; // px of scrolling spent inside the pinned section
+const CIRCLE_BASE = 132;
+
 export default function Services() {
   const containerRef = useRef<HTMLElement>(null);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
@@ -67,12 +78,26 @@ export default function Services() {
   const fx = useRef<number[]>([0, 0, 0, 0, 0]); // per-card focus amount 0..1
   const downRef = useRef<{ x: number; y: number; moved: boolean; card: number | null }>({ x: 0, y: 0, moved: false, card: null });
 
+  // Scroll-pinned collapse sequence state
+  // c: cards converge into the circle (0..1), k: cards fade out (0..1)
+  const col = useRef({ c: 0, k: 0 });
+  const circleRef = useRef<HTMLDivElement>(null);
+  const hintRef = useRef<HTMLSpanElement>(null);
+  const pinTl = useRef<gsap.core.Timeline | null>(null);
+  const pinScroll = useRef<gsap.core.Tween | null>(null);
+  const collapsedRef = useRef(false);
+  const [collapsed, setCollapsed] = useState(false);
+
   const render = () => {
     const o = orb.current;
     const world = worldRef.current;
     if (!world) return;
-    const wx = o.wx * o.p;
-    const wy = o.wy * o.p;
+    const c = col.current.c;
+    const k = col.current.k;
+    const wrap = (a: number) => a - 360 * Math.round(a / 360);
+    // world rotation unwinds to 0 as the cards are pulled into the circle
+    const wx = o.wx * o.p * (1 - c);
+    const wy = (c > 0 ? wrap(o.wy) : o.wy) * o.p * (1 - c);
     world.style.transform = `rotateX(${wx}deg) rotateY(${wy}deg)`;
     const ry = (wy * Math.PI) / 180;
     const rx = (wx * Math.PI) / 180;
@@ -80,19 +105,26 @@ export default function Services() {
     slotsRef.current.forEach((slot, i) => {
       if (!slot) return;
       const t = layout.pos[i];
+      const cl = COLLAGE[i];
       const f = fx.current[i] || 0; // focus amount of this card
       // focused card levels out vertically and pushes toward the viewer along its radial direction
-      const px = (t.x + (t.x / layout.rx) * FOCUS_PUSH * f) * o.p;
-      const py = t.y * o.p * (1 - f);
-      const pz = (t.z + (t.z / layout.rz) * FOCUS_PUSH * f) * o.p;
-      slot.style.transform = `translate3d(${px}px, ${py}px, ${pz}px) rotateY(${-wy}deg) rotateX(${-wx}deg)`;
+      const bx = (t.x + (t.x / layout.rx) * FOCUS_PUSH * f) * o.p;
+      const by = t.y * o.p * (1 - f);
+      const bz = (t.z + (t.z / layout.rz) * FOCUS_PUSH * f) * o.p;
+      const px = bx * (1 - c) + cl.x * c;
+      const py = by * (1 - c) + cl.y * c;
+      const pz = bz * (1 - c);
+      const s = 1 - c * 0.78;
+      slot.style.transform = `translate3d(${px}px, ${py}px, ${pz}px) rotateY(${-wy}deg) rotateX(${-wx}deg) rotate(${cl.r * c}deg) scale(${s})`;
       // depth (z after world rotation) -> blur & dim for far cards
       const z1 = -px * Math.sin(ry) + pz * Math.cos(ry);
       const z2 = py * Math.sin(rx) + z1 * Math.cos(rx);
       const rawDepth = Math.min(1, Math.max(0, (z2 + layout.rz) / (2 * layout.rz))); // 1 = near
       const depth = Math.max(rawDepth, f);
-      slot.style.filter = o.p > 0.01 ? `blur(${((1 - depth) * 4 * o.p).toFixed(2)}px) brightness(${(1 - (1 - depth) * 0.45 * o.p).toFixed(2)})` : "none";
-      slot.style.zIndex = String(Math.round(depth * 100) + (f > 0.5 ? 200 : 0));
+      const fade = o.p * (1 - c);
+      slot.style.filter = fade > 0.01 ? `blur(${((1 - depth) * 4 * fade).toFixed(2)}px) brightness(${(1 - (1 - depth) * 0.45 * fade).toFixed(2)})` : "none";
+      slot.style.opacity = String(1 - k);
+      slot.style.zIndex = String(Math.round(depth * 100 * (1 - c) + cl.z * 20 * c) + (f > 0.5 ? 200 : 0));
     });
   };
 
@@ -115,7 +147,7 @@ export default function Services() {
     const tick = () => {
       const o = orb.current;
       if (orbitModeRef.current && o.p > 0.99) {
-        if (!o.dragging && focusedRef.current === null) {
+        if (!o.dragging && focusedRef.current === null && col.current.c === 0) {
           o.vy += (0.18 - o.vy) * 0.05; // ease toward gentle auto-spin
           o.wy += o.vy;
         }
@@ -198,11 +230,90 @@ export default function Services() {
     });
   }
 
+  // ---- Pin the section while orbiting; scroll collapses cards -> circle -> white -> expands ----
+  function teardownPin() {
+    pinScroll.current?.kill();
+    pinScroll.current = null;
+    const tl = pinTl.current;
+    if (tl) {
+      tl.scrollTrigger?.kill(true);
+      tl.kill();
+      pinTl.current = null;
+    }
+    col.current.c = 0;
+    col.current.k = 0;
+    collapsedRef.current = false;
+    setCollapsed(false);
+    if (circleRef.current) {
+      gsap.set(circleRef.current, { clearProps: "scale,backgroundColor" });
+      circleRef.current.style.zIndex = "400";
+    }
+    if (hintRef.current) hintRef.current.style.opacity = "";
+    render();
+  }
+
+  function setupPin() {
+    const section = containerRef.current;
+    if (!section || !orbitModeRef.current || pinTl.current) return;
+    ScrollTrigger.refresh();
+
+    const build = () => {
+      if (!orbitModeRef.current || pinTl.current || !circleRef.current) return;
+      const circle = circleRef.current;
+      const maxScale = () => (Math.hypot(window.innerWidth, window.innerHeight) / CIRCLE_BASE) * 1.15;
+      const tl = gsap.timeline({
+        defaults: { ease: "none" },
+        scrollTrigger: {
+          trigger: section,
+          start: "center center",
+          end: `+=${PIN_SCROLL_LENGTH}`,
+          pin: true,
+          scrub: 0.6,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+          onUpdate: (self) => {
+            const cl = self.progress > 0.005;
+            if (cl !== collapsedRef.current) {
+              collapsedRef.current = cl;
+              setCollapsed(cl);
+              if (cl) exitFocus();
+            }
+          },
+        },
+      });
+      pinTl.current = tl;
+
+      // 1) all cards fly into the circle, circle grows a little, hint text fades
+      tl.to(col.current, { c: 1, duration: 1, ease: "power2.inOut" }, 0)
+        .to(circle, { scale: 1.25, duration: 1, ease: "power2.inOut" }, 0)
+        .to(hintRef.current, { opacity: 0, duration: 0.3 }, 0)
+        .set(circle, { zIndex: 1 }, 0.05)
+        // 2) cards vanish, circle turns white
+        .to(col.current, { k: 1, duration: 0.5, ease: "power1.in" }, 1.0)
+        .to(circle, { backgroundColor: "#f8f5ff", duration: 0.6 }, 1.0)
+        // 3) white circle expands to cover the screen
+        .to(circle, { scale: maxScale, duration: 1.6, ease: "power2.in" }, 1.7);
+    };
+
+    // bring the section to the center of the viewport first so the pin starts at progress 0
+    const rect = section.getBoundingClientRect();
+    const target = window.scrollY + rect.top + rect.height / 2 - window.innerHeight / 2;
+    const proxy = { y: window.scrollY };
+    pinScroll.current = gsap.to(proxy, {
+      y: target,
+      duration: 0.7,
+      ease: "power2.inOut",
+      onUpdate: () => window.scrollTo(0, proxy.y),
+      onComplete: build,
+    });
+  }
+
   const toggleOrbit = () => {
     const o = orb.current;
     const next = !orbitModeRef.current;
     orbitModeRef.current = next;
     setOrbitMode(next);
+    teardownPin();
     gsap.killTweensOf(o);
     gsap.killTweensOf(fx.current);
     gsap.killTweensOf(cardsRef.current);
@@ -217,7 +328,7 @@ export default function Services() {
       cardsRef.current.forEach((card, i) => {
         gsap.to(card, { x: 0, y: 0, rotation: 0, opacity: 1, scale: ORBIT_TARGET_SIZE / CARD_SIZES[i], duration: 1.2, ease: "power3.inOut" });
       });
-      gsap.to(o, { p: 1, duration: 1.2, ease: "power3.inOut", onUpdate: render, onComplete: render });
+      gsap.to(o, { p: 1, duration: 1.2, ease: "power3.inOut", onUpdate: render, onComplete: () => { render(); setupPin(); } });
     } else {
       const target = Math.round(o.wy / 360) * 360;
       cardsRef.current.forEach((card, i) => {
@@ -228,8 +339,11 @@ export default function Services() {
     }
   };
 
+  // clean up the pin when the component unmounts
+  useEffect(() => () => teardownPin(), []); // eslint-disable-line react-hooks/exhaustive-deps
+
   const onPointerDown = (e: React.PointerEvent) => {
-    if (!orbitModeRef.current || orb.current.p < 0.99) return;
+    if (!orbitModeRef.current || orb.current.p < 0.99 || collapsedRef.current) return;
     const o = orb.current;
     o.dragging = true;
     o.lastX = e.clientX;
@@ -359,7 +473,7 @@ export default function Services() {
   }, []);
 
   return (
-    <section ref={containerRef} className="relative w-full py-32 overflow-hidden flex flex-col items-center justify-center bg-[#0a0806]">
+    <section ref={containerRef} className={`relative w-full py-32 overflow-hidden flex flex-col items-center justify-center bg-[#0a0806] ${orbitMode ? "min-h-screen" : ""}`}>
       {/* Radial Gradient Background */}
       <div className="absolute inset-0 z-0 bg-[radial-gradient(ellipse_at_bottom,_rgba(140,50,10,0.5)_0%,_rgba(10,8,6,1)_70%)]"></div>
       
@@ -379,7 +493,7 @@ export default function Services() {
           onPointerUp={onPointerUp}
           onPointerCancel={onPointerUp}
         >
-          <div ref={worldRef} className="absolute inset-0" style={{ transformStyle: "preserve-3d" }}>
+          <div ref={worldRef} className="absolute inset-0" style={{ transformStyle: "preserve-3d", zIndex: 100 }}>
             {IMAGES.map((img, i) => (
               <div
                 key={i}
@@ -399,12 +513,13 @@ export default function Services() {
             ))}
           </div>
 
-          {/* "Drag to orbit" hint in the middle of the orbit stage */}
+          {/* "Drag to orbit" circle: also the point all cards collapse into, then turns white and expands on scroll */}
           <div
-            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#ff5e00] text-white flex items-center justify-center text-center font-semibold uppercase tracking-wide text-[15px] leading-tight pointer-events-none transition-opacity duration-500"
-            style={{ width: 132, height: 132, opacity: orbitMode && focused === null ? 1 : 0, zIndex: 400 }}
+            ref={circleRef}
+            className="absolute left-1/2 top-1/2 rounded-full bg-[#ff5e00] text-white flex items-center justify-center text-center font-semibold uppercase tracking-wide text-[15px] leading-tight pointer-events-none transition-opacity duration-500"
+            style={{ width: CIRCLE_BASE, height: CIRCLE_BASE, marginLeft: -CIRCLE_BASE / 2, marginTop: -CIRCLE_BASE / 2, opacity: orbitMode && (focused === null || collapsed) ? 1 : 0, zIndex: 400 }}
           >
-            Drag<br />to<br />Orbit
+            <span ref={hintRef}>Drag<br />to<br />Orbit</span>
           </div>
 
           {/* Same action button, shown below the circle while orbiting */}
@@ -415,8 +530,8 @@ export default function Services() {
             className="absolute left-1/2 -translate-x-1/2 bg-white hover:bg-neutral-100 text-black rounded-full pl-6 pr-2 py-2 flex items-center gap-4 hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(255,94,0,0.15)] group"
             style={{
               top: focused !== null ? "calc(100% - 88px)" : "calc(50% + 100px)",
-              opacity: orbitMode ? 1 : 0,
-              pointerEvents: orbitMode ? "auto" : "none",
+              opacity: orbitMode && !collapsed ? 1 : 0,
+              pointerEvents: orbitMode && !collapsed ? "auto" : "none",
               zIndex: 600,
               transition: "top 0.6s ease, opacity 0.5s ease, transform 0.3s ease",
             }}
