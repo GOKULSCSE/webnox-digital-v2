@@ -16,18 +16,18 @@ const FAN = [
 ];
 const CARD_SIZES = [200, 300, 340, 300, 200];
 const IMAGES = [
-  { src: "/images/services/20bd32e73df7a0088851915baca229308343d545.png", alt: "Product 1" },
-  { src: "/images/services/3c9f5242ffe941cc07c5c01c35ea3ca9ce43ee6f.png", alt: "Product 2" },
-  { src: "/images/services/5c5109ad77337b400a40d746be9f026f99d6bb32.png", alt: "Main Product" },
-  { src: "/images/services/5fb6df87413f2f231bd935e66ec6f9b3d0ae01d3.png", alt: "Product 4" },
-  { src: "/images/services/943f6de44b68321b88fc1a40f45f9562c5a6b958.png", alt: "Product 5" },
+  { src: "/images/services/20bd32e73df7a0088851915baca229308343d545.png", alt: "Product 1", title: "Impuls der Zeit 2023", desc: "Geschäfts- und Nachhaltigkeitsbericht" },
+  { src: "/images/services/3c9f5242ffe941cc07c5c01c35ea3ca9ce43ee6f.png", alt: "Product 2", title: "GESCO AG 2017/2018", desc: "Geschäftsbericht Wuppertal" },
+  { src: "/images/services/5c5109ad77337b400a40d746be9f026f99d6bb32.png", alt: "Main Product", title: "virtuos Magazin", desc: "Mitgliedermagazin der GEMA" },
+  { src: "/images/services/5fb6df87413f2f231bd935e66ec6f9b3d0ae01d3.png", alt: "Product 4", title: "heureka GmbH", desc: "Creative Director Gorden Koschel" },
+  { src: "/images/services/943f6de44b68321b88fc1a40f45f9562c5a6b958.png", alt: "Product 5", title: "Red Dot Award", desc: "Best of the Best 2025" },
 ];
 
 // 3D orbit layout (elliptical ring that spreads across the whole viewport)
 const ORBIT_TARGET_SIZE = 280;
 const ORBIT_COUNT = 5;
-const FOCUS_SIZE = 320; // size of the focused card
-const DIM_SIZE = 220; // size of the other cards while one is focused
+const FOCUS_SIZE = 400; // size of the focused card
+const DIM_SIZE = 260; // size of the other cards while one is focused
 const FOCUS_DURATION = 4; // seconds each card stays focused before auto-advancing
 const FOCUS_PUSH = 80; // how far the focused card moves toward the viewer
 const FOCUS_SHADOW = "0 22px 64px rgba(0,0,0,0.55), 0 0 40px rgba(255,94,0,0.25)";
@@ -65,8 +65,12 @@ export default function Services() {
 
   const [orbitMode, setOrbitMode] = useState(false);
   const orbitModeRef = useRef(false);
+  const [isGallery, setIsGallery] = useState(false);
+  const isGalleryRef = useRef(false);
+  
   // Orbit state: p = blend (0 fan -> 1 orbit), wx/wy = world rotation (deg)
   const orb = useRef({ p: 0, wx: -8, wy: 0, vy: 0, dragging: false, lastX: 0, lastY: 0 });
+  const galleryP = useRef({ p: 0 }); // 0 = orbit, 1 = gallery
   const layoutRef = useRef(computeLayout(1440, 640));
   const [stageH, setStageH] = useState(640);
 
@@ -95,34 +99,55 @@ export default function Services() {
     const c = col.current.c;
     const k = col.current.k;
     const wrap = (a: number) => a - 360 * Math.round(a / 360);
-    // world rotation unwinds to 0 as the cards are pulled into the circle
-    const wx = o.wx * o.p * (1 - c);
-    const wy = (c > 0 ? wrap(o.wy) : o.wy) * o.p * (1 - c);
+    const g = galleryP.current.p;
+    
+    // world rotation unwinds to 0 as the cards are pulled into the circle, and also in gallery mode
+    const wx = o.wx * o.p * (1 - c) * (1 - g);
+    const wy = (c > 0 ? wrap(o.wy) : o.wy) * o.p * (1 - c) * (1 - g);
     world.style.transform = `rotateX(${wx}deg) rotateY(${wy}deg)`;
     const ry = (wy * Math.PI) / 180;
     const rx = (wx * Math.PI) / 180;
     const layout = layoutRef.current;
+    const fIdx = focusedRef.current !== null ? focusedRef.current : 2;
+
     slotsRef.current.forEach((slot, i) => {
       if (!slot) return;
       const t = layout.pos[i];
       const cl = COLLAGE[i];
       const f = fx.current[i] || 0; // focus amount of this card
-      // focused card levels out vertically and pushes toward the viewer along its radial direction
-      const bx = (t.x + (t.x / layout.rx) * FOCUS_PUSH * f) * o.p;
-      const by = t.y * o.p * (1 - f);
-      const bz = (t.z + (t.z / layout.rz) * FOCUS_PUSH * f) * o.p;
+      
+      // Orbit base positions:
+      const ox = (t.x + (t.x / layout.rx) * FOCUS_PUSH * f) * o.p;
+      const oy = t.y * o.p * (1 - f);
+      const oz = (t.z + (t.z / layout.rz) * FOCUS_PUSH * f) * o.p;
+
+      // Gallery base positions:
+      let d = i - fIdx;
+      if (d > 2) d -= 5;
+      if (d < -2) d += 5;
+      
+      const gx = d === 0 ? 0 : Math.sign(d) * (340 + (Math.abs(d) - 1) * 260);
+      const gy = 0;
+      const gz = d === 0 ? 150 : -50 - Math.abs(d) * 50;
+      
+      const bx = ox * (1 - g) + gx * g;
+      const by = oy * (1 - g) + gy * g;
+      const bz = oz * (1 - g) + gz * g;
+
       const px = bx * (1 - c) + cl.x * c;
       const py = by * (1 - c) + cl.y * c;
       const pz = bz * (1 - c);
       const s = 1 - c * 0.78;
       slot.style.transform = `translate3d(${px}px, ${py}px, ${pz}px) rotateY(${-wy}deg) rotateX(${-wx}deg) rotate(${cl.r * c}deg) scale(${s})`;
+      
       // depth (z after world rotation) -> blur & dim for far cards
       const z1 = -px * Math.sin(ry) + pz * Math.cos(ry);
       const z2 = py * Math.sin(rx) + z1 * Math.cos(rx);
       const rawDepth = Math.min(1, Math.max(0, (z2 + layout.rz) / (2 * layout.rz))); // 1 = near
       const depth = Math.max(rawDepth, f);
       const fade = o.p * (1 - c);
-      slot.style.filter = fade > 0.01 ? `blur(${((1 - depth) * 4 * fade).toFixed(2)}px) brightness(${(1 - (1 - depth) * 0.45 * fade).toFixed(2)})` : "none";
+      const dimMult = 1 - g * 0.5; // in gallery mode, dimming is halved
+      slot.style.filter = fade > 0.01 ? `blur(${((1 - depth) * 4 * fade * dimMult).toFixed(2)}px) brightness(${(1 - (1 - depth) * 0.45 * fade * dimMult).toFixed(2)})` : "none";
       slot.style.opacity = String(1 - k);
       slot.style.zIndex = String(Math.round(depth * 100 * (1 - c) + cl.z * 20 * c) + (f > 0.5 ? 200 : 0));
     });
@@ -186,7 +211,7 @@ export default function Services() {
       gsap.to(fx.current, { [k]: isF ? 1 : 0, duration: 1, ease: "power3.inOut", onUpdate: render });
       gsap.to(card, {
         scale: (isF ? FOCUS_SIZE : DIM_SIZE) / CARD_SIZES[k],
-        opacity: isF ? 1 : 0.35,
+        opacity: isF ? 1 : (isGalleryRef.current ? 0.6 : 0.35),
         boxShadow: isF ? FOCUS_SHADOW : "0 0 0 rgba(0,0,0,0)",
         duration: 1,
         ease: "power3.inOut",
@@ -227,6 +252,34 @@ export default function Services() {
         overwrite: "auto",
         onComplete: () => { gsap.set(card, { clearProps: "boxShadow" }); },
       });
+    });
+  }
+
+  function toggleGallery() {
+    const next = !isGalleryRef.current;
+    isGalleryRef.current = next;
+    setIsGallery(next);
+
+    if (next && focusedRef.current === null) {
+      focusCard(2);
+    } else if (focusedRef.current !== null) {
+      // Re-trigger focusCard to update opacities (0.35 vs 0.6)
+      cardsRef.current.forEach((card, k) => {
+        const isF = k === focusedRef.current;
+        gsap.to(card, {
+          opacity: isF ? 1 : (next ? 0.6 : 0.35),
+          duration: 1,
+          ease: "power3.inOut",
+          overwrite: "auto",
+        });
+      });
+    }
+
+    gsap.to(galleryP.current, {
+      p: next ? 1 : 0,
+      duration: 1.2,
+      ease: "power3.inOut",
+      onUpdate: render,
     });
   }
 
@@ -382,10 +435,13 @@ export default function Services() {
     if (d.moved) return;
     // a click, not a drag
     if (d.card !== null) {
-      if (focusedRef.current === d.card) exitFocus();
-      else focusCard(d.card);
+      if (focusedRef.current === d.card) {
+        if (!isGalleryRef.current) exitFocus();
+      } else {
+        focusCard(d.card);
+      }
     } else if (focusedRef.current !== null) {
-      exitFocus();
+      if (!isGalleryRef.current) exitFocus();
     }
   };
 
@@ -522,32 +578,47 @@ export default function Services() {
             <span ref={hintRef}>Drag<br />to<br />Orbit</span>
           </div>
 
-          {/* Same action button, shown below the circle while orbiting */}
+          {/* Gallery / Orbit Toggle Button */}
           <button
-            onPointerDown={(e) => e.stopPropagation()}
-            onClick={toggleOrbit}
-            tabIndex={orbitMode ? 0 : -1}
-            className="absolute left-1/2 -translate-x-1/2 bg-white hover:bg-neutral-100 text-black rounded-full pl-6 pr-2 py-2 flex items-center gap-4 hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(255,94,0,0.15)] group"
+            onClick={toggleGallery}
+            className="absolute top-8 left-1/2 -translate-x-1/2 w-14 h-14 rounded-full border border-white/20 bg-neutral-900/50 backdrop-blur-md text-white flex items-center justify-center hover:bg-white/10 transition-colors shadow-[0_0_20px_rgba(0,0,0,0.5)]"
             style={{
-              top: focused !== null ? "calc(100% - 88px)" : "calc(50% + 100px)",
               opacity: orbitMode && !collapsed ? 1 : 0,
               pointerEvents: orbitMode && !collapsed ? "auto" : "none",
               zIndex: 600,
-              transition: "top 0.6s ease, opacity 0.5s ease, transform 0.3s ease",
             }}
+            aria-label="Toggle Gallery View"
           >
-            <span className="font-semibold text-sm">Close Labs</span>
-            <div className="w-10 h-10 rounded-full bg-[#ff5e00] flex items-center justify-center text-white transition-transform duration-300 group-hover:scale-110">
-              <img src="/images/Vector (2).svg" alt="Binoculars" className="w-5 h-5 object-contain" />
-            </div>
+            {isGallery ? (
+              <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M17.1153 15.3582C16.8446 15.6642 16.5606 15.9665 16.2635 16.2635C11.9678 20.5593 6.58585 22.1422 4.2427 19.7991C2.6363 18.1926 2.8752 15.158 4.56847 12.0242M6.88967 8.72526C7.17138 8.40495 7.46772 8.08875 7.77824 7.77824C12.074 3.48247 17.4559 1.89956 19.7991 4.2427C21.4066 5.85021 21.1662 8.88795 19.4698 12.024M16.2635 7.77824C20.5593 12.074 22.1422 17.4559 19.7991 19.7991C17.4559 22.1422 12.074 20.5593 7.77824 16.2635C3.48247 11.9678 1.89956 6.58585 4.2427 4.2427C6.58585 1.89956 11.9678 3.48247 16.2635 7.77824ZM13.0001 12C13.0001 12.5523 12.5523 13 12.0001 13C11.4478 13 11.0001 12.5523 11.0001 12C11.0001 11.4477 11.4478 11 12.0001 11C12.5523 11 13.0001 11.4477 13.0001 12Z" />
+              </svg>
+            ) : (
+              <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M6 10V14M18 10V14M2 8.2L2 15.8C2 16.9201 2 17.4802 2.21799 17.908C2.40973 18.2843 2.71569 18.5903 3.09202 18.782C3.51984 19 4.07989 19 5.2 19L18.8 19C19.9201 19 20.4802 19 20.908 18.782C21.2843 18.5903 21.5903 18.2843 21.782 17.908C22 17.4802 22 16.9201 22 15.8V8.2C22 7.0799 22 6.51984 21.782 6.09202C21.5903 5.7157 21.2843 5.40974 20.908 5.21799C20.4802 5 19.9201 5 18.8 5L5.2 5C4.0799 5 3.51984 5 3.09202 5.21799C2.7157 5.40973 2.40973 5.71569 2.21799 6.09202C2 6.51984 2 7.07989 2 8.2ZM14.5 12C14.5 13.3807 13.3807 14.5 12 14.5C10.6193 14.5 9.5 13.3807 9.5 12C9.5 10.6193 10.6193 9.5 12 9.5C13.3807 9.5 14.5 10.6193 14.5 12Z" />
+              </svg>
+            )}
           </button>
 
-          {/* Focus timer: fills while a card is focused, then auto-advances to the next one */}
+          {/* Focus timer & Text Description */}
           <div
-            className="absolute bottom-6 left-1/2 -translate-x-1/2 w-40 h-[3px] rounded-full bg-white/15 overflow-hidden transition-opacity duration-500 pointer-events-none"
-            style={{ opacity: focused !== null ? 1 : 0, zIndex: 500 }}
+            className="absolute left-1/2 -translate-x-1/2 flex flex-col transition-opacity duration-500 pointer-events-none"
+            style={{ 
+              bottom: `calc(50% - ${FOCUS_SIZE/2 + 70}px)`, 
+              width: FOCUS_SIZE,
+              opacity: focused !== null ? 1 : 0, 
+              zIndex: 500 
+            }}
           >
-            <div ref={timerBarRef} className="h-full w-full bg-[#ff5e00] origin-left" style={{ transform: "scaleX(0)" }} />
+            <div className="w-full h-[3px] bg-white/15 overflow-hidden mb-3">
+              <div ref={timerBarRef} className="h-full w-full bg-[#ff5e00] origin-left" style={{ transform: "scaleX(0)" }} />
+            </div>
+            {focused !== null && (
+              <div className="text-white text-sm leading-snug text-left mt-2">
+                <p className="font-bold">{IMAGES[focused].title}</p>
+                <p className="text-white/60 font-medium">{IMAGES[focused].desc}</p>
+              </div>
+            )}
           </div>
         </div>
 
