@@ -1,28 +1,62 @@
 export default function WhoWeAre() {
   return (
-    <section className="py-24 px-4 bg-[#fdfaf6] border-t border-neutral-200">
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-16">
-        <div className="w-full md:w-1/2">
-          <h2 className="text-4xl md:text-6xl font-bold mb-6 text-black tracking-tight">Who We Are</h2>
-          <p className="text-xl text-neutral-600 mb-8 font-light leading-relaxed">
-            We are an elite team of AI engineers, designers, and strategists building the next generation of digital products. Our mission is to integrate artificial intelligence into practical, beautiful, and scalable solutions for modern enterprises.
-          </p>
-          <div className="flex gap-4">
-            <div className="flex flex-col">
-              <span className="text-4xl font-bold text-[#ff5e00]">10+</span>
-              <span className="text-neutral-500 mt-1">Years Experience</span>
+    <section className="w-full bg-[#0a0806] text-white py-32 px-8">
+      <div className="max-w-7xl mx-auto flex flex-col">
+        {/* Top Content */}
+        <div className="flex flex-col lg:flex-row justify-between items-start gap-16 mb-24">
+          
+          {/* Left Column (Heading) */}
+          <div className="w-full lg:w-1/2">
+            <div className="flex items-center gap-3 mb-10">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#ff5e00]"></span>
+              <span className="text-sm font-semibold tracking-wider text-white uppercase">About</span>
             </div>
-            <div className="flex flex-col ml-8">
-              <span className="text-4xl font-bold text-[#ff5e00]">50+</span>
-              <span className="text-neutral-500 mt-1">AI Projects</span>
-            </div>
+            <h2 className="text-3xl md:text-4xl lg:text-[2.75rem] font-medium leading-[1.25] tracking-tight max-w-xl">
+              Web<span className="text-[#ff5e00]">nox</span> is where deep engineering meets frontier <span className="text-[#ff5e00]">AI,</span> and ambitious ideas become autonomous reality.
+            </h2>
+          </div>
+
+          {/* Right Column (Paragraphs) */}
+          <div className="w-full lg:w-1/2 flex flex-col gap-6 text-neutral-300 text-lg md:text-xl font-light leading-relaxed pt-2 lg:pt-16">
+            <p>
+              From greenfield AI platforms to embedding neural models into legacy systems, we engineer intelligent software built for high-stakes business scale.
+            </p>
+            <p>
+              We bridge proprietary data, modern foundation models, and core workflows—taking intelligent systems from proof-of-concept to resilient, secure execution.
+            </p>
+            <p>
+              Because demos are easy. Production-grade AI is engineered.
+            </p>
           </div>
         </div>
-        <div className="w-full md:w-1/2 h-[500px] bg-neutral-100 rounded-3xl overflow-hidden relative group">
-          <div className="absolute inset-0 bg-gradient-to-tr from-[#ff5e00]/20 to-transparent z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-          {/* Add a subtle pattern or image here */}
-          <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-20"></div>
+
+        {/* Separator Line */}
+        <div className="w-full h-[1px] bg-white/10 mb-20"></div>
+
+        {/* Stats Row */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-12 text-center">
+          {/* Stat 1 */}
+          <div className="flex flex-col items-center">
+            <span className="text-5xl md:text-6xl font-bold text-[#ff5e00] mb-4">15+</span>
+            <span className="text-neutral-300 text-sm md:text-base leading-snug font-medium">Years of software<br/>excellence</span>
+          </div>
+          {/* Stat 2 */}
+          <div className="flex flex-col items-center">
+            <span className="text-5xl md:text-6xl font-bold text-[#ff5e00] mb-4">2,570+</span>
+            <span className="text-neutral-300 text-sm md:text-base leading-snug font-medium">Global clients<br/>empowered</span>
+          </div>
+          {/* Stat 3 */}
+          <div className="flex flex-col items-center">
+            <span className="text-5xl md:text-6xl font-bold text-[#ff5e00] mb-4">20+</span>
+            <span className="text-neutral-300 text-sm md:text-base leading-snug font-medium">Proprietary digital<br/>& AI products</span>
+          </div>
+          {/* Stat 4 */}
+          <div className="flex flex-col items-center">
+            <span className="text-5xl md:text-6xl font-bold text-[#ff5e00] mb-4">20+</span>
+            <span className="text-neutral-300 text-sm md:text-base leading-snug font-medium">Countries served<br/>worldwide</span>
+          </div>
         </div>
+
       </div>
     </section>
   );
