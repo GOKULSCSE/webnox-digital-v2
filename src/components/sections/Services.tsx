@@ -85,6 +85,7 @@ export default function Services() {
   // Scroll-pinned collapse sequence state
   // c: cards converge into the circle (0..1), k: cards fade out (0..1)
   const col = useRef({ c: 0, k: 0 });
+  const circleWrapperRef = useRef<HTMLDivElement>(null);
   const circleRef = useRef<HTMLDivElement>(null);
   const hintRef = useRef<HTMLSpanElement>(null);
   const pinTl = useRef<gsap.core.Timeline | null>(null);
@@ -105,6 +106,11 @@ export default function Services() {
     const wx = o.wx * o.p * (1 - c) * (1 - g);
     const wy = (c > 0 ? wrap(o.wy) : o.wy) * o.p * (1 - c) * (1 - g);
     world.style.transform = `rotateX(${wx}deg) rotateY(${wy}deg)`;
+    
+    if (circleWrapperRef.current) {
+      circleWrapperRef.current.style.transform = `rotateY(${-wy}deg) rotateX(${-wx}deg)`;
+    }
+
     const ry = (wy * Math.PI) / 180;
     const rx = (wx * Math.PI) / 180;
     const layout = layoutRef.current;
@@ -149,7 +155,10 @@ export default function Services() {
       const dimMult = 1 - g * 0.5; // in gallery mode, dimming is halved
       slot.style.filter = fade > 0.01 ? `blur(${((1 - depth) * 4 * fade * dimMult).toFixed(2)}px) brightness(${(1 - (1 - depth) * 0.45 * fade * dimMult).toFixed(2)})` : "none";
       slot.style.opacity = String(1 - k);
-      slot.style.zIndex = String(Math.round(depth * 100 * (1 - c) + cl.z * 20 * c) + (f > 0.5 ? 200 : 0));
+      
+      const fanZ = i === 2 ? 30 : i === 1 || i === 3 ? 20 : 10;
+      const orbitZ = depth * 100;
+      slot.style.zIndex = String(Math.round(fanZ * (1 - o.p) + orbitZ * o.p * (1 - c) + cl.z * 20 * c) + (f > 0.5 ? 200 : 0));
     });
   };
 
@@ -299,7 +308,9 @@ export default function Services() {
     setCollapsed(false);
     if (circleRef.current) {
       gsap.set(circleRef.current, { clearProps: "scale,backgroundColor" });
-      circleRef.current.style.zIndex = "400";
+    }
+    if (circleWrapperRef.current) {
+      circleWrapperRef.current.style.zIndex = "75";
     }
     if (hintRef.current) hintRef.current.style.opacity = "";
     render();
@@ -340,7 +351,7 @@ export default function Services() {
       tl.to(col.current, { c: 1, duration: 1, ease: "power2.inOut" }, 0)
         .to(circle, { scale: 1.25, duration: 1, ease: "power2.inOut" }, 0)
         .to(hintRef.current, { opacity: 0, duration: 0.3 }, 0)
-        .set(circle, { zIndex: 1 }, 0.05)
+        .set(circleWrapperRef.current, { zIndex: 200 }, 0.05)
         // 2) cards vanish, circle turns white
         .to(col.current, { k: 1, duration: 0.5, ease: "power1.in" }, 1.0)
         .to(circle, { backgroundColor: "#f8f5ff", duration: 0.6 }, 1.0)
@@ -567,22 +578,26 @@ export default function Services() {
                 </div>
               </div>
             ))}
-          </div>
-
-          {/* "Drag to orbit" circle: also the point all cards collapse into, then turns white and expands on scroll */}
-          <div
-            ref={circleRef}
-            className="absolute left-1/2 top-1/2 rounded-full bg-[#ff5e00] text-white flex items-center justify-center text-center font-semibold uppercase tracking-wide text-[15px] leading-tight pointer-events-none transition-opacity duration-500"
-            style={{ width: CIRCLE_BASE, height: CIRCLE_BASE, marginLeft: -CIRCLE_BASE / 2, marginTop: -CIRCLE_BASE / 2, opacity: orbitMode && (focused === null || collapsed) ? 1 : 0, zIndex: 400 }}
-          >
-            <span ref={hintRef}>Drag<br />to<br />Orbit</span>
+            
+            {/* "Drag to orbit" circle MUST be inside worldRef to share the 3D stacking context */}
+            <div ref={circleWrapperRef} className="absolute left-1/2 top-1/2 w-0 h-0" style={{ zIndex: 75 }}>
+              <div
+                ref={circleRef}
+                className="absolute rounded-full bg-[#ff5e00] text-white flex items-center justify-center text-center font-semibold uppercase tracking-wide text-[15px] leading-tight pointer-events-none transition-opacity duration-500"
+                style={{ width: CIRCLE_BASE, height: CIRCLE_BASE, marginLeft: -CIRCLE_BASE / 2, marginTop: -CIRCLE_BASE / 2, opacity: orbitMode && (focused === null || collapsed) ? 1 : 0 }}
+              >
+                <span ref={hintRef}>Drag<br />to<br />Orbit</span>
+              </div>
+            </div>
           </div>
 
           {/* Gallery / Orbit Toggle Button */}
           <button
+            onPointerDown={(e) => e.stopPropagation()}
             onClick={toggleGallery}
-            className="absolute top-8 left-1/2 -translate-x-1/2 w-14 h-14 rounded-full border border-white/20 bg-neutral-900/50 backdrop-blur-md text-white flex items-center justify-center hover:bg-white/10 transition-colors shadow-[0_0_20px_rgba(0,0,0,0.5)]"
+            className="absolute left-1/2 -translate-x-1/2 w-14 h-14 rounded-full border border-white/20 bg-neutral-900/50 backdrop-blur-md text-white flex items-center justify-center hover:bg-white/10 transition-all duration-500 shadow-[0_0_20px_rgba(0,0,0,0.5)]"
             style={{
+              top: focused !== null ? "calc(100% - 88px)" : "calc(50% + 100px)",
               opacity: orbitMode && !collapsed ? 1 : 0,
               pointerEvents: orbitMode && !collapsed ? "auto" : "none",
               zIndex: 600,
