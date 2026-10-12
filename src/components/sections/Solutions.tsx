@@ -410,10 +410,13 @@ export default function Solutions() {
                     <span className="text-xs sm:text-sm font-semibold text-neutral-900">
                       {item.highlight}
                     </span>
-                    <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#ff5e00] text-white flex items-center justify-center shadow-sm group-hover:scale-110 group-hover:bg-[#e05300] transition-all cursor-pointer">
-                      <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M5 12h14M12 5l7 7-7 7" />
-                      </svg>
+                    <div className="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center group-hover:scale-110 transition-transform cursor-pointer">
+                      <img
+                        src="/images/arrow.svg"
+                        alt="View details"
+                        className="w-full h-full object-contain"
+                        draggable={false}
+                      />
                     </div>
                   </div>
                 </div>
