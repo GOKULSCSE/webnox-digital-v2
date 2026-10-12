@@ -121,6 +121,11 @@ export default function Solutions() {
           width += 24;
         }
         singleWidthRef.current = width;
+        // Start offset at one full period so cards already emerge from behind the badge
+        if (posRef.current === 0 && width > 0) {
+          posRef.current = width;
+          track.style.transform = `translate3d(${-posRef.current}px, 0, 0)`;
+        }
       }
     };
 
@@ -133,7 +138,7 @@ export default function Solutions() {
     const tick = () => {
       if (!isHoveredRef.current && !isDraggingRef.current) {
         posRef.current += speed;
-        if (singleWidthRef.current > 0 && posRef.current >= singleWidthRef.current) {
+        if (singleWidthRef.current > 0 && posRef.current >= singleWidthRef.current * 2) {
           posRef.current -= singleWidthRef.current;
         }
         if (trackRef.current) {
@@ -153,16 +158,19 @@ export default function Solutions() {
 
   // Controls for manual next / prev buttons
   const scrollNext = () => {
-    const cardStep = 400;
+    const cardStep = singleWidthRef.current > 0 ? singleWidthRef.current / SOLUTIONS_DATA.length : 394;
+    if (singleWidthRef.current > 0 && posRef.current + cardStep >= singleWidthRef.current * 2) {
+      posRef.current -= singleWidthRef.current;
+      if (trackRef.current) {
+        trackRef.current.style.transform = `translate3d(${-posRef.current}px, 0, 0)`;
+      }
+    }
     const target = posRef.current + cardStep;
     gsap.to(posRef, {
       current: target,
       duration: 0.6,
       ease: "power2.out",
       onUpdate: () => {
-        if (singleWidthRef.current > 0 && posRef.current >= singleWidthRef.current) {
-          posRef.current -= singleWidthRef.current;
-        }
         if (trackRef.current) {
           trackRef.current.style.transform = `translate3d(${-posRef.current}px, 0, 0)`;
         }
@@ -171,12 +179,14 @@ export default function Solutions() {
   };
 
   const scrollPrev = () => {
-    const cardStep = 400;
-    let target = posRef.current - cardStep;
-    if (target < 0 && singleWidthRef.current > 0) {
-      target += singleWidthRef.current;
+    const cardStep = singleWidthRef.current > 0 ? singleWidthRef.current / SOLUTIONS_DATA.length : 394;
+    if (singleWidthRef.current > 0 && posRef.current - cardStep < singleWidthRef.current) {
       posRef.current += singleWidthRef.current;
+      if (trackRef.current) {
+        trackRef.current.style.transform = `translate3d(${-posRef.current}px, 0, 0)`;
+      }
     }
+    const target = posRef.current - cardStep;
     gsap.to(posRef, {
       current: target,
       duration: 0.6,
@@ -201,8 +211,8 @@ export default function Solutions() {
     const delta = startXRef.current - e.clientX;
     let nextPos = dragPosRef.current + delta;
     if (singleWidthRef.current > 0) {
-      if (nextPos >= singleWidthRef.current) nextPos -= singleWidthRef.current;
-      if (nextPos < 0) nextPos += singleWidthRef.current;
+      while (nextPos >= singleWidthRef.current * 2) nextPos -= singleWidthRef.current;
+      while (nextPos < singleWidthRef.current) nextPos += singleWidthRef.current;
     }
     posRef.current = nextPos;
     if (trackRef.current) {
@@ -257,7 +267,7 @@ export default function Solutions() {
         {/* Carousel Area with Left Floating Trust Badge */}
         <div
           ref={containerRef}
-          className="relative w-full flex items-stretch"
+          className="relative w-full overflow-hidden cursor-grab active:cursor-grabbing p-3"
           onMouseEnter={() => { isHoveredRef.current = true; }}
           onMouseLeave={() => { isHoveredRef.current = false; }}
           onPointerDown={onPointerDown}
@@ -265,63 +275,62 @@ export default function Solutions() {
           onPointerUp={onPointerUp}
           onPointerCancel={onPointerUp}
         >
-          {/* Left Floating Trust Badge Card */}
-          <div className="hidden lg:flex flex-col justify-between w-[250px] xl:w-[270px] h-[400px] rounded-[28px] bg-gradient-to-br from-[#ff6e05] to-[#f54e00] text-white p-6 shadow-[0_16px_40px_rgba(255,94,0,0.32)] flex-shrink-0 z-20 relative mr-6">
-            {/* Top Stars & Delivered Count */}
-            <div>
-              <div className="flex items-center gap-1 text-white text-base">
-                {"★★★★★"}
-              </div>
-              <p className="text-white font-semibold text-sm tracking-tight mt-1.5 drop-shadow-sm">
-                2.5K+ Solution Delivered
-              </p>
-            </div>
+          {/* Left Floating Trust Badge Card with Frame 109.svg (Increased Size to Fully Cover Slider Behind) */}
+          <div className="hidden lg:block absolute -left-2 top-1/2 -translate-y-1/2 w-[345px] xl:w-[385px] h-[430px] xl:h-[445px] z-20 select-none pointer-events-none group">
+            {/* Background SVG Asset: Frame 109.svg */}
+            <img
+              src="/images/Frame 109.svg"
+              alt="2.5K+ Solution Delivered - 15+ Years of Trust"
+              className="absolute inset-0 w-full h-full object-fill pointer-events-none drop-shadow-[12px_0_28px_rgba(255,94,0,0.3)]"
+              draggable={false}
+            />
 
-            {/* Middle People Silhouette Art */}
-            <div className="relative w-full h-28 my-auto flex items-center justify-center overflow-hidden opacity-30">
-              <svg className="w-full h-full text-white" viewBox="0 0 200 80" fill="currentColor">
-                <circle cx="20" cy="20" r="10" />
-                <path d="M10 50 C10 38 30 38 30 50 Z" />
-                <circle cx="50" cy="18" r="10" />
-                <path d="M40 50 C40 36 60 36 60 50 Z" />
-                <circle cx="80" cy="22" r="10" />
-                <path d="M70 52 C70 40 90 40 90 52 Z" />
-                <circle cx="110" cy="16" r="12" />
-                <path d="M98 52 C98 34 122 34 122 52 Z" />
-                <circle cx="140" cy="20" r="10" />
-                <path d="M130 50 C130 38 150 38 150 50 Z" />
-                <circle cx="170" cy="22" r="10" />
-                <path d="M160 52 C160 40 180 40 180 52 Z" />
-              </svg>
-            </div>
+            {/* Overlaid Badge Typography & Avatars */}
+            <div className="relative z-10 flex flex-col justify-between h-full p-7 sm:p-8 text-white">
+              {/* Top: Stars & Delivered Count */}
+              <div>
+                <div className="flex items-center gap-1.5 text-white text-base xl:text-lg">
+                  {"★★★★★"}
+                </div>
+                <p className="text-white font-semibold text-sm xl:text-base tracking-tight mt-2 drop-shadow-sm">
+                  2.5K+ Solution Delivered
+                </p>
+              </div>
 
-            {/* Bottom Avatars & 15+ Years Trust */}
-            <div>
-              <div className="flex items-center -space-x-2.5 mb-2.5">
-                <div className="w-9 h-9 rounded-full border-2 border-white bg-neutral-800 overflow-hidden shadow-sm flex items-center justify-center text-xs font-bold">
-                  <span>JD</span>
+              {/* Bottom: Team Avatars & 15+ Years of Trust */}
+              <div className="pt-8">
+                <div className="flex items-center -space-x-2.5 mb-3">
+                  <img
+                    src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80"
+                    alt="Team 1"
+                    className="w-10 h-10 rounded-full border-2 border-white object-cover shadow-sm"
+                  />
+                  <img
+                    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=80"
+                    alt="Team 2"
+                    className="w-10 h-10 rounded-full border-2 border-white object-cover shadow-sm"
+                  />
+                  <img
+                    src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&auto=format&fit=crop&q=80"
+                    alt="Team 3"
+                    className="w-10 h-10 rounded-full border-2 border-white object-cover shadow-sm"
+                  />
                 </div>
-                <div className="w-9 h-9 rounded-full border-2 border-white bg-[#1a2b40] overflow-hidden shadow-sm flex items-center justify-center text-xs font-bold">
-                  <span>AK</span>
+                <div className="text-[48px] xl:text-[56px] font-black text-white leading-none tracking-tight drop-shadow-sm">
+                  15+
                 </div>
-                <div className="w-9 h-9 rounded-full border-2 border-white bg-[#4a2810] overflow-hidden shadow-sm flex items-center justify-center text-xs font-bold">
-                  <span>MR</span>
+                <div className="text-sm xl:text-base font-semibold text-white/95 tracking-wide mt-1.5 drop-shadow-sm">
+                  Years of Trust
                 </div>
-              </div>
-              <div className="text-[44px] xl:text-[50px] font-black text-white leading-none tracking-tight drop-shadow-sm">
-                15+
-              </div>
-              <div className="text-sm font-semibold text-white/95 tracking-wide mt-1 drop-shadow-sm">
-                Years of Trust
               </div>
             </div>
           </div>
 
           {/* Continuous Infinite Scrolling Slider Track */}
-          <div className="overflow-hidden flex-1 w-full cursor-grab active:cursor-grabbing">
+          <div className="overflow-hidden w-full">
             <div
               ref={trackRef}
-              className="flex items-center gap-6 will-change-transform"
+              className="flex items-center gap-6 will-change-transform lg:pl-[330px] xl:pl-[370px]"
               style={{ width: "max-content" }}
             >
               {displayItems.map((item, index) => (
