@@ -286,41 +286,53 @@ export default function Solutions() {
             />
 
             {/* Overlaid Badge Typography & Avatars */}
-            <div className="relative z-10 flex flex-col justify-between h-full p-7 sm:p-8 text-white">
+            <div className="relative z-10 flex flex-col justify-between h-full p-6 sm:p-7 xl:p-8 text-white">
               {/* Top: Stars & Delivered Count */}
               <div>
-                <div className="flex items-center gap-1.5 text-white text-base xl:text-lg">
+                <div className="flex items-center gap-1.5 text-white text-lg sm:text-xl">
                   {"★★★★★"}
                 </div>
-                <p className="text-white font-semibold text-sm xl:text-base tracking-tight mt-2 drop-shadow-sm">
+                <p className="text-white font-bold text-lg sm:text-xl xl:text-[22px] tracking-tight mt-2 drop-shadow-sm">
                   2.5K+ Solution Delivered
                 </p>
               </div>
 
-              {/* Bottom: Team Avatars & 15+ Years of Trust */}
-              <div className="pt-8">
-                <div className="flex items-center -space-x-2.5 mb-3">
+              {/* Bottom Row: Avatars on Left, 15+ with Bottom Fade Effect & Years of Trust */}
+              <div className="flex items-end gap-2.5 sm:gap-3 xl:gap-3.5">
+                {/* 3 Overlapping Avatars positioned to the left of 15+ */}
+                <div className="flex items-center -space-x-2.5 sm:-space-x-3 mb-6 sm:mb-7 flex-shrink-0 z-10">
                   <img
-                    src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80"
+                    src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&auto=format&fit=crop&q=80"
                     alt="Team 1"
-                    className="w-10 h-10 rounded-full border-2 border-white object-cover shadow-sm"
+                    className="w-10 h-10 sm:w-11 sm:h-11 rounded-full border-2 border-white object-cover shadow-md"
                   />
                   <img
-                    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=80"
+                    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&auto=format&fit=crop&q=80"
                     alt="Team 2"
-                    className="w-10 h-10 rounded-full border-2 border-white object-cover shadow-sm"
+                    className="w-10 h-10 sm:w-11 sm:h-11 rounded-full border-2 border-white object-cover shadow-md"
                   />
                   <img
-                    src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&auto=format&fit=crop&q=80"
+                    src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=120&auto=format&fit=crop&q=80"
                     alt="Team 3"
-                    className="w-10 h-10 rounded-full border-2 border-white object-cover shadow-sm"
+                    className="w-10 h-10 sm:w-11 sm:h-11 rounded-full border-2 border-white object-cover shadow-md"
                   />
                 </div>
-                <div className="text-[48px] xl:text-[56px] font-black text-white leading-none tracking-tight drop-shadow-sm">
-                  15+
-                </div>
-                <div className="text-sm xl:text-base font-semibold text-white/95 tracking-wide mt-1.5 drop-shadow-sm">
-                  Years of Trust
+
+                {/* 15+ with Bottom Fade Effect & Years of Trust */}
+                <div className="flex flex-col flex-1 min-w-0">
+                  <div
+                    className="text-[68px] sm:text-[76px] xl:text-[86px] font-black leading-[0.88] tracking-tight select-none"
+                    style={{
+                      background: "linear-gradient(180deg, #FFFFFF 25%, rgba(255, 255, 255, 0.75) 55%, rgba(255, 255, 255, 0.05) 92%, rgba(255, 255, 255, 0) 100%)",
+                      WebkitBackgroundClip: "text",
+                      WebkitTextFillColor: "transparent",
+                    }}
+                  >
+                    15+
+                  </div>
+                  <div className="text-lg sm:text-xl xl:text-2xl font-bold text-white tracking-tight mt-1 drop-shadow-sm whitespace-nowrap">
+                    Years of Trust
+                  </div>
                 </div>
               </div>
             </div>
