@@ -1,8 +1,45 @@
 @import "tailwindcss";
 
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+
+  --animate-marquee: marquee var(--duration, 40s) linear infinite;
+  --animate-marquee-vertical: marquee-vertical var(--duration, 40s) linear infinite;
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(calc(-100% - var(--gap, 1rem)));
+    }
+  }
+
+  @keyframes marquee-vertical {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(calc(-100% - var(--gap, 1rem)));
+    }
+  }
+}
+
 :root {
   --background: #fdfaf6;
   --foreground: #0a0a0a;
+  --card: #ffffff;
+  --card-foreground: #0a0a0a;
+  --muted: #f4ede4;
+  --muted-foreground: #737373;
+  --border: #e8e3dc;
+  --radius: 0.75rem;
 }
 
 body {
@@ -18,6 +55,7 @@ body {
 }
 
 :root {
+  --our-orange-svg: url('/WD Grad.svg');
   --our-orange: linear-gradient(110deg, #FF7230 0%, #FF6A2F 26%, #FF7631 44%, #FF8935 63%, #FF532B 100%);
   --our-orange-horizontal: linear-gradient(90deg, #FF7230 0%, #FF6A2F 26%, #FF7631 44%, #FF8935 63%, #FF532B 100%);
   --our-orange-solid: #FF7230;
@@ -25,6 +63,12 @@ body {
   --our-orange-glow: rgba(255, 114, 48, 0.38);
   --btn-dark: #22252c;
   --btn-dark-hover: #111317;
+}
+
+.bg-webnox-gradient {
+  background-image: url('/WD Grad.svg');
+  background-size: cover;
+  background-position: center;
 }
 
 /* Trusted by Many Pill Badge */
