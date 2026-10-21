@@ -315,3 +315,13 @@ body {
   transform: translateY(0) scale(0.98);
 }
 
+/* Custom animations and utilities for the orbital timeline */
+.bg-gradient-orbital {
+  background: linear-gradient(135deg, #FF7230 0%, #FF8935 50%, #FF532B 100%);
+}
+
+.shadow-orbital {
+  box-shadow: 0 0 20px rgba(255, 114, 48, 0.25);
+}
+
+

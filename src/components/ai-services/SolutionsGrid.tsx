@@ -9,6 +9,7 @@ import {
   ShieldCheck,
   TrendingUp,
   Sparkles,
+  Handshake,
   Search,
   Bot,
   Layers,
@@ -97,7 +98,7 @@ const BENTO_SOLUTIONS: MagicBentoItem[] = [
   {
     id: "assistants-copilots",
     label: "Human-AI Collaboration",
-    icon: <Sparkles className="w-4 h-4 text-[#ff5e00]" />,
+    icon: <Handshake className="w-4 h-4 text-[#ff5e00]" />,
     title: "AI Assistants and Copilots",
     description:
       "Build AI assistants that help employees retrieve information, draft content, navigate business workflows and complete approved tasks using relevant organisational context.",

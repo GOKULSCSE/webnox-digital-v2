@@ -23,6 +23,7 @@ import {
   ExternalLink,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { LiquidButton } from "@/components/ui/button";
 
 export interface FeatureItem {
   id: string;
@@ -198,11 +199,22 @@ export const DEFAULT_FEATURES: FeatureItem[] = [
 ];
 
 const AUTO_PLAY_INTERVAL = 3800;
-const ITEM_HEIGHT = 68;
 
-const wrap = (min: number, max: number, v: number) => {
-  const rangeSize = max - min;
-  return ((((v - min) % rangeSize) + rangeSize) % rangeSize) + min;
+// Responsive slot positioning helper for the 5 visible slots (-2, -1, 0, 1, 2)
+// Provides clean, generous vertical clearance (~48px) around the active liquid pill
+const getSlotY = (slot: -2 | -1 | 0 | 1 | 2) => {
+  switch (slot) {
+    case -2:
+      return "var(--slot-y-neg2, -210px)";
+    case -1:
+      return "var(--slot-y-neg1, -112px)";
+    case 0:
+      return "0px";
+    case 1:
+      return "var(--slot-y-pos1, 112px)";
+    case 2:
+      return "var(--slot-y-pos2, 210px)";
+  }
 };
 
 interface FeatureCarouselProps {
@@ -217,6 +229,7 @@ export function FeatureCarousel({
   className = "",
 }: FeatureCarouselProps) {
   const [step, setStep] = useState(0);
+  const [direction, setDirection] = useState<number>(1);
   const [isPaused, setIsPaused] = useState(false);
 
   const activeFeatures = features && features.length > 0 ? features : WEBNOX_SERVICES_FEATURES;
@@ -225,12 +238,17 @@ export function FeatureCarousel({
   const currentIndex = ((step % count) + count) % count;
 
   const nextStep = useCallback(() => {
+    setDirection(1);
     setStep((prev) => prev + 1);
   }, []);
 
   const handleChipClick = (index: number) => {
     const diff = (index - currentIndex + count) % count;
-    if (diff > 0) setStep((s) => s + diff);
+    const delta = diff > count / 2 ? diff - count : diff;
+    if (delta !== 0) {
+      setDirection(delta > 0 ? 1 : -1);
+      setStep((s) => s + delta);
+    }
   };
 
   useEffect(() => {
@@ -287,108 +305,187 @@ export function FeatureCarousel({
     <div className={cn("w-full max-w-7xl mx-auto select-none", className)}>
       <div className="relative overflow-hidden rounded-[2.5rem] lg:rounded-[3.5rem] flex flex-col lg:flex-row min-h-[620px] lg:aspect-[16/10] border border-neutral-200/80 shadow-[0_12px_40px_rgba(0,0,0,0.06)] bg-white">
         
-        {/* Left Side: Interactive vertical scrolling chips list with WD Grad.svg */}
+        {/* Left Side: Interactive vertical scrolling chips list with proper spacing & testimonials gradient */}
         <div
           className={cn(
-            "w-full lg:w-[44%] min-h-[400px] md:min-h-[460px] lg:h-full relative z-30 flex flex-col items-start justify-center overflow-hidden px-6 sm:px-8 md:px-12 lg:pl-12",
+            "w-full lg:w-[46%] min-h-[500px] sm:min-h-[540px] md:min-h-[580px] lg:h-full relative z-30 flex flex-col items-center justify-center overflow-hidden px-4 sm:px-6 md:px-8",
             leftBgClass
           )}
           style={
             isWebnoxTheme
               ? {
-                  backgroundImage: "url('/WD Grad.svg')",
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
+                  background:
+                    "linear-gradient(96.82deg, #FF7230 8.11%, #FF6A2F 28.74%, #FF7631 43.14%, #FF8935 63.76%, #FF532B 87.55%)",
                 }
               : undefined
           }
         >
-          {/* Ambient WD Grad SVG Background */}
-          {isWebnoxTheme && (
-            <img
-              src="/WD Grad.svg"
-              alt="Webnox Orange Gradient"
-              className="absolute inset-0 w-full h-full object-cover pointer-events-none -z-0 select-none"
-              draggable={false}
-            />
-          )}
+          {/* Top and Bottom Progressive Gradient Blur Masks */}
+          <div
+            className="absolute inset-x-0 top-0 h-28 pointer-events-none z-30 backdrop-blur-[6px]"
+            style={{
+              maskImage: "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%)",
+              WebkitMaskImage: "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%)",
+            }}
+          />
+          <div
+            className="absolute inset-x-0 bottom-0 h-28 pointer-events-none z-30 backdrop-blur-[6px]"
+            style={{
+              maskImage: "linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%)",
+              WebkitMaskImage: "linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%)",
+            }}
+          />
 
-          {/* Top and Bottom Fading Gradients */}
-          <div className={cn("absolute inset-x-0 top-0 h-16 md:h-24 lg:h-20 z-40 pointer-events-none", topFadeClass)} />
-          <div className={cn("absolute inset-x-0 bottom-0 h-16 md:h-24 lg:h-20 z-40 pointer-events-none", bottomFadeClass)} />
-
-          <div className="relative w-full h-full flex items-center justify-center lg:justify-start z-20 py-8">
-            {activeFeatures.map((feature, index) => {
-              const isActive = index === currentIndex;
-              const distance = index - currentIndex;
-              const wrappedDistance = wrap(
-                -(count / 2),
-                count / 2,
-                distance
-              );
+          <div
+            className="relative w-full h-full flex items-center justify-center z-20 py-8 [--slot-y-neg2:-186px] [--slot-y-neg1:-100px] [--slot-y-pos1:100px] [--slot-y-pos2:186px] sm:[--slot-y-neg2:-210px] sm:[--slot-y-neg1:-112px] sm:[--slot-y-pos1:112px] sm:[--slot-y-pos2:210px]"
+            style={{
+              maskImage: "linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%)",
+              WebkitMaskImage: "linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%)",
+            }}
+          >
+            {([-2, -1, 0, 1, 2] as const).map((slot) => {
+              const itemIndex = ((currentIndex + slot) % count + count) % count;
+              const feature = activeFeatures[itemIndex];
+              const isActive = slot === 0;
+              const isNear = Math.abs(slot) === 1;
+              const restingBlur = isNear ? "blur(1.2px)" : "blur(3.2px)";
+              const restingOpacity = isNear ? 0.90 : 0.58;
 
               return (
-                <motion.div
-                  key={feature.id}
+                <div
+                  key={slot}
                   style={{
-                    height: ITEM_HEIGHT,
-                    width: "fit-content",
+                    transform: `translateY(${getSlotY(slot)})`,
                   }}
-                  animate={{
-                    y: wrappedDistance * ITEM_HEIGHT,
-                    opacity: 1 - Math.abs(wrappedDistance) * 0.28,
-                  }}
-                  transition={{
-                    type: "spring",
-                    stiffness: 90,
-                    damping: 22,
-                    mass: 1,
-                  }}
-                  className="absolute flex items-center justify-start"
+                  className={cn(
+                    "absolute inset-x-0 flex items-center justify-center px-4 transition-transform duration-300",
+                    isActive ? "z-20 pointer-events-auto" : "z-10 pointer-events-auto"
+                  )}
                 >
-                  <button
-                    type="button"
-                    onClick={() => handleChipClick(index)}
-                    onMouseEnter={() => setIsPaused(true)}
-                    onMouseLeave={() => setIsPaused(false)}
-                    className={cn(
-                      "relative flex items-center gap-3 px-5 sm:px-6 md:px-7 py-3 md:py-3.5 rounded-full transition-all duration-500 text-left group border cursor-pointer max-w-[90vw] lg:max-w-[360px]",
-                      isActive
-                        ? activeChipClass
-                        : "bg-transparent text-white/70 border-white/20 hover:border-white/50 hover:text-white"
-                    )}
-                  >
-                    <div
-                      className={cn(
-                        "flex items-center justify-center transition-colors duration-300 flex-shrink-0",
-                        isActive ? activeIconClass : "text-white/60"
-                      )}
+                  {isActive ? (
+                    <motion.div
+                      key={`liquid-physic-capsule-${currentIndex}`}
+                      initial={{
+                        scaleY: 1.15,
+                        scaleX: 0.91,
+                        y: direction > 0 ? -9 : 9,
+                      }}
+                      animate={{
+                        scaleY: [1.15, 0.91, 1.05, 0.98, 1],
+                        scaleX: [0.91, 1.08, 0.96, 1.01, 1],
+                        y: [direction > 0 ? -9 : 9, direction > 0 ? 6 : -6, direction > 0 ? -2 : 2, 0],
+                      }}
+                      transition={{
+                        duration: 0.65,
+                        ease: [0.22, 1, 0.36, 1],
+                      }}
+                      className="w-full flex items-center justify-center relative"
                     >
-                      {feature.lucideIcon ? (
-                        feature.lucideIcon
-                      ) : feature.icon ? (
-                        <HugeiconsIcon
-                          icon={feature.icon}
-                          size={18}
-                          strokeWidth={2}
+                      <LiquidButton
+                        type="button"
+                        onClick={() => handleChipClick(itemIndex)}
+                        onMouseEnter={() => setIsPaused(true)}
+                        onMouseLeave={() => setIsPaused(false)}
+                        className="rounded-full text-center cursor-pointer max-w-[90vw] sm:max-w-[460px] md:max-w-[480px] lg:max-w-[500px] h-auto px-7 py-3 sm:px-9 sm:py-3.5 border-2 border-white/95 bg-white/[0.18] text-white hover:text-white shadow-[0_0_30px_rgba(255,255,255,0.35),0_10px_32px_rgba(0,0,0,0.25)] flex items-center justify-center select-none whitespace-normal hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 relative overflow-hidden"
+                      >
+                        {/* Liquid surface wave ripple sweep on transition */}
+                        <motion.div
+                          key={`liquid-ripple-${currentIndex}`}
+                          initial={{ x: "-120%", opacity: 0 }}
+                          animate={{ x: "220%", opacity: [0, 0.85, 0] }}
+                          transition={{ duration: 0.55, ease: "easeInOut" }}
+                          className="absolute inset-0 -z-10 rounded-full pointer-events-none bg-gradient-to-r from-transparent via-white/50 to-transparent skew-x-12"
                         />
-                      ) : (
-                        <div className="w-2 h-2 rounded-full bg-current" />
-                      )}
-                    </div>
 
-                    <div className="flex flex-col min-w-0">
-                      <span className="font-bold text-xs sm:text-[13px] tracking-tight truncate">
-                        {index + 1}. {feature.label}
-                      </span>
-                      {feature.category && (
-                        <span className="text-[10px] font-medium opacity-80 truncate hidden sm:inline-block">
-                          {feature.category}
-                        </span>
-                      )}
-                    </div>
-                  </button>
-                </motion.div>
+                        <AnimatePresence mode="popLayout" custom={direction} initial={false}>
+                          <motion.span
+                            key={feature.id}
+                            custom={direction}
+                            initial={{
+                              opacity: 0,
+                              y: direction > 0 ? 32 : -32,
+                              filter: "blur(6px)",
+                              scale: 0.94,
+                            }}
+                            animate={{
+                              opacity: 1,
+                              y: 0,
+                              filter: "blur(0px)",
+                              scale: 1,
+                              transition: {
+                                y: { type: "spring", stiffness: 320, damping: 24, mass: 0.8 },
+                                opacity: { duration: 0.28 },
+                                filter: { duration: 0.2 },
+                                scale: { type: "spring", stiffness: 340, damping: 22 },
+                              },
+                            }}
+                            exit={{
+                              opacity: 0,
+                              y: direction > 0 ? -32 : 32,
+                              filter: "blur(6px)",
+                              scale: 0.94,
+                              transition: {
+                                y: { type: "spring", stiffness: 320, damping: 24, mass: 0.8 },
+                                opacity: { duration: 0.2 },
+                                filter: { duration: 0.15 },
+                              },
+                            }}
+                            className="text-white font-extrabold text-base sm:text-lg md:text-xl lg:text-[22px] tracking-tight text-center drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)] block leading-snug sm:leading-tight"
+                          >
+                            {feature.label}
+                          </motion.span>
+                        </AnimatePresence>
+                      </LiquidButton>
+                    </motion.div>
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={() => handleChipClick(itemIndex)}
+                      onMouseEnter={() => setIsPaused(true)}
+                      onMouseLeave={() => setIsPaused(false)}
+                      className="transition-all duration-200 text-center cursor-pointer max-w-[90vw] sm:max-w-[440px] md:max-w-[460px] lg:max-w-[480px] px-4 py-2 bg-transparent border-0 outline-none flex items-center justify-center select-none group hover:scale-[1.03] active:scale-[0.98]"
+                    >
+                      <AnimatePresence mode="popLayout" custom={direction} initial={false}>
+                        <motion.span
+                          key={feature.id}
+                          custom={direction}
+                          initial={{
+                            opacity: 0,
+                            y: direction > 0 ? 30 : -30,
+                            filter: "blur(5px)",
+                          }}
+                          animate={{
+                            opacity: restingOpacity,
+                            y: 0,
+                            filter: restingBlur,
+                            transition: {
+                              y: { type: "spring", stiffness: 300, damping: 25, mass: 0.8 },
+                              opacity: { duration: 0.28 },
+                              filter: { duration: 0.28 },
+                            },
+                          }}
+                          exit={{
+                            opacity: 0,
+                            y: direction > 0 ? -30 : 30,
+                            filter: "blur(5px)",
+                            transition: {
+                              y: { type: "spring", stiffness: 300, damping: 25, mass: 0.8 },
+                              opacity: { duration: 0.2 },
+                            },
+                          }}
+                          className={cn(
+                            "tracking-tight text-center transition-[filter,opacity] duration-200 block text-white group-hover:opacity-100 group-hover:filter-none leading-snug sm:leading-normal",
+                            isNear
+                              ? "font-bold text-sm sm:text-base md:text-lg drop-shadow-[0_2px_5px_rgba(0,0,0,0.55)]"
+                              : "font-semibold text-xs sm:text-sm md:text-base drop-shadow-[0_1px_4px_rgba(0,0,0,0.5)]"
+                          )}
+                        >
+                          {feature.label}
+                        </motion.span>
+                      </AnimatePresence>
+                    </button>
+                  )}
+                </div>
               );
             })}
           </div>
