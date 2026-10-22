@@ -10,7 +10,8 @@ import React, {
 import Matter from "matter-js";
 import "./FolderFloat.css";
 
-const { Bodies, Body, Composite, Engine } = Matter;
+const matterInstance = (Matter as any).default || Matter;
+const { Bodies, Body, Composite, Engine } = matterInstance;
 
 const useIsomorphicLayoutEffect =
   typeof window !== "undefined" ? useLayoutEffect : useEffect;
