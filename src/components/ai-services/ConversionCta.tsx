@@ -3,18 +3,18 @@
 import React from "react";
 import Image from "next/image";
 import { Sparkles, ArrowUpRight } from "lucide-react";
+import PatternWaves from "@/components/PatternWaves";
 
 /**
  * Halftone Dot Matrix Band
- * Renders the glowing diagonal amber/orange halftone strip from the Figma design.
- * Generates horizontal rows of dots along the diagonal slope.
+ * Renders the glowing diagonal amber/orange band with dynamic PatternWaves silk dots.
  */
 function HalftoneDotBand({
   className = "",
   style = {},
-  columns = 70,
-  rows = 9,
-  spacing = 20,
+  columns = 160,
+  rows = 7,
+  spacing = 24,
 }: {
   className?: string;
   style?: React.CSSProperties;
@@ -24,49 +24,49 @@ function HalftoneDotBand({
 }) {
   const width = columns * spacing;
   const height = rows * spacing;
-  const centerRow = (rows - 1) / 2;
-
-  const circles = [];
-  for (let r = 0; r < rows; r++) {
-    const distFromCenter = Math.abs(r - centerRow) / centerRow;
-    const radius = 4.8 - distFromCenter * 2.8;
-    const opacity = Math.max(0.12, 0.95 - distFromCenter * 0.82);
-
-    for (let c = 0; c < columns; c++) {
-      circles.push(
-        <circle
-          key={`${r}-${c}`}
-          cx={c * spacing + spacing / 2}
-          cy={r * spacing + spacing / 2}
-          r={Math.max(1.3, radius)}
-          fill="#FFA84A"
-          fillOpacity={opacity}
-        />
-      );
-    }
-  }
 
   return (
     <div
       className={`absolute pointer-events-none select-none ${className}`}
-      style={style}
+      style={{
+        width: `${width}px`,
+        height: `${height}px`,
+        ...style,
+      }}
       aria-hidden="true"
     >
-      <svg
-        width={width}
-        height={height}
-        viewBox={`0 0 ${width} ${height}`}
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        style={{
-          maskImage:
-            "linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%)",
-          WebkitMaskImage:
-            "linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%)",
-        }}
-      >
-        {circles}
-      </svg>
+      {/* Dynamic Animated Silk Waves of Dots */}
+      <div className="absolute inset-0 w-full h-full overflow-hidden">
+        <PatternWaves
+          preset="silk"
+          pattern="dot"
+          wave="silk"
+          characters=".:-=+*#%@"
+          shadowColor="#442508"
+          color="#c06b2e"
+          accentColor="#f69653"
+          highlightColor="#ffb87a"
+          backgroundColor="transparent"
+          spacing={15}
+          markSize={0.96}
+          depth={0.42}
+          light={0}
+          shine={0.85}
+          contrast={1.05}
+          speed={0.35}
+          scale={1.2}
+          direction={20}
+          fade="none"
+          fadeSize={0}
+          opacity={1}
+          interactive={true}
+          cursorSize={100}
+          cursorStrength={1.0}
+          intro={false}
+          paused={false}
+          className="w-full h-full"
+        />
+      </div>
     </div>
   );
 }
@@ -75,7 +75,7 @@ export default function ConversionCta() {
   return (
     <section
       id="contact"
-      className="relative w-full bg-[#160a04] text-white overflow-hidden py-20 sm:py-24 md:py-32 selection:bg-[#ff5e00] selection:text-white"
+      className="relative w-full bg-[#160a04] text-white overflow-hidden py-16 sm:py-20 lg:py-24 xl:py-28 selection:bg-[#ff5e00] selection:text-white"
     >
       {/* Deep Background Gradient Base */}
       <div
@@ -89,11 +89,11 @@ export default function ConversionCta() {
 
       {/* Ambient Orange Glow behind the 3D sculpture */}
       <div
-        className="absolute right-0 lg:right-[-5%] top-1/2 -translate-y-1/2 w-[550px] lg:w-[700px] h-[550px] lg:h-[700px] rounded-full pointer-events-none"
+        className="absolute right-0 lg:right-[-4%] top-[52%] sm:top-[55%] lg:top-[57%] -translate-y-1/2 w-[750px] lg:w-[1100px] h-[750px] lg:h-[1100px] rounded-full pointer-events-none"
         style={{
           background:
-            "radial-gradient(circle, rgba(255, 94, 0, 0.28) 0%, rgba(255, 114, 48, 0.12) 40%, transparent 70%)",
-          filter: "blur(50px)",
+            "radial-gradient(circle, rgba(255, 114, 48, 0.48) 0%, rgba(255, 94, 0, 0.24) 36%, transparent 70%)",
+          filter: "blur(70px)",
         }}
         aria-hidden="true"
       />
@@ -109,29 +109,13 @@ export default function ConversionCta() {
         aria-hidden="true"
       />
 
-      {/* Halftone Dot Band 1: Bottom-Left to Center-Right (sloping upwards / under buttons and rock) */}
-      <HalftoneDotBand
-        columns={75}
-        rows={9}
-        spacing={20}
-        className="bottom-[-40px] left-[-250px] sm:left-[-150px] lg:left-[-100px] origin-left rotate-[-20deg] opacity-75 sm:opacity-85"
-      />
-
-      {/* Halftone Dot Band 2: Upper-Right behind 3D Sculpture & Glass Cube (parallel slope /) */}
-      <HalftoneDotBand
-        columns={60}
-        rows={10}
-        spacing={20}
-        className="top-[-60px] sm:top-[-20px] right-[-200px] sm:right-[-100px] lg:right-[-50px] origin-center rotate-[-20deg] opacity-60 sm:opacity-75"
-      />
-
       {/* Main Content Container */}
       <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
           {/* Left Column: Logo, Heading, Description, CTAs */}
-          <div className="lg:col-span-7 flex flex-col items-start text-left z-20">
+          <div className="lg:col-span-7 flex flex-col items-start text-left relative z-20">
             {/* Webnox Logo */}
-            <div className="mb-8 sm:mb-10">
+            <div className="mb-7 sm:mb-9">
               <Image
                 src="/images/Webnox logo White.svg"
                 alt="Webnox"
@@ -143,7 +127,7 @@ export default function ConversionCta() {
             </div>
 
             {/* Headline */}
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-[52px] font-bold tracking-tight text-white leading-[1.12]">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-[52px] xl:text-[56px] font-bold tracking-tight text-white leading-[1.12]">
               Build, Launch and Grow
               <br />
               With an{" "}
@@ -153,7 +137,7 @@ export default function ConversionCta() {
             </h2>
 
             {/* Description */}
-            <p className="mt-5 sm:mt-6 text-neutral-300 text-sm sm:text-base md:text-lg font-light leading-relaxed max-w-xl">
+            <p className="mt-5 sm:mt-6 text-neutral-200/90 text-sm sm:text-base md:text-[17px] font-light leading-relaxed max-w-xl">
               Turn your AI idea, existing software, or business workflow into a
               production-ready digital solution. From AI strategy and architecture to
               development, integration, and deployment, Webnox helps bring your
@@ -184,15 +168,34 @@ export default function ConversionCta() {
             </div>
           </div>
 
-          {/* Right Column: 3D Infinity Sculpture & Pedestal */}
-          <div className="lg:col-span-5 relative flex items-center justify-center lg:justify-end z-10 mt-4 lg:mt-0">
-            <div className="relative w-full max-w-[460px] lg:max-w-none">
+          {/* Right Column: 3D Infinity Sculpture & Pedestal with locked Halftone Dot Band */}
+          <div className="lg:col-span-5 relative flex items-center lg:items-end justify-center lg:justify-end z-10 mt-10 lg:mt-0">
+            <div className="relative w-full max-w-[700px] lg:max-w-[920px] xl:max-w-[1020px] 2xl:max-w-[1120px] lg:translate-x-6 xl:translate-x-12 translate-y-12 sm:translate-y-16 lg:translate-y-24 xl:translate-y-28 2xl:translate-y-32">
+              {/* Halftone Dot Matrix Band anchored in same coordinate space */}
+              <HalftoneDotBand
+                columns={160}
+                rows={7}
+                spacing={24}
+                className="opacity-85 sm:opacity-95 z-0"
+                style={{
+                  left: "50%",
+                  top: "84.95%",
+                  transform: "translate(-50%, -100%) rotate(-8.494deg)",
+                  transformOrigin: "50% 100%",
+                }}
+              />
+
               <Image
                 src="/images/startyouraiproject.png"
                 alt="Webnox AI-Native Partner"
                 width={800}
                 height={533}
-                className="w-full h-auto object-contain drop-shadow-[0_25px_45px_rgba(0,0,0,0.7)] scale-100 lg:scale-105 xl:scale-110 transform transition-transform duration-500 hover:scale-[1.12]"
+                style={{
+                  clipPath: "polygon(-10% -10%, 110% -10%, 110% 71.5%, -10% 98.4%)",
+                  WebkitClipPath: "polygon(-10% -10%, 110% -10%, 110% 71.5%, -10% 98.4%)",
+                  transformOrigin: "50% 84.95%",
+                }}
+                className="relative z-10 w-full h-auto object-contain scale-145 sm:scale-155 lg:scale-170 xl:scale-185 2xl:scale-195 transform transition-transform duration-500 hover:brightness-110"
                 priority
               />
             </div>
