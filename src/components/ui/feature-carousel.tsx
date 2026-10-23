@@ -45,8 +45,7 @@ export const WEBNOX_SERVICES_FEATURES: FeatureItem[] = [
     label: "Custom AI Application Development",
     category: "Full-Stack AI Software",
     lucideIcon: <Cpu className="w-4 h-4" />,
-    image:
-      "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1200",
+    image: "/images/services/custom-llm.jpg",
     description:
       "Build custom AI applications with business specific features, user interfaces, backend services and data connections. We develop internal tools, customer-facing platforms and AI-enabled software products based on your functional and technical requirements.",
     ctaText: "Talk to Our AI Experts",
@@ -57,8 +56,7 @@ export const WEBNOX_SERVICES_FEATURES: FeatureItem[] = [
     label: "Generative AI Application Development",
     category: "Multimodal & Synthesis",
     lucideIcon: <Sparkles className="w-4 h-4" />,
-    image:
-      "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1200",
+    image: "/images/services/generative-ai.jpg",
     description:
       "Develop generative AI applications for document analysis, content generation, summarisation and conversational experiences. We connect suitable language or multimodal models with relevant data, output validation and application-level access controls.",
     ctaText: "Talk to Our AI Experts",
@@ -69,8 +67,7 @@ export const WEBNOX_SERVICES_FEATURES: FeatureItem[] = [
     label: "AI Agent Development and Workflow Automation",
     category: "Autonomous Systems",
     lucideIcon: <Bot className="w-4 h-4" />,
-    image:
-      "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=1200",
+    image: "/images/services/ai-agent-workflows.jpg",
     description:
       "Develop AI agents that retrieve information, use approved tools and perform defined multi-step tasks. We implement workflow orchestration, permission controls and human approval points to help manage automated business operations.",
     ctaText: "Talk to Our AI Experts",
@@ -81,8 +78,7 @@ export const WEBNOX_SERVICES_FEATURES: FeatureItem[] = [
     label: "LLM Application Development",
     category: "RAG & Language Models",
     lucideIcon: <Brain className="w-4 h-4" />,
-    image:
-      "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=1200",
+    image: "/images/services/rag-development.jpg",
     description:
       "Integrate large language models into applications for question answering, information extraction and structured outputs. Where appropriate, we use retrieval-augmented generation (RAG) to connect responses with relevant business documents and knowledge sources.",
     ctaText: "Talk to Our AI Experts",
@@ -93,8 +89,7 @@ export const WEBNOX_SERVICES_FEATURES: FeatureItem[] = [
     label: "AI Application Integration Services",
     category: "APIs & Ecosystems",
     lucideIcon: <Network className="w-4 h-4" />,
-    image:
-      "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200",
+    image: "/images/services/integration.jpg",
     description:
       "Add AI capabilities to existing web applications, SaaS products and enterprise systems through APIs and data connectors. Integration planning covers authentication, data permissions, system compatibility, error handling and operational requirements.",
     ctaText: "Talk to Our AI Experts",
@@ -105,8 +100,7 @@ export const WEBNOX_SERVICES_FEATURES: FeatureItem[] = [
     label: "AI-Powered Analytics and Decision Support",
     category: "Predictive Intelligence",
     lucideIcon: <TrendingUp className="w-4 h-4" />,
-    image:
-      "https://images.unsplash.com/photo-1551288049-bbda38a10ad5?q=80&w=1200",
+    image: "/images/services/analytics.jpg",
     description:
       "Develop applications that analyse business data, identify patterns and present useful insights. Depending on the use case, solutions can include forecasting, recommendation systems and natural-language analytics supported by defined evaluation criteria.",
     ctaText: "Talk to Our AI Experts",

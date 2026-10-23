@@ -11,6 +11,7 @@ interface ProjectItem {
   description: string;
   ctaText: string;
   ctaLink: string;
+  image: string;
   mockup: {
     badge: string;
     appName: string;
@@ -29,6 +30,7 @@ const PROJECTS_DATA: ProjectItem[] = [
       "An AI-native procurement workflow that automates purchase-order processes, vendor communication, stock monitoring and follow-ups to reduce manual coordination.",
     ctaText: "View Project",
     ctaLink: "#contact",
+    image: "/images/projects/bull-machine.jpg",
     mockup: {
       badge: "BULL MACHINE",
       appName: "Procurement AI",
@@ -45,6 +47,7 @@ const PROJECTS_DATA: ProjectItem[] = [
       "An internal AI-powered workflow that connects keyword research, content generation, optimisation, deployment and ongoing SEO tasks in one coordinated process.",
     ctaText: "View Project",
     ctaLink: "#contact",
+    image: "/images/projects/seo-copilot.jpg",
     mockup: {
       badge: "SEO COPILOT",
       appName: "Content Engine",
@@ -61,6 +64,7 @@ const PROJECTS_DATA: ProjectItem[] = [
       "A field service management application that helps teams schedule jobs, dispatch technicians, track work orders and manage service operations from a central platform.",
     ctaText: "View Project",
     ctaLink: "#contact",
+    image: "/images/projects/easy-field.jpg",
     mockup: {
       badge: "EASY FIELD",
       appName: "JobDispatch IQ",
@@ -77,6 +81,7 @@ const PROJECTS_DATA: ProjectItem[] = [
       "A stock market application supporting user registration, KYC, digital transactions, wallet management and market information within a security-conscious interface.",
     ctaText: "View Project",
     ctaLink: "#contact",
+    image: "/images/projects/amaramba.jpg",
     mockup: {
       badge: "AMARAMBA",
       appName: "TradeVault",
@@ -93,6 +98,7 @@ const PROJECTS_DATA: ProjectItem[] = [
       "A custom shopping application with product browsing, cart management, checkout, order history and shipping integration for a mechanical-sector business.",
     ctaText: "View Project",
     ctaLink: "#contact",
+    image: "/images/projects/make-u-easy.jpg",
     mockup: {
       badge: "MAKE U EASY",
       appName: "ShopFlow Pro",
@@ -109,6 +115,7 @@ const PROJECTS_DATA: ProjectItem[] = [
       "A self-drive car rental application that simplifies vehicle selection, location-based bookings, pickup and drop-off scheduling, and customer support.",
     ctaText: "View Project",
     ctaLink: "#contact",
+    image: "/images/projects/onroadz.jpg",
     mockup: {
       badge: "ONROADZ",
       appName: "Self-Drive Rental",
@@ -368,48 +375,34 @@ export default function ProjectsShowcase() {
                   key={`${item.id}-${index}`}
                   className="w-[320px] sm:w-[350px] md:w-[370px] h-[400px] rounded-[24px] bg-white border border-neutral-200/80 shadow-[0_4px_24px_rgba(0,0,0,0.03)] hover:shadow-[0_12px_36px_rgba(0,0,0,0.08)] transition-all duration-300 p-5 sm:p-6 flex flex-col justify-between flex-shrink-0 group"
                 >
-                  {/* Top Tablet/Screen UI Mockup Preview (Fixed h-[175px]) */}
-                  <div className="w-full h-[175px] rounded-[18px] bg-gradient-to-br from-[#fcf2e8] via-[#faeae0] to-[#f7dfd0] relative overflow-hidden flex items-center justify-center p-3 border border-orange-500/10 shadow-inner">
+                  {/* Top Tablet/Screen UI Mockup Preview (Realistic Tablet Mockup) */}
+                  <div className="w-full h-[175px] rounded-[18px] bg-gradient-to-br from-[#fcf2e8] via-[#faeae0] to-[#f7dfd0] relative overflow-hidden flex items-center justify-center p-2.5 border border-orange-500/10 shadow-inner">
                     <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-40">
                       <div className="w-48 h-48 rounded-full border border-orange-400/25" />
                       <div className="w-32 h-32 rounded-full border border-orange-400/35" />
                     </div>
 
-                    <div className="w-[92%] h-[90%] rounded-[12px] bg-neutral-900 p-1.5 shadow-xl border border-neutral-700/60 transform rotate-[-2deg] group-hover:rotate-0 transition-transform duration-500 flex flex-col justify-between">
-                      <div className="w-full bg-neutral-800/90 rounded-t-[8px] px-2.5 py-1.5 flex items-center justify-between border-b border-neutral-700/50">
-                        <div className="flex items-center gap-1.5">
-                          <span className="w-2 h-2 rounded-full bg-[#ff5e00]" />
-                          <span className="text-[9px] font-bold tracking-wider text-white uppercase">{item.mockup.badge}</span>
-                        </div>
-                        <span className="text-[8px] font-medium text-neutral-400">{item.mockup.rating}</span>
+                    {/* Realistic Landscape Tablet Mockup Frame enclosing App UI */}
+                    <div className="relative w-full max-w-[244px] aspect-[1260/862] transform rotate-[-2deg] group-hover:rotate-0 group-hover:scale-[1.03] transition-all duration-500 drop-shadow-[0_12px_24px_rgba(0,0,0,0.18)]">
+                      {/* Inner Screen Content rendered behind the transparent tablet frame */}
+                      <div className="absolute top-[5.2%] bottom-[5.2%] left-[3.6%] right-[3.6%] rounded-[4px] overflow-hidden bg-neutral-950 z-0">
+                        <img
+                          src={item.image}
+                          alt={item.title}
+                          className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                          loading="lazy"
+                        />
+                        {/* Ambient subtle screen sheen and gradient overlay */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/10 pointer-events-none" />
                       </div>
 
-                      <div className="flex-1 bg-neutral-950 p-2 flex flex-col justify-between rounded-b-[8px]">
-                        <div className="flex items-center justify-between">
-                          <div>
-                            <p className="text-[10px] font-bold text-white tracking-tight">{item.mockup.appName}</p>
-                            <p className="text-[8px] text-neutral-400">{item.mockup.tagline}</p>
-                          </div>
-                          <span className="text-[9px] font-bold text-[#ff5e00]">Production Ready</span>
-                        </div>
-
-                        <div className="grid grid-cols-7 gap-1 my-1 opacity-70">
-                          {[1, 2, 3, 4, 5, 6, 7].map((d) => (
-                            <div
-                              key={d}
-                              className={`h-2.5 rounded-[2px] flex items-center justify-center text-[7px] ${
-                                d === 3 || d === 4 ? "bg-[#ff5e00] text-white font-bold" : "bg-neutral-800 text-neutral-400"
-                              }`}
-                            >
-                              {d}
-                            </div>
-                          ))}
-                        </div>
-
-                        <div className="w-full bg-[#ff5e00] text-white text-[8px] font-semibold py-1 rounded-[4px] text-center shadow-sm">
-                          {item.ctaText}
-                        </div>
-                      </div>
+                      {/* Realistic Transparent Landscape Tablet Mockup PNG Frame */}
+                      <img
+                        src="/images/Transparent Landscape Tablet Mockup.png"
+                        alt="Tablet Mockup Frame"
+                        className="absolute inset-0 w-full h-full object-fill pointer-events-none z-10 select-none"
+                        draggable={false}
+                      />
                     </div>
                   </div>
 

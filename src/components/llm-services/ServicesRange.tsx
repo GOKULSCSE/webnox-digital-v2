@@ -17,8 +17,7 @@ export const LLM_SERVICES_FEATURES: FeatureItem[] = [
     label: "1. Custom LLM Application Development",
     category: "Intelligent Software",
     lucideIcon: <Brain className="w-4 h-4" />,
-    image:
-      "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1200",
+    image: "/images/services/custom-llm.jpg",
     description:
       "Build custom LLM applications for intelligent assistants, document analysis, semantic search, and AI-powered software products. We develop solutions that process natural language, extract information, summarise content and support specialised tasks across business workflows.",
     ctaText: "Talk to Our AI Experts",
@@ -29,8 +28,7 @@ export const LLM_SERVICES_FEATURES: FeatureItem[] = [
     label: "2. Retrieval Augmented Generation (RAG) Development",
     category: "Knowledge Retrieval",
     lucideIcon: <Database className="w-4 h-4" />,
-    image:
-      "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1200",
+    image: "/images/services/rag-development.jpg",
     description:
       "Connect large language models to company documents, databases and knowledge bases through RAG development. We implement document processing, embeddings, vector search and retrieval pipelines to help applications generate responses grounded in relevant source information.",
     ctaText: "Talk to Our AI Experts",
@@ -41,8 +39,7 @@ export const LLM_SERVICES_FEATURES: FeatureItem[] = [
     label: "3. LLM Fine-Tuning and Optimization",
     category: "Domain Specialization",
     lucideIcon: <Sliders className="w-4 h-4" />,
-    image:
-      "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=1200",
+    image: "/images/services/fine-tuning.jpg",
     description:
       "Adapt pre trained language models to specialised tasks, domain terminology and required output formats. Our LLM fine-tuning services include dataset preparation, model selection, supervised fine-tuning and evaluation to improve performance for specific application requirements.",
     ctaText: "Talk to Our AI Experts",
@@ -53,8 +50,7 @@ export const LLM_SERVICES_FEATURES: FeatureItem[] = [
     label: "4. LLM Integration Services",
     category: "System Connectivity",
     lucideIcon: <Network className="w-4 h-4" />,
-    image:
-      "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1200",
+    image: "/images/services/integration.jpg",
     description:
       "Integrate large language models into websites, SaaS products, APIs, CRM platforms and enterprise software. Our LLM integration services connect AI capabilities with existing systems to support intelligent search, document processing, customer support and automated content workflows.",
     ctaText: "Talk to Our AI Experts",
@@ -65,8 +61,7 @@ export const LLM_SERVICES_FEATURES: FeatureItem[] = [
     label: "5. AI Agent and Workflow Development",
     category: "Multi-Step Automation",
     lucideIcon: <Bot className="w-4 h-4" />,
-    image:
-      "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=1200",
+    image: "/images/services/ai-agent-workflows.jpg",
     description:
       "Develop AI agents that combine language models, APIs, and approved tools to complete defined multi-step tasks. Our AI agent development services support lead qualification, support-ticket classification, document processing, and research workflows with appropriate access controls and human oversight.",
     ctaText: "Talk to Our AI Experts",
@@ -77,8 +72,7 @@ export const LLM_SERVICES_FEATURES: FeatureItem[] = [
     label: "6. LLM Deployment, Evaluation and Monitoring",
     category: "Production Ops & Governance",
     lucideIcon: <Activity className="w-4 h-4" />,
-    image:
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200",
+    image: "/images/services/deployment.jpg",
     description:
       "Deploy LLM applications across cloud, private, or hybrid environments based on your technical requirements. Our LLM deployment services cover response evaluation, latency monitoring, token-cost tracking, logging, regression testing, and performance optimization to support reliable operation.",
     ctaText: "Talk to Our AI Experts",
