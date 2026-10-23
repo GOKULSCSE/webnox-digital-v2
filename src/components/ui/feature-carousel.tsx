@@ -308,7 +308,7 @@ export function FeatureCarousel({
         {/* Left Side: Interactive vertical scrolling chips list with proper spacing & testimonials gradient */}
         <div
           className={cn(
-            "w-full lg:w-[46%] min-h-[500px] sm:min-h-[540px] md:min-h-[580px] lg:h-full relative z-30 flex flex-col items-center justify-center overflow-hidden px-4 sm:px-6 md:px-8",
+            "w-full lg:w-[48%] xl:w-[47%] min-h-[500px] sm:min-h-[540px] md:min-h-[580px] lg:h-full relative z-30 flex flex-col items-center justify-center overflow-hidden px-3 sm:px-5 md:px-6",
             leftBgClass
           )}
           style={
@@ -358,7 +358,7 @@ export function FeatureCarousel({
                     transform: `translateY(${getSlotY(slot)})`,
                   }}
                   className={cn(
-                    "absolute inset-x-0 flex items-center justify-center px-4 transition-transform duration-300",
+                    "absolute inset-x-0 flex items-center justify-center px-2 sm:px-3 transition-transform duration-300",
                     isActive ? "z-20 pointer-events-auto" : "z-10 pointer-events-auto"
                   )}
                 >
@@ -366,35 +366,35 @@ export function FeatureCarousel({
                     <motion.div
                       key={`liquid-physic-capsule-${currentIndex}`}
                       initial={{
-                        scaleY: 1.15,
-                        scaleX: 0.91,
-                        y: direction > 0 ? -9 : 9,
+                        scaleY: 1.06,
+                        scaleX: 0.96,
+                        y: direction > 0 ? -6 : 6,
                       }}
                       animate={{
-                        scaleY: [1.15, 0.91, 1.05, 0.98, 1],
-                        scaleX: [0.91, 1.08, 0.96, 1.01, 1],
-                        y: [direction > 0 ? -9 : 9, direction > 0 ? 6 : -6, direction > 0 ? -2 : 2, 0],
+                        scaleY: [1.06, 0.96, 1.02, 0.99, 1],
+                        scaleX: [0.96, 1.02, 0.98, 1.01, 1],
+                        y: [direction > 0 ? -6 : 6, direction > 0 ? 4 : -4, direction > 0 ? -1 : 1, 0],
                       }}
                       transition={{
-                        duration: 0.65,
+                        duration: 0.55,
                         ease: [0.22, 1, 0.36, 1],
                       }}
-                      className="w-full flex items-center justify-center relative"
+                      className="w-full flex items-center justify-center relative px-1"
                     >
                       <LiquidButton
                         type="button"
                         onClick={() => handleChipClick(itemIndex)}
                         onMouseEnter={() => setIsPaused(true)}
                         onMouseLeave={() => setIsPaused(false)}
-                        className="rounded-full text-center cursor-pointer max-w-[90vw] sm:max-w-[460px] md:max-w-[480px] lg:max-w-[500px] h-auto px-7 py-3 sm:px-9 sm:py-3.5 border-2 border-white/95 bg-white/[0.18] text-white hover:text-white shadow-[0_0_30px_rgba(255,255,255,0.35),0_10px_32px_rgba(0,0,0,0.25)] flex items-center justify-center select-none whitespace-normal hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 relative overflow-hidden"
+                        className="rounded-full text-center cursor-pointer w-auto max-w-[calc(100%-1rem)] sm:max-w-[calc(100%-1.5rem)] md:max-w-[450px] h-auto px-5 py-2.5 sm:px-6 sm:py-3 border border-white/40 bg-white/[0.08] text-white hover:text-white shadow-[0_4px_20px_rgba(0,0,0,0.18),0_1px_3px_rgba(0,0,0,0.1),inset_0_1px_1px_rgba(255,255,255,0.25)] flex items-center justify-center select-none whitespace-normal hover:scale-[1.015] active:scale-[0.98] transition-all duration-300 relative overflow-hidden"
                       >
                         {/* Liquid surface wave ripple sweep on transition */}
                         <motion.div
                           key={`liquid-ripple-${currentIndex}`}
                           initial={{ x: "-120%", opacity: 0 }}
-                          animate={{ x: "220%", opacity: [0, 0.85, 0] }}
+                          animate={{ x: "220%", opacity: [0, 0.45, 0] }}
                           transition={{ duration: 0.55, ease: "easeInOut" }}
-                          className="absolute inset-0 -z-10 rounded-full pointer-events-none bg-gradient-to-r from-transparent via-white/50 to-transparent skew-x-12"
+                          className="absolute inset-0 -z-10 rounded-full pointer-events-none bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12"
                         />
 
                         <AnimatePresence mode="popLayout" custom={direction} initial={false}>
@@ -403,9 +403,9 @@ export function FeatureCarousel({
                             custom={direction}
                             initial={{
                               opacity: 0,
-                              y: direction > 0 ? 32 : -32,
-                              filter: "blur(6px)",
-                              scale: 0.94,
+                              y: direction > 0 ? 28 : -28,
+                              filter: "blur(5px)",
+                              scale: 0.95,
                             }}
                             animate={{
                               opacity: 1,
@@ -421,16 +421,16 @@ export function FeatureCarousel({
                             }}
                             exit={{
                               opacity: 0,
-                              y: direction > 0 ? -32 : 32,
-                              filter: "blur(6px)",
-                              scale: 0.94,
+                              y: direction > 0 ? -28 : 28,
+                              filter: "blur(5px)",
+                              scale: 0.95,
                               transition: {
                                 y: { type: "spring", stiffness: 320, damping: 24, mass: 0.8 },
                                 opacity: { duration: 0.2 },
                                 filter: { duration: 0.15 },
                               },
                             }}
-                            className="text-white font-extrabold text-base sm:text-lg md:text-xl lg:text-[22px] tracking-tight text-center drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)] block leading-snug sm:leading-tight"
+                            className="text-white font-bold text-sm sm:text-base md:text-lg lg:text-[18px] xl:text-[19px] tracking-tight text-center drop-shadow-[0_1px_4px_rgba(0,0,0,0.4)] block leading-snug sm:leading-tight px-2"
                           >
                             {feature.label}
                           </motion.span>
@@ -443,7 +443,7 @@ export function FeatureCarousel({
                       onClick={() => handleChipClick(itemIndex)}
                       onMouseEnter={() => setIsPaused(true)}
                       onMouseLeave={() => setIsPaused(false)}
-                      className="transition-all duration-200 text-center cursor-pointer max-w-[90vw] sm:max-w-[440px] md:max-w-[460px] lg:max-w-[480px] px-4 py-2 bg-transparent border-0 outline-none flex items-center justify-center select-none group hover:scale-[1.03] active:scale-[0.98]"
+                      className="transition-all duration-200 text-center cursor-pointer w-auto max-w-[calc(100%-1.5rem)] md:max-w-[440px] px-3 sm:px-4 py-2 bg-transparent border-0 outline-none flex items-center justify-center select-none group hover:scale-[1.02] active:scale-[0.98]"
                     >
                       <AnimatePresence mode="popLayout" custom={direction} initial={false}>
                         <motion.span
