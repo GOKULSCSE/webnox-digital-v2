@@ -5,6 +5,7 @@ import Services from "@/components/sections/Services";
 import Solutions from "@/components/sections/Solutions";
 import WhyChooseUs from "@/components/sections/WhyChooseUs";
 import IndustrySolutions from "@/components/sections/IndustrySolutions";
+import AiDevelopmentProcess from "@/components/sections/AiDevelopmentProcess";
 
 export default function Home() {
   return (
@@ -27,6 +28,8 @@ export default function Home() {
         <WhyChooseUs />
         
         <IndustrySolutions />
+        
+        <AiDevelopmentProcess />
         
        
       </main>
