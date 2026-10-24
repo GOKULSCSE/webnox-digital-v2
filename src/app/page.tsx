@@ -7,6 +7,9 @@ import WhyChooseUs from "@/components/sections/WhyChooseUs";
 import IndustrySolutions from "@/components/sections/IndustrySolutions";
 import AiDevelopmentProcess from "@/components/sections/AiDevelopmentProcess";
 import NotTypicalAgency from "@/components/sections/NotTypicalAgency";
+import Testimonials from "@/components/sections/Testimonials";
+import Faq from "@/components/sections/Faq";
+import LetsGrowTogether from "@/components/sections/LetsGrowTogether";
 
 export default function Home() {
   return (
@@ -33,6 +36,12 @@ export default function Home() {
         <AiDevelopmentProcess />
         
         <NotTypicalAgency />
+        
+        <Testimonials />
+        
+        <Faq />
+        
+        <LetsGrowTogether />
        
       </main>
     </SmoothScroll>
