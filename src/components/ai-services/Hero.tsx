@@ -56,18 +56,40 @@ const AWARDS_LIST: AwardItem[] = [
 
 export default function Hero() {
   return (
-    <section className="relative w-full pt-32 pb-16 md:pt-40 md:pb-24 overflow-hidden bg-[#030303] text-white">
-      {/* Background Ambience & Gradient Orbs */}
+    <section className="relative w-full pt-32 pb-16 md:pt-40 md:pb-24 overflow-hidden bg-[#160a04] text-white selection:bg-[#ff5e00] selection:text-white">
+      {/* Deep Brown Background Gradient Base */}
       <div
-        className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-[1500px] h-[750px] pointer-events-none -z-10 overflow-hidden"
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(circle at 82% 38%, #2e1307 0%, #1a0b04 45%, #130702 100%)",
+        }}
         aria-hidden="true"
-      >
-        {/* Soft Amber Glow behind the graphic and left text */}
-        <div className="absolute top-10 right-0 w-[650px] h-[650px] rounded-full bg-gradient-to-b from-[#ff7230]/16 via-[#ff532b]/8 to-transparent blur-[140px]" />
-        <div className="absolute top-[-80px] left-[-100px] w-[500px] h-[500px] rounded-full bg-gradient-to-b from-[#ff7230]/10 via-[#ff532b]/5 to-transparent blur-[120px]" />
-      </div>
+      />
 
-      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+      {/* Ambient Orange Glow behind the 3D architecture visual */}
+      <div
+        className="absolute right-0 lg:right-[-5%] top-[38%] -translate-y-1/2 w-[550px] lg:w-[750px] h-[550px] lg:h-[750px] rounded-full pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(circle, rgba(255, 94, 0, 0.28) 0%, rgba(255, 114, 48, 0.12) 40%, transparent 70%)",
+          filter: "blur(60px)",
+        }}
+        aria-hidden="true"
+      />
+
+      {/* Subtle Top-Left Warm Vignette */}
+      <div
+        className="absolute left-[-10%] top-[-5%] w-[550px] h-[550px] rounded-full pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(circle, rgba(255, 114, 48, 0.09) 0%, transparent 65%)",
+          filter: "blur(70px)",
+        }}
+        aria-hidden="true"
+      />
+
+      <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
         {/* Main 2-Column Hero Grid: Left Content, Right 3D Visual */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
           {/* Left Column: Heading, Paragraph, and Pill CTA */}
@@ -81,7 +103,7 @@ export default function Hero() {
             </h1>
 
             {/* Hero Paragraph */}
-            <p className="text-neutral-400 text-base sm:text-lg font-normal leading-relaxed max-w-xl mt-6 sm:mt-8">
+            <p className="text-neutral-300 text-base sm:text-lg font-light leading-relaxed max-w-xl mt-6 sm:mt-8">
               Webnox Digital provides AI application development services to build custom AI
               applications, generative AI solutions and AI agents that integrate business data,
               automate workflows and connect with existing software. As an AI native company, we
@@ -126,16 +148,17 @@ export default function Hero() {
           <div className="lg:col-span-6 relative flex items-center justify-center lg:justify-end mt-4 lg:mt-0">
             {/* Ambient orange glow directly behind the 3D stack */}
             <div
-              className="absolute inset-0 bg-gradient-to-r from-[#FF7230]/25 via-[#FF6A2F]/20 to-transparent blur-[100px] rounded-full pointer-events-none -z-10"
+              className="absolute inset-0 bg-gradient-to-r from-[#FF7230]/25 via-[#FF6A2F]/20 to-transparent blur-[100px] rounded-full pointer-events-none"
               aria-hidden="true"
             />
 
             {/* Seamless 3D Visual (No bounding card, floating directly on dark canvas) */}
             <div className="relative w-full max-w-[560px] lg:max-w-[620px] xl:max-w-[660px] flex items-center justify-center">
               <img
-                src="/images/cybersecurity_technology_assurance.svg"
+                src="/images/cybersecurity_technology_assurance.svg?v=transparent"
                 alt="Webnox AI Architecture Stack: Intelligence, Automation, Solutions"
-                className="w-full h-auto object-contain transition-transform duration-700 hover:scale-[1.03]"
+                className="w-full h-auto object-contain transition-transform duration-700 hover:scale-[1.03] select-none pointer-events-none"
+                style={{ mixBlendMode: "screen" }}
                 draggable={false}
               />
             </div>

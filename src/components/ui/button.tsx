@@ -57,7 +57,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 Button.displayName = "Button";
 
 const liquidbuttonVariants = cva(
-  "inline-flex items-center transition-colors justify-center cursor-pointer gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-[color,box-shadow] disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
+  "inline-flex items-center transition-colors justify-center cursor-pointer gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-[color,box-shadow] disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
   {
     variants: {
       variant: {
@@ -105,7 +105,7 @@ function LiquidButton({
       <Comp
         data-slot="button"
         className={cn(
-          "relative group isolate overflow-hidden transition-all duration-300",
+          "relative group isolate overflow-hidden transition-all duration-300 max-w-full",
           liquidbuttonVariants({ variant, size, className })
         )}
         {...props}
@@ -114,28 +114,28 @@ function LiquidButton({
         <div
           className="absolute inset-0 -z-20 rounded-[inherit] overflow-hidden pointer-events-none"
           style={{
-            backdropFilter: "blur(18px) saturate(180%)",
-            WebkitBackdropFilter: "blur(18px) saturate(180%)",
+            backdropFilter: "blur(10px) saturate(140%)",
+            WebkitBackdropFilter: "blur(10px) saturate(140%)",
           }}
         />
 
-        {/* 2. Liquid Meniscus Edge - Multi-layer Specular Refraction */}
+        {/* 2. Liquid Meniscus Edge - Multi-layer Specular Refraction (delicate, translucent) */}
         <div
           className="absolute inset-0 -z-10 rounded-[inherit] pointer-events-none transition-all duration-300
-            shadow-[inset_0_2px_1.5px_rgba(255,255,255,0.85),inset_0_-2px_3px_rgba(255,255,255,0.35),inset_2px_0_2px_rgba(255,255,255,0.45),inset_-2px_0_2px_rgba(255,255,255,0.45),0_6px_20px_rgba(0,0,0,0.1)]
-            group-hover:shadow-[inset_0_2.5px_2px_rgba(255,255,255,0.95),inset_0_-2.5px_4px_rgba(255,255,255,0.5),inset_2px_0_2px_rgba(255,255,255,0.6),inset_-2px_0_2px_rgba(255,255,255,0.6),0_10px_28px_rgba(0,0,0,0.16)]"
+            shadow-[inset_0_1.5px_1px_rgba(255,255,255,0.45),inset_0_-1px_1.5px_rgba(255,255,255,0.15),inset_1px_0_1px_rgba(255,255,255,0.15),inset_-1px_0_1px_rgba(255,255,255,0.15),0_4px_16px_rgba(0,0,0,0.12)]
+            group-hover:shadow-[inset_0_1.5px_1.5px_rgba(255,255,255,0.55),inset_0_-1px_2px_rgba(255,255,255,0.2),inset_1px_0_1px_rgba(255,255,255,0.2),inset_-1px_0_1px_rgba(255,255,255,0.2),0_6px_20px_rgba(0,0,0,0.16)]"
         />
 
-        {/* 3. Convex Water Dome Glare (Top specular glare arc) */}
+        {/* 3. Convex Water Dome Glare (Subtle top specular glare arc) */}
         <div
-          className="absolute inset-x-2 top-0 h-[48%] rounded-t-[inherit] -z-10 pointer-events-none transition-opacity duration-300
-            bg-gradient-to-b from-white/70 via-white/20 to-transparent opacity-85 group-hover:opacity-100"
+          className="absolute inset-x-3 top-0 h-[40%] rounded-t-[inherit] -z-10 pointer-events-none transition-opacity duration-300
+            bg-gradient-to-b from-white/30 via-white/8 to-transparent opacity-50 group-hover:opacity-70"
         />
 
-        {/* 4. Bottom Caustic Reflection Rim */}
+        {/* 4. Bottom Caustic Reflection Rim (Subtle bottom rim glow) */}
         <div
-          className="absolute inset-x-3 bottom-0 h-[28%] rounded-b-[inherit] -z-10 pointer-events-none transition-opacity duration-300
-            bg-gradient-to-t from-white/35 via-white/10 to-transparent opacity-65 group-hover:opacity-90"
+          className="absolute inset-x-4 bottom-0 h-[22%] rounded-b-[inherit] -z-10 pointer-events-none transition-opacity duration-300
+            bg-gradient-to-t from-white/15 via-white/5 to-transparent opacity-30 group-hover:opacity-45"
         />
 
         {/* 5. Fluid Content Container */}
