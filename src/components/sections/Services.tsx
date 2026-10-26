@@ -16,11 +16,11 @@ const FAN = [
 ];
 const CARD_SIZES = [200, 300, 340, 300, 200];
 const IMAGES = [
-  { src: "/images/services/20bd32e73df7a0088851915baca229308343d545.png", alt: "Product 1", title: "Impuls der Zeit 2023", desc: "Geschäfts- und Nachhaltigkeitsbericht" },
-  { src: "/images/services/3c9f5242ffe941cc07c5c01c35ea3ca9ce43ee6f.png", alt: "Product 2", title: "GESCO AG 2017/2018", desc: "Geschäftsbericht Wuppertal" },
-  { src: "/images/services/5c5109ad77337b400a40d746be9f026f99d6bb32.png", alt: "Main Product", title: "virtuos Magazin", desc: "Mitgliedermagazin der GEMA" },
-  { src: "/images/services/5fb6df87413f2f231bd935e66ec6f9b3d0ae01d3.png", alt: "Product 4", title: "heureka GmbH", desc: "Creative Director Gorden Koschel" },
-  { src: "/images/services/943f6de44b68321b88fc1a40f45f9562c5a6b958.png", alt: "Product 5", title: "Red Dot Award", desc: "Best of the Best 2025" },
+  { src: "/images/services/20bd32e73df7a0088851915baca229308343d545.png", alt: "SEO Copilot", title: "SEO Copilot", desc: "AI-Native SEO Operating System from Research to Deployment" },
+  { src: "/images/services/3c9f5242ffe941cc07c5c01c35ea3ca9ce43ee6f.png", alt: "Bull Machine", title: "Bull Machine", desc: "AI-Native Procurement & Inventory Autonomous Engine" },
+  { src: "/images/services/5c5109ad77337b400a40d746be9f026f99d6bb32.png", alt: "Rathz AI HRMS", title: "Rathz AI HRMS", desc: "Agentic HR Management & Business Process Automation" },
+  { src: "/images/services/5fb6df87413f2f231bd935e66ec6f9b3d0ae01d3.png", alt: "AI-Native ERP", title: "AI-Native ERP", desc: "Intelligent Workflow Mesh for Operations, CRM & Field Service" },
+  { src: "/images/services/943f6de44b68321b88fc1a40f45f9562c5a6b958.png", alt: "AI Marketing Studio", title: "AI Marketing Studio", desc: "Multi-Agent Content, Search & Growth Campaign Engine" },
 ];
 
 // 3D orbit layout (elliptical ring that spreads across the whole viewport)

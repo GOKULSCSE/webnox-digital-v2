@@ -95,36 +95,33 @@ export default function LetsGrowTogether() {
           }}
         >
           {/* Headline */}
-          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-[76px] xl:text-[84px] font-bold tracking-tight leading-[1.04]">
-            <span className="block text-white">Let’s Grow</span>
-            <span className="block text-[#ff5e00]">Together!</span>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-[56px] xl:text-[62px] font-bold tracking-tight leading-[1.08]">
+            <span className="block text-white">Build Your Next AI Product</span>
+            <span className="block text-[#ff5e00]">with Webnox Digital</span>
           </h2>
 
           {/* Subtitle / Description */}
-          <p className="mt-5 sm:mt-6 text-[#cfc7c0] text-xs sm:text-[13.5px] md:text-[14.5px] leading-relaxed max-w-[480px] font-normal">
-            Turn your AI idea, existing software, or business workflow into a
-            production-ready digital solution. From AI strategy and architecture to
-            development, integration, and deployment, Webnox helps bring your
-            technology vision to life.
+          <p className="mt-5 sm:mt-6 text-[#cfc7c0] text-xs sm:text-[14px] md:text-[15px] leading-relaxed max-w-[500px] font-normal">
+            Turn your AI idea, existing software, or business workflow into a production-ready digital solution. From AI strategy and architecture to development, integration, and deployment, Webnox helps bring your technology vision to life.
           </p>
 
           {/* Action Buttons */}
           <div className="mt-8 sm:mt-10 flex flex-wrap items-center gap-5 sm:gap-7">
-            <button
-              type="button"
+            <a
+              href="mailto:contact@webnox.in?subject=Start%20Your%20AI%20Project"
               className="inline-flex items-center gap-3 bg-white text-[#110804] px-5 sm:px-6 py-2.5 sm:py-3 rounded-[12px] font-semibold text-xs sm:text-sm hover:bg-neutral-100 transition-all duration-300 shadow-[0_4px_20px_rgba(0,0,0,0.35)] hover:scale-105 active:scale-95 cursor-pointer"
             >
-              <span>Let’s Begin today</span>
+              <span>Start Your AI Project</span>
               <span className="w-5 h-5 sm:w-6 sm:h-6 rounded-[6px] bg-gradient-to-tr from-[#ff5e00] to-[#ff7b2b] flex items-center justify-center text-white text-[10px] sm:text-xs font-bold shadow-sm">
                 ✦
               </span>
-            </button>
+            </a>
 
             <a
-              href="#contact"
+              href="tel:+919786557739"
               className="inline-flex items-center gap-2 text-white font-medium text-xs sm:text-sm hover:text-[#ff5e00] transition-colors duration-300 group cursor-pointer"
             >
-              <span>Book an Appointment</span>
+              <span>Talk to Our AI Experts</span>
               <span className="text-[#ff5e00] text-sm sm:text-base font-bold transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
                 ↗
               </span>

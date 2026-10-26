@@ -148,23 +148,66 @@ export default function ThreeDShowcase() {
       </div>
     </section>
 
-    {/* Bottom Features - Statically placed below the viewport */}
-    <section ref={bottomTextRef} className="w-full bg-[#fdfaf6] py-16 flex justify-center opacity-0 px-8 translate-y-8 mt-[-10vh]">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-6xl mx-auto">
-        {/* Col 1 */}
-        <div className="flex flex-col items-center text-center">
-          <img src="/images/cs.svg" alt="Full-stack engineering" className="w-8 h-8 mb-4" />
-          <p className="text-sm font-semibold text-black leading-snug">Full-stack web, mobile, and enterprise<br/>software engineering foundation.</p>
+    {/* Bottom Features - Measurable AI Productivity */}
+    <section ref={bottomTextRef} className="w-full bg-[#fdfaf6] py-20 lg:py-24 flex flex-col items-center opacity-0 px-6 sm:px-8 translate-y-8 mt-[-6vh] relative z-20 border-t border-neutral-200/50">
+      <div className="max-w-6xl mx-auto w-full">
+        {/* Section Heading */}
+        <div className="flex flex-col items-center text-center mb-12 sm:mb-14">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-orange-50 border border-orange-200/70 text-[#ff5e00] text-xs font-semibold uppercase tracking-wider mb-3.5 shadow-sm">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#ff5e00] animate-pulse" />
+            Performance Benchmarks
+          </div>
+          <h2 className="text-3xl sm:text-4xl md:text-[42px] font-bold text-neutral-900 tracking-tight leading-tight">
+            Measurable AI Productivity
+          </h2>
+          <p className="mt-3 text-neutral-600 text-sm sm:text-base max-w-xl">
+            Real operational impact and velocity metrics delivered across our AI-native engineering and automation workflows.
+          </p>
         </div>
-        {/* Col 2 */}
-        <div className="flex flex-col items-center text-center">
-          <img src="/images/cloud.svg" alt="Cloud infrastructure" className="w-8 h-8 mb-4" />
-          <p className="text-sm font-semibold text-black leading-snug">Full lifecycle ownership from technical architecture<br/>to secure production deployment.</p>
-        </div>
-        {/* Col 3 */}
-        <div className="flex flex-col items-center text-center">
-          <img src="/images/ai.svg" alt="AI Solutions" className="w-8 h-8 mb-4" />
-          <p className="text-sm font-semibold text-black leading-snug">Custom generative AI, agentic workflows,<br/>and proprietary AI SaaS platforms.</p>
+
+        {/* 7 Metrics Grid */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+          {/* Metric 1 */}
+          <div className="group bg-white rounded-2xl p-6 border border-neutral-200/70 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:border-[#ff5e00]/40 hover:shadow-[0_10px_30px_rgba(255,94,0,0.08)] transition-all duration-300 flex flex-col justify-between">
+            <span className="text-3xl sm:text-4xl font-extrabold text-[#ff5e00] tracking-tight">13.8%</span>
+            <span className="mt-3 text-xs sm:text-sm font-medium text-neutral-700 leading-snug">More Issues Resolved per Hour</span>
+          </div>
+
+          {/* Metric 2 */}
+          <div className="group bg-white rounded-2xl p-6 border border-neutral-200/70 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:border-[#ff5e00]/40 hover:shadow-[0_10px_30px_rgba(255,94,0,0.08)] transition-all duration-300 flex flex-col justify-between">
+            <span className="text-3xl sm:text-4xl font-extrabold text-[#ff5e00] tracking-tight">35%</span>
+            <span className="mt-3 text-xs sm:text-sm font-medium text-neutral-700 leading-snug">Higher Productivity for Less-Experienced Workers</span>
+          </div>
+
+          {/* Metric 3 */}
+          <div className="group bg-white rounded-2xl p-6 border border-neutral-200/70 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:border-[#ff5e00]/40 hover:shadow-[0_10px_30px_rgba(255,94,0,0.08)] transition-all duration-300 flex flex-col justify-between">
+            <span className="text-3xl sm:text-4xl font-extrabold text-[#ff5e00] tracking-tight">55%</span>
+            <span className="mt-3 text-xs sm:text-sm font-medium text-neutral-700 leading-snug">Faster Task Completion</span>
+          </div>
+
+          {/* Metric 4 */}
+          <div className="group bg-white rounded-2xl p-6 border border-neutral-200/70 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:border-[#ff5e00]/40 hover:shadow-[0_10px_30px_rgba(255,94,0,0.08)] transition-all duration-300 flex flex-col justify-between">
+            <span className="text-3xl sm:text-4xl font-extrabold text-[#ff5e00] tracking-tight">2 Weeks</span>
+            <span className="mt-3 text-xs sm:text-sm font-medium text-neutral-700 leading-snug">to First Release</span>
+          </div>
+
+          {/* Metric 5 */}
+          <div className="group bg-white rounded-2xl p-6 border border-neutral-200/70 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:border-[#ff5e00]/40 hover:shadow-[0_10px_30px_rgba(255,94,0,0.08)] transition-all duration-300 flex flex-col justify-between">
+            <span className="text-3xl sm:text-4xl font-extrabold text-[#ff5e00] tracking-tight">50+</span>
+            <span className="mt-3 text-xs sm:text-sm font-medium text-neutral-700 leading-snug">Workflows Automated</span>
+          </div>
+
+          {/* Metric 6 */}
+          <div className="group bg-white rounded-2xl p-6 border border-neutral-200/70 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:border-[#ff5e00]/40 hover:shadow-[0_10px_30px_rgba(255,94,0,0.08)] transition-all duration-300 flex flex-col justify-between">
+            <span className="text-3xl sm:text-4xl font-extrabold text-[#ff5e00] tracking-tight">95%</span>
+            <span className="mt-3 text-xs sm:text-sm font-medium text-neutral-700 leading-snug">AI Evaluation Pass Rate</span>
+          </div>
+
+          {/* Metric 7 */}
+          <div className="group bg-white rounded-2xl p-6 border border-neutral-200/70 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:border-[#ff5e00]/40 hover:shadow-[0_10px_30px_rgba(255,94,0,0.08)] transition-all duration-300 flex flex-col justify-between col-span-2 md:col-span-3 lg:col-span-2">
+            <span className="text-3xl sm:text-4xl font-extrabold text-[#ff5e00] tracking-tight">40%</span>
+            <span className="mt-3 text-xs sm:text-sm font-medium text-neutral-700 leading-snug">Reduction in Processing Time</span>
+          </div>
         </div>
       </div>
     </section>

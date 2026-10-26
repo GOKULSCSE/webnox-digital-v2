@@ -138,20 +138,17 @@ export default function ConversionCta() {
 
             {/* Description */}
             <p className="mt-5 sm:mt-6 text-neutral-200/90 text-sm sm:text-base md:text-[17px] font-light leading-relaxed max-w-xl">
-              Turn your AI idea, existing software, or business workflow into a
-              production-ready digital solution. From AI strategy and architecture to
-              development, integration, and deployment, Webnox helps bring your
-              technology vision to life.
+              From AI and software development to automation, digital products, SEO, and digital marketing, Webnox brings the capabilities you need under one team. With 15+ years of experience, 2,570+ clients, 20+ own products, and delivery across 20+ countries, we help businesses build digital products, take them to market, and continuously improve their growth.
             </p>
 
             {/* CTAs */}
             <div className="flex flex-wrap items-center gap-5 sm:gap-8 mt-8 sm:mt-10">
               {/* Primary White Button with Orange Sparkle Icon */}
               <a
-                href="mailto:contact@webnox.in?subject=Start%20Your%20AI%20Project"
+                href="mailto:contact@webnox.in?subject=Start%20Your%20Project"
                 className="group inline-flex items-center gap-3.5 bg-white hover:bg-neutral-100 text-neutral-950 font-bold text-sm sm:text-base pl-6 pr-2 py-2 rounded-full shadow-[0_4px_20px_rgba(255,255,255,0.15)] hover:shadow-[0_6px_25px_rgba(255,114,48,0.35)] transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
               >
-                <span>Start Your AI Project</span>
+                <span>Start Your Project →</span>
                 <span className="w-8 h-8 rounded-lg bg-gradient-to-tr from-[#FF5E00] to-[#FF8935] flex items-center justify-center text-white shadow-sm transition-transform duration-300 group-hover:rotate-12">
                   <Sparkles className="w-4 h-4 text-white fill-white" />
                 </span>
@@ -162,7 +159,7 @@ export default function ConversionCta() {
                 href="tel:+919786557739"
                 className="inline-flex items-center gap-1.5 text-white hover:text-[#FF7230] font-semibold text-sm sm:text-base transition-colors duration-200 group cursor-pointer"
               >
-                <span>Talk to Our AI Experts</span>
+                <span>Talk to Our AI Experts →</span>
                 <ArrowUpRight className="w-4 h-4 text-white/90 group-hover:text-[#FF7230] transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </a>
             </div>
