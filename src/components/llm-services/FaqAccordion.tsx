@@ -1,127 +1,139 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, HelpCircle } from "lucide-react";
 
 interface FaqItem {
+  number: string;
   question: string;
   answer: string;
 }
 
 const LLM_FAQS_LIST: FaqItem[] = [
   {
-    question: "1. What are LLM development services?",
+    number: "01",
+    question: "1. What is the difference between RAG and custom LLM fine-tuning?",
     answer:
-      "LLM development services involve building AI applications powered by large language models. They can include custom LLM application development, retrieval-augmented generation (RAG), fine-tuning, AI agents, system integration, testing, and deployment.",
+      "RAG connects AI to your company files so it can search your documents accurately without retraining. Fine-tuning teaches the AI a specialized industry language or brand voice. Most businesses start with RAG because it is faster and more affordable.",
   },
   {
-    question: "2. What is the difference between LLM development and LLM integration?",
+    number: "02",
+    question: "2. Who owns the custom AI and code after project completion?",
     answer:
-      "LLM integration connects an existing language model to software, APIs, or business workflows. LLM development covers a broader scope, including application engineering, data retrieval, model adaptation, evaluation, and deployment where required.",
+      "You own 100% of everything we build. All custom code, AI files, and setup scripts are transferred directly to your company upon completion, with zero recurring license royalties, zero monthly subscription fees, and no vendor lock-in.",
   },
   {
-    question: "3. What is the difference between RAG and fine-tuning?",
+    number: "03",
+    question: "3. How do you prevent the AI from making up false answers ?",
     answer:
-      "RAG retrieves relevant information from external data sources to support a model’s responses. Fine-tuning adjusts a model’s behaviour using training examples for specific tasks or output patterns. The right approach depends on the application, data, and evaluation results.",
+      "We set strict safety controls that force the AI to answer only from your approved company records and cite direct sources. If information is not found in your files, the system politely says it doesn't know rather than guessing.",
   },
   {
-    question: "4. Can an LLM application use our company’s data?",
+    number: "04",
+    question: "4. Can our AI run entirely inside our own private cloud or servers?",
     answer:
-      "Yes. LLM applications can access approved company documents, databases, and knowledge bases through controlled integrations or RAG architectures. Implementation should account for data permissions, privacy, security, and the model provider’s data-handling policies.",
+      "Yes, we regularly deploy private models inside your own AWS, Azure, Google Cloud or local office servers. Your private company records never leak or train public AI tools, ensuring full compliance with India’s DPDP Act 2023 and GDPR.",
   },
   {
-    question: "5. How do you reduce inaccurate responses in LLM applications?",
+    number: "05",
+    question: "5. How long does it take to build and launch a custom LLM system?",
     answer:
-      "Accuracy can be improved through relevant data retrieval, clear instructions, structured outputs, application-level validation, and systematic testing. Human review may also be necessary for high-impact decisions. No approach can guarantee that an LLM will never produce an incorrect response.",
+      "A working test prototype takes 2 to 4 weeks, while a full production rollout takes 6 to 10 weeks. This allows you to test the AI on your real business data before committing to full software integration.",
   },
   {
-    question: "6. How long does LLM application development take?",
+    number: "06",
+    question: "6. Can custom AI connect to our existing business software and CRM?",
     answer:
-      "The timeline depends on project scope, data readiness, integrations, security requirements, and deployment needs. A focused proof of concept is generally less complex than a production application requiring extensive testing, monitoring, and access controls.",
-  },
-  {
-    question: "7. How much does LLM development cost?",
-    answer:
-      "LLM development costs depend on application complexity, model usage, data preparation, infrastructure, integrations, testing, and ongoing maintenance. A project assessment helps establish the scope, required resources, and estimated costs.",
-  },
-  {
-    question: "8. Can you integrate LLMs into an existing SaaS product?",
-    answer:
-      "Yes. LLM capabilities can add natural-language search, summarisation, content generation, and AI assistants to existing SaaS products. The integration should account for tenant isolation, access permissions, data privacy, performance, and usage costs.",
-  },
-  {
-    question: "9. How are LLM applications tested before deployment?",
-    answer:
-      "Testing can assess response quality, factual grounding, task completion, security, latency, and cost per request using representative test cases. Evaluation criteria should reflect the application’s intended use and potential risks.",
-  },
-  {
-    question: "10. Can LLM applications be deployed in a private environment?",
-    answer:
-      "Depending on the selected model and infrastructure, LLM applications may run through managed APIs, private cloud environments, or supported self-hosted deployments. The choice depends on data sensitivity, compliance requirements, performance, and operational resources.",
+      "Yes, we connect custom AI directly into the tools your team already uses every day—including your CRM, ERP, customer helpdesk, databases, or website. Your staff can use AI right inside their daily dashboards without changing workflows.",
   },
 ];
 
 export default function FaqAccordion() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
-  const toggleFaq = (index: number) => {
+  const toggleAccordion = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
   };
 
   return (
-    <section id="faq" className="relative w-full py-16 sm:py-24 lg:py-32 bg-[#fcf8f2] border-t border-neutral-200/80 overflow-hidden">
-      <div className="max-w-4xl mx-auto px-4 sm:px-8">
+    <section id="faq" className="w-full py-20 sm:py-28 bg-[#fdfaf6] text-neutral-900 border-t border-neutral-200/70">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center mb-10 sm:mb-16">
-          <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#12141a]">
-            Frequently Asked Questions About LLM Development
+        <div className="text-center max-w-3xl mx-auto mb-14 sm:mb-18">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#ff5e00]/10 border border-[#ff5e00]/25 text-[#ff5e00] text-xs font-semibold uppercase tracking-wider mb-4">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#ff5e00]" />
+            KNOWLEDGE BASE
+          </div>
+
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#12141a] leading-tight mb-4">
+            Frequently Asked Questions About LLM Development Services
           </h2>
-          <p className="mt-3 sm:mt-4 text-neutral-600 text-sm sm:text-base md:text-lg leading-relaxed max-w-2xl mx-auto">
+
+          <p className="text-neutral-600 text-sm sm:text-base leading-relaxed">
             Everything you need to know about developing, integrating, and maintaining production-ready Large Language Model applications.
           </p>
         </div>
 
-        {/* 10 Accordion Items */}
-        <div className="flex flex-col gap-3 sm:gap-4">
+        {/* FAQ Accordion List */}
+        <div className="space-y-4">
           {LLM_FAQS_LIST.map((faq, index) => {
             const isOpen = openIndex === index;
             return (
               <div
                 key={index}
-                className={`rounded-2xl transition-all duration-300 border ${
+                className={`rounded-2xl border transition-all duration-300 overflow-hidden ${
                   isOpen
-                    ? "bg-white border-orange-500/40 shadow-sm"
+                    ? "bg-white border-[#ff5e00]/40 shadow-[0_8px_30px_rgba(255,94,0,0.08)] ring-1 ring-[#ff5e00]/20"
                     : "bg-white/80 hover:bg-white border-neutral-200/90 shadow-sm"
                 }`}
               >
                 <button
                   type="button"
-                  onClick={() => toggleFaq(index)}
-                  className="w-full text-left p-4 sm:p-7 flex items-center justify-between gap-3 sm:gap-4 cursor-pointer"
+                  onClick={() => toggleAccordion(index)}
+                  className="w-full py-5 px-6 sm:px-7 flex items-center justify-between gap-4 text-left cursor-pointer select-none"
                   aria-expanded={isOpen}
                 >
-                  <span className="text-sm sm:text-base md:text-lg font-bold text-neutral-900 tracking-tight">
-                    {faq.question}
-                  </span>
+                  <div className="flex items-center gap-3.5">
+                    <span className="font-mono text-xs font-bold text-[#ff7230]">
+                      {faq.number}
+                    </span>
+                    {/* All questions explicitly in H5 */}
+                    <h5 className="text-base sm:text-lg font-bold text-neutral-900 leading-snug">
+                      {faq.question}
+                    </h5>
+                  </div>
                   <div
-                    className={`w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center flex-shrink-0 transition-transform duration-300 ${
+                    className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-transform duration-300 ${
                       isOpen
-                        ? "bg-[#ff5e00] text-white rotate-180 shadow-md shadow-orange-500/20"
+                        ? "bg-[#ff7230] text-white rotate-180"
                         : "bg-neutral-100 text-neutral-500"
                     }`}
                   >
-                    <ChevronDown className="w-4 h-4 sm:w-5 sm:h-5" />
+                    <ChevronDown className="w-4 h-4" />
                   </div>
                 </button>
 
                 {isOpen && (
-                  <div className="px-4 sm:px-7 pb-4 sm:pb-7 text-neutral-600 text-xs sm:text-sm md:text-base leading-relaxed border-t border-neutral-100 pt-3 sm:pt-4">
-                    <p>{faq.answer}</p>
+                  <div className="px-6 sm:px-7 pb-6 pt-1 text-neutral-600 text-sm sm:text-[15px] leading-relaxed border-t border-neutral-100 font-normal">
+                    <p className="pl-8">{faq.answer}</p>
                   </div>
                 )}
               </div>
             );
           })}
+        </div>
+
+        {/* Still have questions */}
+        <div className="mt-12 text-center">
+          <p className="text-xs sm:text-sm text-neutral-500">
+            Have a custom architecture question?{" "}
+            <a
+              href="/contact"
+              className="text-[#ff5e00] font-semibold underline underline-offset-4 hover:text-[#ff7230] transition-colors"
+            >
+              Speak directly with an LLM architect →
+            </a>
+          </p>
         </div>
       </div>
     </section>

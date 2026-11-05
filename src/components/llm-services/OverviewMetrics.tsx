@@ -2,7 +2,6 @@
 
 import React from "react";
 import {
-  Sparkles,
   Settings,
   HelpCircle,
   Cloud,
@@ -27,16 +26,16 @@ export default function OverviewMetrics() {
           <div className="lg:col-span-7 flex flex-col">
             {/* Main Heading */}
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-[#12141a] leading-[1.18]">
-              Custom LLM Development Backed by 15+ Years of Experience
+              Custom LLM Development Services India: Engineered for Reliable Production
             </h2>
           </div>
 
           <div className="lg:col-span-5 flex flex-col justify-center lg:pt-2 text-neutral-600 text-xs sm:text-sm md:text-base leading-relaxed space-y-3 sm:space-y-4">
             <p>
-              Off-the-shelf language models may not meet every business requirement. Custom LLM development adapts language models to specific tasks, connects them to your company data, and integrates them with existing software to improve information retrieval and automate workflows.
+              Webnox Digital is a large language model development company focused on solving real business problems. While free or basic AI tools often crash and make mistakes, our custom AI is built to do real work. It handles heavy customer inquiries, finds information in seconds and protects your company data completely.
             </p>
             <p>
-              As an AI-native company, Webnox Digital brings 15+ years of experience in software development, digital products, website development and digital marketing. With 2,570+ clients across 20+ countries and 20+ in-house products, we combine LLM engineering with software development expertise to build practical AI applications.
+              With our custom LLM development services in India, you don&apos;t need to be a technology expert. We handle everything from selecting affordable AI for your budget, organizing your business files and ensuring the AI always tells the truth on your own private system. Through our proven generative AI development services, our team in India builds reliable enterprise LLM solutions in India that help your business work faster, reduce costly errors and protect your bottom line.
             </p>
           </div>
         </div>

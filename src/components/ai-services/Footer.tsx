@@ -201,9 +201,9 @@ export default function Footer() {
                   </a>
                 </li>
                 <li>
-                  <a href="#about" className="hover:text-[#ff5e00] transition-colors">
+                  <Link href="/about" className="hover:text-[#ff5e00] transition-colors">
                     About Webnox
-                  </a>
+                  </Link>
                 </li>
                 <li>
                   <a href="#projects" className="hover:text-[#ff5e00] transition-colors">

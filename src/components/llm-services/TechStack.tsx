@@ -1,146 +1,151 @@
 "use client";
 
 import React from "react";
-import FolderFloat from "@/components/ui/FolderFloat";
-import MobileTechStack, { MobileTechCategory } from "@/components/ui/MobileTechStack";
+import { Cpu, Network, Database, Terminal, CheckCircle2 } from "lucide-react";
 
-interface TechCategory extends MobileTechCategory {
+interface TechCategory {
   title: string;
+  categoryTag: string;
   technologies: string[];
-  shortTitle?: string;
+  icon: React.ComponentType<{ className?: string }>;
+  description: string;
 }
 
 const TECH_CATEGORIES: TechCategory[] = [
   {
-    title: "LLM Providers and Models",
-    shortTitle: "Models & Providers",
+    title: "Foundation Models & Open Weights",
+    categoryTag: "CORE INTELLIGENCE",
+    description: "Multi-modal foundation engines and private sovereign open weights tuned for enterprise workloads.",
     technologies: [
-      "OpenAI GPT",
-      "Anthropic Claude",
-      "Google Gemini",
-      "Meta Llama",
-      "Mistral",
+      "Meta Llama 3.3",
+      "Mistral Large",
+      "DeepSeek-V3",
+      "Qwen 2.5",
+      "Phi-4",
+      "Claude 3.5 Sonnet",
+      "GPT-4o",
     ],
+    icon: Cpu,
   },
   {
-    title: "Retrieval and Knowledge Systems",
-    shortTitle: "RAG & Retrieval",
+    title: "Model Orchestration & Agent Frameworks",
+    categoryTag: "AGENTIC WORKFLOWS",
+    description: "Multi-agent runtime environments, structured outputs, and dynamic prompt optimization compilers.",
     technologies: [
-      "Embedding Models",
-      "Vector Databases",
-      "Hybrid Search",
-      "Reranking",
-      "RAG Pipelines",
+      "LangChain",
+      "LlamaIndex",
+      "AutoGen",
+      "CrewAI",
+      "DSPy",
+      "Semantic Kernel",
+      "Outlines",
     ],
+    icon: Network,
   },
   {
-    title: "Application Engineering",
-    shortTitle: "Engineering",
+    title: "Vector Databases & Search Engines",
+    categoryTag: "KNOWLEDGE RETRIEVAL",
+    description: "Ultra-fast semantic search, hybrid sparse-dense indexing, and sub-millisecond similarity recall.",
     technologies: [
-      "Python",
-      "FastAPI",
-      "REST APIs",
-      "Backend Frameworks",
-      "Next.js / Web Tech",
+      "Pinecone",
+      "Milvus",
+      "Qdrant",
+      "Weaviate",
+      "pgvector",
+      "Elasticsearch",
+      "ChromaDB",
     ],
+    icon: Database,
   },
   {
-    title: "Orchestration and Tool Use",
-    shortTitle: "Orchestration",
+    title: "Inference Optimization & LLMOps",
+    categoryTag: "PRODUCTION SERVING",
+    description: "High-throughput model serving engines, continuous RAG benchmarking, and containerized orchestration.",
     technologies: [
-      "Structured Outputs",
-      "Function Calling",
-      "Multi-Step Workflows",
-      "Tool Integration",
-      "Agent Frameworks",
+      "vLLM",
+      "TensorRT-LLM",
+      "Hugging Face TGI",
+      "DeepEval",
+      "RAGAS",
+      "MLflow",
+      "Docker",
+      "Kubernetes",
     ],
-  },
-  {
-    title: "Evaluation and Observability",
-    shortTitle: "Observability",
-    technologies: [
-      "Test Datasets",
-      "Automated Evaluations",
-      "Tracing & Logging",
-      "Latency Monitoring",
-      "Usage-Cost Analysis",
-    ],
-  },
-  {
-    title: "Infrastructure and Deployment",
-    shortTitle: "Infrastructure",
-    technologies: [
-      "Cloud Services",
-      "Containerized Envs",
-      "Managed Model APIs",
-      "Private Deployments",
-      "Docker & K8s",
-    ],
+    icon: Terminal,
   },
 ];
 
 export default function TechStack() {
   return (
-    <section className="relative w-full py-14 sm:py-20 lg:py-28 bg-[#fcf8f2] border-t border-b border-neutral-200/80 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-8">
-        <div className="max-w-4xl mb-8 sm:mb-14 lg:mb-18">
-          <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-[#12141a]">
-            LLM Development Technology Stack
-          </h3>
-          <p className="mt-3 sm:mt-4 text-neutral-600 text-xs sm:text-sm md:text-base lg:text-lg leading-relaxed">
-            We select technologies based on the application, data requirements, operating environment, and expected scale rather than forcing every project into the same stack. Hover or tap any category folder to reveal the underlying technologies.
+    <section id="tech-stack" className="relative w-full py-20 sm:py-28 bg-[#100602] text-white overflow-hidden selection:bg-[#ff5e00] selection:text-white">
+      {/* Background Ambience */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse at 50% 30%, #200d04 0%, #110602 60%, #0a0301 100%)",
+        }}
+        aria-hidden="true"
+      />
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-8">
+        {/* Section Header */}
+        <div className="flex flex-col items-center text-center max-w-3xl mx-auto mb-16 sm:mb-20">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#ff5e00]/15 border border-[#ff5e00]/30 text-[#ff8935] text-xs font-semibold uppercase tracking-wider mb-4">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#ff5e00]" />
+            PRODUCTION TOOLING
+          </div>
+
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white leading-tight mb-4">
+            Technology Behind Your Custom AI System
+          </h2>
+
+          <p className="text-neutral-300 text-sm sm:text-base md:text-lg leading-relaxed font-light">
+            We use proven, production-grade frameworks and open-source models that avoid single-vendor lock-in and keep operational costs strictly controlled.
           </p>
         </div>
 
-        {/* Mobile Tech Stack Explorer (visible below md) */}
-        <MobileTechStack
-          categories={TECH_CATEGORIES}
-          sectionTitle="LLM Development Technology Stack"
-        />
-
-        {/* Desktop 6 Technology Categories Grid with FolderFloat (visible on md and up) */}
-        <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-x-8 lg:gap-x-10 gap-y-24 sm:gap-y-32 pt-16 sm:pt-24 pb-8 sm:pb-12">
+        {/* 4 Categories Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
           {TECH_CATEGORIES.map((cat, idx) => (
             <div
               key={idx}
-              className="relative flex flex-col items-center justify-end group z-10 hover:z-30 transition-[z-index]"
+              className="bg-gradient-to-b from-white/[0.08] to-white/[0.02] rounded-3xl p-8 sm:p-10 border border-white/10 hover:border-[#ff7230]/40 transition-all duration-300 flex flex-col justify-between shadow-[0_16px_40px_rgba(0,0,0,0.2)] group"
             >
-              {/* Category H4 Header */}
-              <h4 className="sr-only">{cat.title}</h4>
+              <div>
+                {/* Header */}
+                <div className="flex items-center justify-between mb-6">
+                  <div className="w-12 h-12 rounded-2xl bg-[#ff7230]/15 border border-[#ff7230]/30 flex items-center justify-center text-[#ff7230] group-hover:bg-[#ff7230] group-hover:text-white transition-all duration-300 shadow-sm">
+                    <cat.icon className="w-5 h-5 text-current transition-colors" />
+                  </div>
+                  <span className="text-[10px] font-mono uppercase tracking-wider font-semibold text-[#ff8935] bg-[#ff5e00]/15 border border-[#ff5e00]/25 px-2.5 py-1 rounded-md">
+                    {cat.categoryTag}
+                  </span>
+                </div>
 
-              {/* FolderFloat Interactive Component */}
-              <div className="w-full flex justify-center">
-                <FolderFloat
-                  items={cat.technologies}
-                  label={cat.title}
-                  trigger="hover"
-                  physics={true}
-                  drift={0.6}
-                  folderColor="#D34B16"
-                  frontColor="#FF6A2F"
-                  paperColor="#FFFFFF"
-                  itemColor="#FFFFFF"
-                  itemTextColor="#12141A"
-                  labelColor="#FFFFFF"
-                  width={250}
-                  height={165}
-                  radius={18}
-                  spread={145}
-                  lift={32}
-                  openDuration={480}
-                  stagger={40}
-                  className="mx-auto"
-                />
+                <h3 className="text-xl sm:text-2xl font-bold text-white group-hover:text-[#ff8935] transition-colors mb-2 leading-snug">
+                  {cat.title}
+                </h3>
+
+                <p className="text-xs sm:text-sm text-neutral-300 font-light leading-relaxed mb-6">
+                  {cat.description}
+                </p>
+              </div>
+
+              {/* Technologies Chips */}
+              <div className="pt-6 border-t border-white/10 flex flex-wrap gap-2">
+                {cat.technologies.map((tech, tIdx) => (
+                  <span
+                    key={tIdx}
+                    className="inline-flex items-center gap-1.5 text-xs font-mono font-medium px-3 py-1.5 rounded-lg bg-white/[0.05] hover:bg-white/[0.1] text-neutral-200 border border-white/10 transition-colors"
+                  >
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#ff7230]" />
+                    {tech}
+                  </span>
+                ))}
               </div>
             </div>
           ))}
-        </div>
-
-        {/* Bottom architecture disclosure note */}
-        <div className="mt-12 sm:mt-20 pt-6 sm:pt-8 border-t border-neutral-200/80 text-center max-w-2xl mx-auto">
-          <p className="text-xs sm:text-sm text-neutral-500 font-medium">
-            * The final stack is determined during technical discovery and architecture planning.
-          </p>
         </div>
       </div>
     </section>

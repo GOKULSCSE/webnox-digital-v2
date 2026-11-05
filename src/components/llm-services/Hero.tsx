@@ -2,6 +2,8 @@
 
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { ShieldCheck, Lock, Zap, Award, ArrowRight } from "lucide-react";
 
 interface AwardBadge {
   src: string;
@@ -42,16 +44,33 @@ const AWARD_BADGES: AwardBadge[] = [
   },
 ];
 
-interface StatHighlight {
-  metric: string;
-  label: string;
+interface GovernanceStandard {
+  title: string;
+  description: string;
+  icon: React.ComponentType<{ className?: string }>;
 }
 
-const STATS_LIST: StatHighlight[] = [
-  { metric: "4 Weeks", label: "Rapid AI Product Delivery" },
-  { metric: "15+ Years", label: "Software Engineering Experience" },
-  { metric: "2,570+", label: "Clients Served" },
-  { metric: "20+", label: "In-House Products" },
+const GOVERNANCE_STANDARDS: GovernanceStandard[] = [
+  {
+    title: "100% Client Ownership",
+    description: "You own all custom code, trained AI models and data pipelines with zero recurring license fees.",
+    icon: ShieldCheck,
+  },
+  {
+    title: "Absolute Data Privacy",
+    description: "Your private business data stays inside your network and is never used to train public AI models.",
+    icon: Lock,
+  },
+  {
+    title: "Fast & Reliable Performance",
+    description: "Ultra-fast response times and built-in accuracy controls to prevent errors or false information.",
+    icon: Zap,
+  },
+  {
+    title: "Proven Track Record",
+    description: "15+ years of software experience delivering digital solutions to 2,570+ clients across 20+ countries.",
+    icon: Award,
+  },
 ];
 
 export default function Hero() {
@@ -92,89 +111,59 @@ export default function Hero() {
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-8 lg:px-12">
         {/* Main 2-Column Hero Grid: Left Content, Right 3D Visual */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-center">
-          {/* Left Column: Heading, Paragraph, CTAs, and Stats */}
-          <div className="lg:col-span-6 flex flex-col items-start text-left z-10">
+          {/* Left Column: Heading, Paragraph, CTAs */}
+          <div className="lg:col-span-7 flex flex-col items-start text-left z-10">
+            {/* Top Sub-Badge */}
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.06] border border-[#ff5e00]/40 backdrop-blur-md mb-5 shadow-[0_0_24px_rgba(255,94,0,0.18)]">
+              <span className="w-2 h-2 rounded-full bg-[#ff7230] shadow-[0_0_8px_#ff7230]" />
+              <span className="text-[11px] sm:text-xs font-semibold tracking-[0.2em] uppercase text-neutral-200">
+                ENTERPRISE LLM ENGINEERING
+              </span>
+            </div>
 
             {/* H1 Headline */}
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[52px] xl:text-[58px] font-bold text-white tracking-tight leading-[1.14]">
-              LLM Development Services for{" "}
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[48px] xl:text-[54px] font-bold text-white tracking-tight leading-[1.14]">
+              LLM Development Services in India for{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF7230] via-[#FF532B] to-[#FF8935]">
-                Business-Specific AI Solutions
+                High Uptime Enterprise Systems
               </span>
             </h1>
 
-            {/* Intro Highlight */}
-            <p className="text-neutral-200 text-sm sm:text-base md:text-lg font-medium leading-relaxed mt-4 sm:mt-5">
-              Develop AI applications that answer business questions, retrieve relevant information, and automate repetitive tasks.
-            </p>
-
             {/* Hero Paragraph */}
-            <p className="text-neutral-300 text-xs sm:text-sm md:text-base font-light leading-relaxed max-w-xl mt-2.5 sm:mt-3">
-              Webnox Digital delivers custom LLM solutions, including AI assistants, intelligent chatbots, and applications integrated with your business data and existing software to improve workflow efficiency.
+            <p className="text-neutral-300 text-sm sm:text-base md:text-lg font-light leading-relaxed max-w-2xl mt-4 sm:mt-5">
+              We design, fine-tune, and deploy custom large language models that automate complex enterprise operations. From self-hosted open-source deployment to hybrid RAG pipelines, we deliver production grade systems with complete working sandbox in two weeks.
             </p>
 
             {/* Primary Action Buttons */}
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 mt-7 sm:mt-9 w-full sm:w-auto">
-              <a
-                href="#contact"
-                className="inline-flex items-center justify-center gap-3 bg-white hover:bg-neutral-100 text-neutral-950 text-sm sm:text-base font-semibold pl-2 pr-6 py-2.5 sm:py-2 rounded-full transition-all duration-300 shadow-[0_4px_24px_rgba(255,114,48,0.22)] hover:shadow-[0_6px_32px_rgba(255,114,48,0.36)] hover:-translate-y-0.5 active:translate-y-0 group cursor-pointer"
+              <Link
+                href="/contact"
+                className="inline-flex items-center justify-center gap-3 bg-gradient-to-r from-[#FF7230] to-[#FF532B] hover:brightness-110 text-white text-sm sm:text-base font-semibold px-7 py-3.5 rounded-full transition-all duration-300 shadow-[0_4px_28px_rgba(255,94,0,0.38)] hover:shadow-[0_6px_36px_rgba(255,94,0,0.55)] hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
               >
-                <span className="w-9 h-9 rounded-full bg-gradient-to-br from-[#FF7230] to-[#FF532B] flex items-center justify-center text-white shadow-sm flex-shrink-0">
-                  <svg
-                    className="w-4 h-4 transition-transform group-hover:translate-x-0.5"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth="2.5"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M14 5l7 7m0 0l-7 7m7-7H3"
-                    />
-                  </svg>
-                </span>
-                <span>Build Your AI Solution</span>
-              </a>
+                <span>Schedule an LLM Architecture Call</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
 
-              <a
-                href="#contact"
-                className="inline-flex items-center justify-center text-neutral-300 hover:text-white text-sm sm:text-base font-medium px-6 py-3 rounded-full border border-white/15 hover:border-white/30 hover:bg-white/5 transition-all duration-300 cursor-pointer text-center"
+              <Link
+                href="/contact"
+                className="inline-flex items-center justify-center text-neutral-200 hover:text-white text-sm sm:text-base font-medium px-6 py-3.5 rounded-full border border-white/20 hover:border-white/40 hover:bg-white/10 transition-all duration-300 cursor-pointer text-center"
               >
-                <span>Talk to Our AI Experts</span>
-              </a>
-            </div>
-
-            {/* 4 Stats Grid in Hero */}
-            <div className="mt-8 sm:mt-10 pt-6 sm:pt-8 border-t border-white/10 w-full">
-              <span className="text-[11px] sm:text-xs font-semibold tracking-wider uppercase text-[#FF7230] block mb-3">
-                Built on Experience, Driven by AI
-              </span>
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6">
-                {STATS_LIST.map((stat, idx) => (
-                  <div key={idx} className="flex flex-col">
-                    <span className="text-xl sm:text-2xl font-bold text-white tracking-tight">
-                      {stat.metric}
-                    </span>
-                    <span className="text-[11px] sm:text-xs text-neutral-400 font-normal leading-snug mt-1">
-                      {stat.label}
-                    </span>
-                  </div>
-                ))}
-              </div>
+                <span>Request a 2-Week Sandbox PoC</span>
+              </Link>
             </div>
           </div>
 
           {/* Right Column: Floating 3D Isometric Architecture Visual */}
-          <div className="lg:col-span-6 relative flex items-center justify-center lg:justify-end mt-4 lg:mt-0">
+          <div className="lg:col-span-5 relative flex items-center justify-center lg:justify-end mt-4 lg:mt-0">
             {/* Ambient orange glow directly behind the 3D stack */}
             <div
               className="absolute inset-0 bg-gradient-to-r from-[#FF7230]/25 via-[#FF6A2F]/20 to-transparent blur-[100px] rounded-full pointer-events-none"
               aria-hidden="true"
             />
 
-            {/* Seamless 3D Visual (Floating directly on dark canvas) */}
-            <div className="relative w-full max-w-[320px] sm:max-w-[480px] lg:max-w-[620px] xl:max-w-[660px] flex items-center justify-center">
+            {/* Seamless 3D Visual */}
+            <div className="relative w-full max-w-[320px] sm:max-w-[440px] lg:max-w-[520px] flex items-center justify-center">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/images/cybersecurity_technology_assurance.svg?v=transparent"
                 alt="Webnox LLM Architecture Stack: Models, RAG, Integrations, AI Agents"
@@ -186,21 +175,52 @@ export default function Hero() {
           </div>
         </div>
 
+        {/* Enterprise Performance & Governance Standards (4 H3s) */}
+        <div className="mt-14 sm:mt-18 pt-8 sm:pt-10 border-t border-white/10">
+          <div className="mb-6 flex items-center justify-between">
+            <h2 className="text-xs uppercase tracking-widest font-mono font-bold text-[#ff8935]">
+              Enterprise Performance &amp; Governance Standards
+            </h2>
+            <span className="text-xs text-neutral-400 font-mono hidden sm:inline">Zero Public Leaks • 100% Sovereign</span>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
+            {GOVERNANCE_STANDARDS.map((standard, idx) => (
+              <div
+                key={idx}
+                className="group rounded-2xl p-5 bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 hover:border-[#ff7230]/40 transition-all duration-300 flex flex-col justify-between"
+              >
+                <div>
+                  <div className="w-10 h-10 rounded-xl bg-[#ff7230]/15 border border-[#ff7230]/30 flex items-center justify-center text-[#ff7230] group-hover:bg-[#ff7230] group-hover:text-white transition-colors mb-3.5">
+                    <standard.icon className="w-5 h-5 text-current" />
+                  </div>
+                  <h3 className="text-base font-bold text-white mb-2 group-hover:text-[#ff8935] transition-colors">
+                    {standard.title}
+                  </h3>
+                  <p className="text-xs text-neutral-300 font-light leading-relaxed">
+                    {standard.description}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
         {/* Industry Awards & Recognitions Bar */}
-        <div className="w-full mt-12 sm:mt-16 lg:mt-20 pt-8 sm:pt-10 border-t border-white/10">
-          <div className="grid grid-cols-3 sm:grid-cols-6 gap-2.5 sm:gap-5 md:gap-8 items-center justify-items-center max-w-6xl mx-auto px-1 sm:px-4">
+        <div className="w-full mt-12 sm:mt-16 pt-8 border-t border-white/10">
+          <div className="grid grid-cols-3 sm:grid-cols-6 gap-2.5 sm:gap-5 md:gap-8 items-center justify-items-center max-w-6xl mx-auto px-1 sm:px-4 opacity-85 hover:opacity-100 transition-opacity">
             {AWARD_BADGES.map((badge, index) => (
               <div
                 key={index}
-                className="w-full flex items-center justify-center p-1 sm:p-2 rounded-xl transition-all duration-300 group"
+                className="w-full flex items-center justify-center p-1 sm:p-2 rounded-xl transition-all duration-300 grayscale hover:grayscale-0 hover:scale-105"
               >
-                <div className="relative w-24 sm:w-32 md:w-36 lg:w-40 h-16 sm:h-22 md:h-24 lg:h-28 flex items-center justify-center">
+                <div className="relative w-24 sm:w-32 md:w-36 h-12 sm:h-16 flex items-center justify-center">
                   <Image
                     src={badge.src}
                     alt={badge.alt}
-                    fill
-                    sizes="(max-width: 640px) 96px, (max-width: 768px) 128px, 160px"
-                    className="object-contain filter drop-shadow-[0_4px_12px_rgba(0,0,0,0.5)] opacity-85 group-hover:opacity-100 group-hover:scale-105 transition-all duration-300"
+                    width={120}
+                    height={40}
+                    className="h-8 sm:h-10 w-auto object-contain"
                   />
                 </div>
               </div>

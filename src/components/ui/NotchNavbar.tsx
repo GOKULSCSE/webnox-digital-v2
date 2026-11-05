@@ -21,11 +21,11 @@ export interface NotchNavbarProps {
 const DEFAULT_LEFT_LINKS: NavLinkItem[] = [
   { label: "Ai", href: "/ai-application-development-services" },
   { label: "Resources", href: "#resources" },
-  { label: "Contact", href: "#contact" },
+  { label: "Contact", href: "/contact" },
 ];
 
 const DEFAULT_RIGHT_LINKS: NavLinkItem[] = [
-  { label: "About", href: "#about" },
+  { label: "About", href: "/about" },
   { label: "Services", href: "#services" },
   { label: "Solution", href: "/solutions" },
 ];

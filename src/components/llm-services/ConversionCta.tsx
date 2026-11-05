@@ -2,7 +2,8 @@
 
 import React from "react";
 import Image from "next/image";
-import { Sparkles, ArrowUpRight } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import PatternWaves from "@/components/PatternWaves";
 
 /**
@@ -127,43 +128,38 @@ export default function ConversionCta() {
             </div>
 
             {/* Headline */}
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[50px] xl:text-[54px] font-bold tracking-tight text-white leading-[1.14]">
-              Build an LLM Application{" "}
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[46px] xl:text-[50px] font-bold tracking-tight text-white leading-[1.15]">
+              Ready to Build a Custom AI{" "}
               <br className="hidden sm:inline" />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF7230] via-[#FF6A2F] to-[#FF8935]">
-                for Your Business
+                for Your Business?
               </span>
             </h2>
 
             {/* Description */}
-            <p className="mt-4 sm:mt-6 text-neutral-200/90 text-xs sm:text-sm md:text-base font-light leading-relaxed max-w-xl">
-              From RAG-powered knowledge assistants and custom LLM applications to AI agents and LLM integration, Webnox Digital helps businesses turn AI opportunities into practical software solutions.
-            </p>
-            <p className="mt-2.5 sm:mt-3 text-neutral-300 text-xs sm:text-sm font-light leading-relaxed max-w-xl">
-              Share your business challenge, required integrations, and project goals. Our AI team can help identify a suitable LLM development approach and define the next steps.
+            <p className="mt-4 sm:mt-6 text-neutral-200 text-xs sm:text-sm md:text-base font-light leading-relaxed max-w-xl">
+              Talk with our senior AI team to see how a custom LLM can automate your daily operations, cut manual costs, and protect your company data. In a quick 30-minute call, we will review your business goals, discuss realistic costs and give you a clear project roadmap with zero obligation.
             </p>
 
             {/* CTAs */}
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 sm:gap-6 mt-7 sm:mt-10 w-full sm:w-auto">
-              {/* Primary White Button with Orange Sparkle Icon */}
-              <a
-                href="mailto:contact@webnox.in?subject=Talk%20to%20Our%20AI%20Experts"
-                className="group inline-flex items-center justify-center gap-3.5 bg-white hover:bg-neutral-100 text-neutral-950 font-bold text-sm sm:text-base pl-6 pr-2 py-2.5 sm:py-2 rounded-full shadow-[0_4px_20px_rgba(255,255,255,0.15)] hover:shadow-[0_6px_25px_rgba(255,114,48,0.35)] transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
+              {/* Primary White Button */}
+              <Link
+                href="/contact"
+                className="group inline-flex items-center justify-center gap-3 bg-white hover:bg-neutral-100 text-neutral-950 font-bold text-sm sm:text-base px-7 py-3.5 rounded-full shadow-[0_4px_20px_rgba(255,255,255,0.15)] hover:shadow-[0_6px_25px_rgba(255,114,48,0.35)] transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
               >
-                <span>Talk to Our AI Experts</span>
-                <span className="w-8 h-8 rounded-lg bg-gradient-to-tr from-[#FF5E00] to-[#FF8935] flex items-center justify-center text-white shadow-sm transition-transform duration-300 group-hover:rotate-12 flex-shrink-0">
-                  <Sparkles className="w-4 h-4 text-white fill-white" />
-                </span>
-              </a>
+                <span>Book a Free AI Consultation</span>
+                <ArrowRight className="w-4 h-4 text-[#FF7230]" />
+              </Link>
 
-              {/* Secondary Link with Arrow */}
-              <a
-                href="#contact"
-                className="inline-flex items-center justify-center gap-1.5 text-white hover:text-[#FF7230] font-semibold text-sm sm:text-base transition-colors duration-200 group cursor-pointer text-center"
+              {/* Secondary Link */}
+              <Link
+                href="/contact"
+                className="inline-flex items-center justify-center gap-1.5 text-white hover:text-[#FF7230] font-semibold text-sm sm:text-base transition-colors duration-200 group cursor-pointer text-center px-4 py-3"
               >
-                <span>Discuss Your LLM Project</span>
+                <span>Request a 2-Week Sandbox PoC</span>
                 <ArrowUpRight className="w-4 h-4 text-white/90 group-hover:text-[#FF7230] transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-              </a>
+              </Link>
             </div>
           </div>
 
