@@ -2,7 +2,8 @@
 
 import React from "react";
 import Image from "next/image";
-import { Sparkles, ArrowUpRight } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import PatternWaves from "@/components/PatternWaves";
 
 /**
@@ -110,12 +111,12 @@ export default function ConversionCta() {
       />
 
       {/* Main Content Container */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-8 lg:px-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-center">
           {/* Left Column: Logo, Heading, Description, CTAs */}
           <div className="lg:col-span-7 flex flex-col items-start text-left relative z-20">
             {/* Webnox Logo */}
-            <div className="mb-7 sm:mb-9">
+            <div className="mb-6 sm:mb-9">
               <Image
                 src="/images/Webnox logo White.svg"
                 alt="Webnox"
@@ -127,49 +128,44 @@ export default function ConversionCta() {
             </div>
 
             {/* Headline */}
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-[50px] xl:text-[54px] font-bold tracking-tight text-white leading-[1.14]">
-              Build an LLM Application{" "}
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[46px] xl:text-[50px] font-bold tracking-tight text-white leading-[1.15]">
+              Ready to Build a Custom AI{" "}
               <br className="hidden sm:inline" />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF7230] via-[#FF6A2F] to-[#FF8935]">
-                for Your Business
+                for Your Business?
               </span>
             </h2>
 
             {/* Description */}
-            <p className="mt-5 sm:mt-6 text-neutral-200/90 text-sm sm:text-base md:text-[16px] font-light leading-relaxed max-w-xl">
-              From RAG-powered knowledge assistants and custom LLM applications to AI agents and LLM integration, Webnox Digital helps businesses turn AI opportunities into practical software solutions.
-            </p>
-            <p className="mt-3 text-neutral-300 text-xs sm:text-sm font-light leading-relaxed max-w-xl">
-              Share your business challenge, required integrations, and project goals. Our AI team can help identify a suitable LLM development approach and define the next steps.
+            <p className="mt-4 sm:mt-6 text-neutral-200 text-xs sm:text-sm md:text-base font-light leading-relaxed max-w-xl">
+              Talk with our senior AI team to see how a custom LLM can automate your daily operations, cut manual costs, and protect your company data. In a quick 30-minute call, we will review your business goals, discuss realistic costs and give you a clear project roadmap with zero obligation.
             </p>
 
             {/* CTAs */}
-            <div className="flex flex-wrap items-center gap-5 sm:gap-8 mt-8 sm:mt-10">
-              {/* Primary White Button with Orange Sparkle Icon */}
-              <a
-                href="mailto:contact@webnox.in?subject=Talk%20to%20Our%20AI%20Experts"
-                className="group inline-flex items-center gap-3.5 bg-white hover:bg-neutral-100 text-neutral-950 font-bold text-sm sm:text-base pl-6 pr-2 py-2 rounded-full shadow-[0_4px_20px_rgba(255,255,255,0.15)] hover:shadow-[0_6px_25px_rgba(255,114,48,0.35)] transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 sm:gap-6 mt-7 sm:mt-10 w-full sm:w-auto">
+              {/* Primary White Button */}
+              <Link
+                href="/contact"
+                className="group inline-flex items-center justify-center gap-3 bg-white hover:bg-neutral-100 text-neutral-950 font-bold text-sm sm:text-base px-7 py-3.5 rounded-full shadow-[0_4px_20px_rgba(255,255,255,0.15)] hover:shadow-[0_6px_25px_rgba(255,114,48,0.35)] transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
               >
-                <span>Talk to Our AI Experts</span>
-                <span className="w-8 h-8 rounded-lg bg-gradient-to-tr from-[#FF5E00] to-[#FF8935] flex items-center justify-center text-white shadow-sm transition-transform duration-300 group-hover:rotate-12">
-                  <Sparkles className="w-4 h-4 text-white fill-white" />
-                </span>
-              </a>
+                <span>Book a Free AI Consultation</span>
+                <ArrowRight className="w-4 h-4 text-[#FF7230]" />
+              </Link>
 
-              {/* Secondary Link with Arrow */}
-              <a
-                href="#contact"
-                className="inline-flex items-center gap-1.5 text-white hover:text-[#FF7230] font-semibold text-sm sm:text-base transition-colors duration-200 group cursor-pointer"
+              {/* Secondary Link */}
+              <Link
+                href="/contact"
+                className="inline-flex items-center justify-center gap-1.5 text-white hover:text-[#FF7230] font-semibold text-sm sm:text-base transition-colors duration-200 group cursor-pointer text-center px-4 py-3"
               >
-                <span>Discuss Your LLM Project</span>
+                <span>Request a 2-Week Sandbox PoC</span>
                 <ArrowUpRight className="w-4 h-4 text-white/90 group-hover:text-[#FF7230] transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-              </a>
+              </Link>
             </div>
           </div>
 
           {/* Right Column: 3D Infinity Sculpture & Pedestal with locked Halftone Dot Band */}
-          <div className="lg:col-span-5 relative flex items-center lg:items-end justify-center lg:justify-end z-10 mt-10 lg:mt-0">
-            <div className="relative w-full max-w-[700px] lg:max-w-[920px] xl:max-w-[1020px] 2xl:max-w-[1120px] lg:translate-x-6 xl:translate-x-12 translate-y-12 sm:translate-y-16 lg:translate-y-24 xl:translate-y-28 2xl:translate-y-32">
+          <div className="lg:col-span-5 relative flex items-center lg:items-end justify-center lg:justify-end z-10 mt-6 lg:mt-0">
+            <div className="relative w-full max-w-[440px] sm:max-w-[620px] lg:max-w-[920px] xl:max-w-[1020px] 2xl:max-w-[1120px] lg:translate-x-6 xl:translate-x-12 translate-y-4 sm:translate-y-12 lg:translate-y-24">
               {/* Halftone Dot Matrix Band anchored in same coordinate space */}
               <HalftoneDotBand
                 columns={160}

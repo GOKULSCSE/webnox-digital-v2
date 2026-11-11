@@ -116,26 +116,26 @@ export default function WhyChooseUs() {
       {/* Ambient background glow */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-[#FF7230]/[0.04] blur-[140px] pointer-events-none rounded-full" />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-8">
         {/* Section Header */}
-        <div className="text-center max-w-4xl mx-auto mb-16 sm:mb-20">
-          <div className="inline-flex items-center gap-2 mb-5">
+        <div className="text-center max-w-4xl mx-auto mb-10 sm:mb-16 lg:mb-20">
+          <div className="inline-flex items-center gap-2 mb-3 sm:mb-5">
             <span className="w-1.5 h-1.5 rounded-full bg-[#FF7230]" />
             <span className="text-xs sm:text-sm font-medium tracking-wide text-neutral-400">
               Why Choose us
             </span>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-[48px] font-bold text-center leading-[1.2] tracking-tight text-white">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[48px] font-bold text-center leading-[1.2] tracking-tight text-white">
             Why Choose Webnox for<br className="hidden sm:inline" />{" "}
             <span className="text-[#FF7230]">AI</span> Application Development?
           </h2>
         </div>
 
         {/* 3-Column Showcase Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 items-stretch">
           {/* Left Column: Selector List (6 items) */}
-          <div className="lg:col-span-3 flex flex-col gap-3 justify-between">
+          <div className="lg:col-span-3 flex flex-col gap-2.5 sm:gap-3 justify-between">
             {CAPABILITIES.map((item, index) => {
               const isActive = index === activeIndex;
 
@@ -144,7 +144,7 @@ export default function WhyChooseUs() {
                   key={item.id}
                   type="button"
                   onClick={() => setActiveIndex(index)}
-                  className={`relative w-full text-left p-3 sm:p-3.5 rounded-2xl flex items-center gap-3 transition-all duration-300 cursor-pointer border ${
+                  className={`relative w-full text-left p-2.5 sm:p-3.5 rounded-xl sm:rounded-2xl flex items-center gap-2.5 sm:gap-3 transition-all duration-300 cursor-pointer border ${
                     isActive
                       ? "border-transparent text-white shadow-lg shadow-orange-950/40"
                       : "bg-[#140e0a]/80 border-white/[0.08] hover:bg-[#1c130d] hover:border-white/20 text-neutral-300"
@@ -160,7 +160,7 @@ export default function WhyChooseUs() {
                 >
                   {/* Left Icon Square */}
                   <div
-                    className={`w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 transition-colors ${
+                    className={`w-8 h-8 sm:w-9 sm:h-9 rounded-lg sm:rounded-xl flex items-center justify-center flex-shrink-0 transition-colors ${
                       isActive
                         ? "bg-white/20 border border-white/40 text-white shadow-inner"
                         : "bg-white/[0.06] border border-white/[0.08] text-neutral-400"
@@ -184,7 +184,7 @@ export default function WhyChooseUs() {
 
           {/* Middle Column: The Brown Card (Expanded Width) */}
           <div
-            className="lg:col-span-6 relative rounded-[28px] sm:rounded-[34px] border border-white/10 p-7 sm:p-9 md:p-10 flex flex-col justify-between overflow-hidden shadow-2xl min-h-[460px]"
+            className="lg:col-span-6 relative rounded-[22px] sm:rounded-[34px] border border-white/10 p-5 sm:p-8 md:p-10 flex flex-col justify-between overflow-hidden shadow-2xl min-h-[360px] sm:min-h-[420px] lg:min-h-[460px]"
             style={{
               background:
                 "linear-gradient(152.18deg, #60290B -16.91%, #140B06 99.34%)",
@@ -192,7 +192,7 @@ export default function WhyChooseUs() {
           >
             {/* Corner diagonal arrow watermark */}
             <svg
-              className="absolute right-[-10px] bottom-[-10px] w-48 h-48 text-[#FF7230]/[0.08] pointer-events-none select-none stroke-current"
+              className="absolute right-[-10px] bottom-[-10px] w-36 sm:w-48 h-36 sm:h-48 text-[#FF7230]/[0.08] pointer-events-none select-none stroke-current"
               viewBox="0 0 24 24"
               fill="none"
               strokeWidth="1.7"
@@ -214,23 +214,23 @@ export default function WhyChooseUs() {
               >
                 <div>
                   {/* Heading */}
-                  <h3 className="text-2xl sm:text-3xl font-bold text-white tracking-tight leading-snug mb-4">
+                  <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white tracking-tight leading-snug mb-3 sm:mb-4">
                     {activeItem.heading}
                   </h3>
 
                   {/* Description Paragraph */}
-                  <p className="text-xs sm:text-sm text-neutral-200/90 leading-relaxed font-normal mb-8">
+                  <p className="text-xs sm:text-sm text-neutral-200/90 leading-relaxed font-normal mb-6 sm:mb-8">
                     {activeItem.description}
                   </p>
                 </div>
 
                 {/* 4 Feature Bullet Points with custom brand gradient double-chevron icon */}
-                <div className="flex flex-col gap-3.5 pt-4 border-t border-white/10">
+                <div className="flex flex-col gap-3 pt-4 border-t border-white/10">
                   {activeItem.bullets.map((bullet, bIdx) => (
-                    <div key={bIdx} className="flex items-start gap-3">
+                    <div key={bIdx} className="flex items-start gap-2.5 sm:gap-3">
                       {/* Custom brand double-chevron SVG bullet */}
                       <svg
-                        className="w-3.5 h-3.5 flex-shrink-0 mt-1"
+                        className="w-3.5 h-3.5 flex-shrink-0 mt-0.5 sm:mt-1"
                         viewBox="0 0 15 15"
                         fill="none"
                         xmlns="http://www.w3.org/2000/svg"
@@ -273,7 +273,7 @@ export default function WhyChooseUs() {
           </div>
 
           {/* Right Column: AI Crystal Sphere Orb Card */}
-          <div className="lg:col-span-3 relative rounded-[28px] sm:rounded-[34px] border border-white/10 overflow-hidden shadow-2xl bg-[#0d0805] min-h-[460px] flex items-center justify-center">
+          <div className="lg:col-span-3 relative rounded-[22px] sm:rounded-[34px] border border-white/10 overflow-hidden shadow-2xl bg-[#0d0805] h-52 sm:h-72 lg:h-auto min-h-[220px] sm:min-h-[320px] lg:min-h-[460px] flex items-center justify-center">
             <img
               src="/images/ai-crystal-orb.jpg"
               alt="AI-Native Engineering Crystal Orb"

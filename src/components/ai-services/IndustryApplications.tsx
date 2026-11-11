@@ -85,8 +85,53 @@ const INDUSTRY_SECTORS: IndustrySector[] = [
 ];
 
 export default function IndustryApplications() {
+  const [cardDims, setCardDims] = React.useState({
+    width: 440,
+    height: 320,
+    cardDistance: 48,
+    verticalDistance: 55,
+  });
+
+  React.useEffect(() => {
+    const updateDims = () => {
+      const w = window.innerWidth;
+      if (w < 420) {
+        setCardDims({
+          width: Math.max(280, w - 48),
+          height: 250,
+          cardDistance: 26,
+          verticalDistance: 36,
+        });
+      } else if (w < 640) {
+        setCardDims({
+          width: Math.min(360, w - 64),
+          height: 275,
+          cardDistance: 34,
+          verticalDistance: 44,
+        });
+      } else if (w < 1024) {
+        setCardDims({
+          width: 400,
+          height: 300,
+          cardDistance: 42,
+          verticalDistance: 50,
+        });
+      } else {
+        setCardDims({
+          width: 440,
+          height: 320,
+          cardDistance: 48,
+          verticalDistance: 55,
+        });
+      }
+    };
+    updateDims();
+    window.addEventListener("resize", updateDims);
+    return () => window.removeEventListener("resize", updateDims);
+  }, []);
+
   return (
-    <section className="relative w-full py-24 sm:py-32 bg-[#160a04] text-white overflow-hidden border-t border-white/[0.08]">
+    <section className="relative w-full py-20 sm:py-28 lg:py-32 bg-[#160a04] text-white overflow-hidden border-t border-white/[0.08]">
       {/* Deep Brown Background Gradient Base */}
       <div
         className="absolute inset-0 pointer-events-none"
@@ -99,7 +144,7 @@ export default function IndustryApplications() {
 
       {/* Ambient Warm Orange Glow behind CardSwap */}
       <div
-        className="absolute right-0 lg:right-[-2%] top-[55%] -translate-y-1/2 w-[700px] lg:w-[950px] h-[700px] lg:h-[950px] rounded-full pointer-events-none"
+        className="absolute right-0 lg:right-[-2%] top-[55%] -translate-y-1/2 w-[550px] lg:w-[950px] h-[550px] lg:h-[950px] rounded-full pointer-events-none"
         style={{
           background:
             "radial-gradient(circle, rgba(255, 114, 48, 0.35) 0%, rgba(255, 94, 0, 0.15) 38%, transparent 70%)",
@@ -110,7 +155,7 @@ export default function IndustryApplications() {
 
       {/* Subtle Top-Left Warm Vignette */}
       <div
-        className="absolute left-[-10%] top-[-10%] w-[550px] h-[550px] rounded-full pointer-events-none"
+        className="absolute left-[-10%] top-[-10%] w-[500px] h-[500px] rounded-full pointer-events-none"
         style={{
           background:
             "radial-gradient(circle, rgba(255, 114, 48, 0.08) 0%, transparent 65%)",
@@ -119,17 +164,17 @@ export default function IndustryApplications() {
         aria-hidden="true"
       />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-8">
         {/* Section Header - Top Center */}
-        <div className="text-center max-w-4xl mx-auto mb-12 sm:mb-16">
-          <div className="inline-flex items-center gap-2 mb-4">
+        <div className="text-center max-w-4xl mx-auto mb-10 sm:mb-16">
+          <div className="inline-flex items-center gap-2 mb-3 sm:mb-4">
             <span className="w-1.5 h-1.5 rounded-full bg-[#FF7230]" />
             <span className="text-xs sm:text-sm font-medium tracking-wide text-neutral-400">
               Cross-Industry Impact
             </span>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-[48px] font-bold tracking-tight text-white leading-tight">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[48px] font-bold tracking-tight text-white leading-tight">
             Industry Applications of{" "}
             <span className="text-[#FF7230]">AI-Powered</span> Applications
           </h2>
@@ -139,7 +184,7 @@ export default function IndustryApplications() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           {/* Left Column: Text Content */}
           <div className="lg:col-span-5 flex flex-col justify-center">
-            <p className="text-neutral-300 text-base sm:text-lg md:text-xl leading-relaxed font-normal">
+            <p className="text-neutral-300 text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed font-normal">
               AI-powered applications help businesses improve workflows, support
               customer interactions and process information efficiently. Through
               custom AI application development, organisations can address
@@ -149,12 +194,12 @@ export default function IndustryApplications() {
           </div>
 
           {/* Right Column: CardSwap 3D Interactive Stack */}
-          <div className="lg:col-span-7 relative w-full h-[540px] sm:h-[600px] lg:h-[640px] flex items-center justify-center">
+          <div className="lg:col-span-7 relative w-full h-[460px] sm:h-[540px] lg:h-[640px] flex items-center justify-center">
             <CardSwap
-              width={440}
-              height={320}
-              cardDistance={48}
-              verticalDistance={55}
+              width={cardDims.width}
+              height={cardDims.height}
+              cardDistance={cardDims.cardDistance}
+              verticalDistance={cardDims.verticalDistance}
               depth={75}
               skewAmount={5}
               visibleCards={4}

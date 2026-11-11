@@ -258,13 +258,13 @@ export default function ProjectsShowcase() {
   };
 
   return (
-    <section id="projects" className="relative w-full bg-[#fcf8f2] text-neutral-900 py-20 sm:py-28 overflow-hidden select-none">
-      <div className="max-w-[1600px] mx-auto px-6 sm:px-10 lg:px-16">
+    <section id="projects" className="relative w-full bg-[#fcf8f2] text-neutral-900 py-16 sm:py-24 lg:py-28 overflow-hidden select-none">
+      <div className="max-w-[1600px] mx-auto px-4 sm:px-10 lg:px-16">
         
         {/* Top Header Row with Exact H2 */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-12 sm:mb-16">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-10 sm:mb-16">
           <div className="max-w-4xl">
-            <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-bold tracking-tight text-[#1c1b18] leading-[1.2]">
+            <h2 className="text-2xl sm:text-4xl lg:text-[44px] font-bold tracking-tight text-[#1c1b18] leading-[1.2]">
               Projects Showcasing Our Application Development Expertise
             </h2>
           </div>
@@ -275,7 +275,7 @@ export default function ProjectsShowcase() {
               onClick={scrollPrev}
               type="button"
               aria-label="Previous Project"
-              className="w-12 h-12 rounded-full border border-neutral-300 bg-white hover:border-neutral-400 hover:bg-neutral-50 text-neutral-600 flex items-center justify-center transition-all shadow-sm active:scale-95 cursor-pointer"
+              className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-neutral-300 bg-white hover:border-neutral-400 hover:bg-neutral-50 text-neutral-600 flex items-center justify-center transition-all shadow-sm active:scale-95 cursor-pointer"
             >
               <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M15 18l-6-6 6-6" />
@@ -285,7 +285,7 @@ export default function ProjectsShowcase() {
               onClick={scrollNext}
               type="button"
               aria-label="Next Project"
-              className="w-12 h-12 rounded-full bg-[#ff5e00] hover:bg-[#e65500] text-white flex items-center justify-center transition-all shadow-md active:scale-95 cursor-pointer"
+              className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#ff5e00] hover:bg-[#e65500] text-white flex items-center justify-center transition-all shadow-md active:scale-95 cursor-pointer"
             >
               <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M9 18l6-6-6-6" />
@@ -297,7 +297,7 @@ export default function ProjectsShowcase() {
         {/* Carousel Area with Left Floating Trust Badge */}
         <div
           ref={containerRef}
-          className="relative w-full overflow-hidden cursor-grab active:cursor-grabbing p-3"
+          className="relative w-full overflow-hidden cursor-grab active:cursor-grabbing px-1 py-3 sm:p-3"
           onMouseEnter={() => { isHoveredRef.current = true; }}
           onMouseLeave={() => { isHoveredRef.current = false; }}
           onPointerDown={onPointerDown}
@@ -373,7 +373,7 @@ export default function ProjectsShowcase() {
               {displayItems.map((item, index) => (
                 <div
                   key={`${item.id}-${index}`}
-                  className="w-[320px] sm:w-[350px] md:w-[370px] h-[400px] rounded-[24px] bg-white border border-neutral-200/80 shadow-[0_4px_24px_rgba(0,0,0,0.03)] hover:shadow-[0_12px_36px_rgba(0,0,0,0.08)] transition-all duration-300 p-5 sm:p-6 flex flex-col justify-between flex-shrink-0 group"
+                  className="w-[280px] sm:w-[340px] md:w-[370px] h-[390px] sm:h-[400px] rounded-[24px] bg-white border border-neutral-200/80 shadow-[0_4px_24px_rgba(0,0,0,0.03)] hover:shadow-[0_12px_36px_rgba(0,0,0,0.08)] transition-all duration-300 p-4 sm:p-6 flex flex-col justify-between flex-shrink-0 group"
                 >
                   {/* Top Tablet/Screen UI Mockup Preview (Realistic Tablet Mockup) */}
                   <div className="w-full h-[175px] rounded-[18px] bg-gradient-to-br from-[#fcf2e8] via-[#faeae0] to-[#f7dfd0] relative overflow-hidden flex items-center justify-center p-2.5 border border-orange-500/10 shadow-inner">

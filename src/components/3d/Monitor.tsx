@@ -370,18 +370,33 @@ const HeroScreenContent = ({ pxHeight }: { pxHeight: number }) => {
 
         {/* Hero Subtitle Description */}
         <p className="hero-description">
-          Build software, AI agents, applications and digital products with Webnox. We provide<br className="hero-desc-br" />
-          AI development services that turn business ideas into production-ready AI solutions.
+          Build software, AI agents, applications and digital products with Webnox Digital. We provide<br className="hero-desc-br" />
+          AI Native services that turn business ideas into production ready AI solutions.
         </p>
 
-        {/* Primary Action Button */}
+        {/* Action Buttons */}
         <div className="hero-action-group">
           <button
             type="button"
             className="cta-pill-button"
             id="build-ai-solution-cta"
+            onClick={() => {
+              const el = document.getElementById("contact") || document.querySelector("section:last-of-type");
+              el?.scrollIntoView({ behavior: "smooth" });
+            }}
           >
             Build Your AI Solution
+          </button>
+          <button
+            type="button"
+            className="cta-pill-secondary"
+            id="talk-to-experts-cta"
+            onClick={() => {
+              const el = document.getElementById("contact") || document.querySelector("section:last-of-type");
+              el?.scrollIntoView({ behavior: "smooth" });
+            }}
+          >
+            Talk to Our AI Experts
           </button>
         </div>
       </div>

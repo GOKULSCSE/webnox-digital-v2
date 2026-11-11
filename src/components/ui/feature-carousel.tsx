@@ -236,6 +236,31 @@ export function FeatureCarousel({
     setStep((prev) => prev + 1);
   }, []);
 
+  const prevStep = useCallback(() => {
+    setDirection(-1);
+    setStep((prev) => prev - 1);
+  }, []);
+
+  const [touchStartX, setTouchStartX] = useState<number | null>(null);
+
+  const onMobileTouchStart = (e: React.TouchEvent) => {
+    setIsPaused(true);
+    setTouchStartX(e.targetTouches[0].clientX);
+  };
+
+  const onMobileTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX === null) return;
+    const touchEndX = e.changedTouches[0].clientX;
+    const diff = touchStartX - touchEndX;
+    if (diff > 45) {
+      nextStep();
+    } else if (diff < -45) {
+      prevStep();
+    }
+    setTouchStartX(null);
+    setIsPaused(false);
+  };
+
   const handleChipClick = (index: number) => {
     const diff = (index - currentIndex + count) % count;
     const delta = diff > count / 2 ? diff - count : diff;
@@ -297,12 +322,133 @@ export function FeatureCarousel({
 
   return (
     <div className={cn("w-full max-w-7xl mx-auto select-none", className)}>
-      <div className="relative overflow-hidden rounded-[2.5rem] lg:rounded-[3.5rem] flex flex-col lg:flex-row min-h-[620px] lg:aspect-[16/10] border border-neutral-200/80 shadow-[0_12px_40px_rgba(0,0,0,0.06)] bg-white">
+      {/* 1. Mobile & Tablet Carousel View (< lg): Single cohesive responsive card */}
+      <div
+        className="block lg:hidden w-full"
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => setIsPaused(false)}
+      >
+        {/* Horizontal Scrollable Tabs */}
+        <div className="flex items-center gap-2 overflow-x-auto pb-3 pt-1 px-0.5 scrollbar-none no-scrollbar">
+          {activeFeatures.map((feat, idx) => {
+            const isSelected = idx === currentIndex;
+            return (
+              <button
+                key={feat.id}
+                type="button"
+                onClick={() => {
+                  setDirection(idx > currentIndex ? 1 : -1);
+                  setStep(idx);
+                }}
+                className={cn(
+                  "flex-shrink-0 px-3.5 py-2 rounded-full text-xs font-bold tracking-tight transition-all duration-200 cursor-pointer whitespace-nowrap",
+                  isSelected
+                    ? "bg-[#ff5e00] text-white shadow-md shadow-orange-500/25 scale-100"
+                    : "bg-white text-neutral-700 hover:bg-neutral-100 border border-neutral-200/90 shadow-sm"
+                )}
+              >
+                {idx + 1}. {feat.category || feat.label.replace(/^\d+\.\s*/, "")}
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Interactive Feature Card with touch swipe */}
+        <div
+          className="relative w-full rounded-[24px] sm:rounded-[32px] overflow-hidden shadow-xl border border-neutral-200/90 bg-neutral-950 mt-1 min-h-[440px] flex flex-col justify-between"
+          onTouchStart={onMobileTouchStart}
+          onTouchEnd={onMobileTouchEnd}
+        >
+          {/* Background Image */}
+          <img
+            src={activeFeatures[currentIndex].image}
+            alt={activeFeatures[currentIndex].label}
+            className="absolute inset-0 w-full h-full object-cover opacity-60"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-black/35" />
+
+          {/* Card Top Header */}
+          <div className="relative z-10 p-5 flex items-center justify-between">
+            <div className="flex items-center gap-2 bg-black/50 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/20">
+              <span className="w-2 h-2 rounded-full bg-[#ff5e00] animate-pulse" />
+              <span className="text-[10px] font-mono uppercase tracking-wider text-white font-semibold">
+                AI Native Engineering
+              </span>
+            </div>
+            <span className="text-white/90 font-mono text-xs font-bold bg-white/10 px-2.5 py-1 rounded-full backdrop-blur-sm border border-white/10">
+              0{currentIndex + 1} / 0{count}
+            </span>
+          </div>
+
+          {/* Card Bottom Content */}
+          <div className="relative z-10 p-5 sm:p-6 flex flex-col gap-2.5">
+            <div className="bg-white/95 text-neutral-900 px-3 py-1 rounded-full text-[10.5px] font-bold uppercase tracking-wider w-fit shadow-md">
+              {activeFeatures[currentIndex].label}
+            </div>
+
+            <p className="text-white font-normal text-xs sm:text-sm leading-relaxed drop-shadow-sm line-clamp-4">
+              {activeFeatures[currentIndex].description}
+            </p>
+
+            {/* CTA Button Row */}
+            <div className="pt-3 border-t border-white/20 flex items-center justify-between mt-1">
+              <a
+                href={activeFeatures[currentIndex].ctaLink || "#contact"}
+                className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full bg-gradient-to-r from-[#ff5e00] to-[#ff7230] text-white text-xs font-bold shadow-lg shadow-orange-500/30 active:scale-95 transition-all"
+              >
+                <span>{activeFeatures[currentIndex].ctaText || "Talk to Our AI Experts"}</span>
+                <ExternalLink className="w-3.5 h-3.5" />
+              </a>
+              <span className="text-[10px] text-white/70 font-medium">
+                Production Ready
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom Pagination Controls (Arrows + Dots) */}
+        <div className="flex items-center justify-between mt-3.5 px-2">
+          <button
+            type="button"
+            onClick={prevStep}
+            aria-label="Previous service"
+            className="w-9 h-9 rounded-full bg-white border border-neutral-300 text-neutral-700 flex items-center justify-center shadow-sm active:scale-90 font-bold text-lg cursor-pointer"
+          >
+            ‹
+          </button>
+          <div className="flex items-center gap-1.5">
+            {activeFeatures.map((_, i) => (
+              <span
+                key={i}
+                onClick={() => {
+                  setDirection(i > currentIndex ? 1 : -1);
+                  setStep(i);
+                }}
+                className={cn(
+                  "h-1.5 rounded-full transition-all duration-300 cursor-pointer",
+                  i === currentIndex ? "w-6 bg-[#ff5e00]" : "w-1.5 bg-neutral-300"
+                )}
+              />
+            ))}
+          </div>
+          <button
+            type="button"
+            onClick={nextStep}
+            aria-label="Next service"
+            className="w-9 h-9 rounded-full bg-[#ff5e00] text-white flex items-center justify-center shadow-md active:scale-90 font-bold text-lg cursor-pointer"
+          >
+            ›
+          </button>
+        </div>
+      </div>
+
+      {/* 2. Desktop Split Carousel (lg and above): 2-Column interactive layout */}
+      <div className="hidden lg:flex relative overflow-hidden rounded-[2.5rem] lg:rounded-[3.5rem] min-h-[580px] lg:aspect-[16/10] border border-neutral-200/80 shadow-[0_12px_40px_rgba(0,0,0,0.06)] bg-white">
         
         {/* Left Side: Interactive vertical scrolling chips list with proper spacing & testimonials gradient */}
         <div
           className={cn(
-            "w-full lg:w-[48%] xl:w-[47%] min-h-[500px] sm:min-h-[540px] md:min-h-[580px] lg:h-full relative z-30 flex flex-col items-center justify-center overflow-hidden px-3 sm:px-5 md:px-6",
+            "w-full lg:w-[48%] xl:w-[47%] min-h-[460px] sm:min-h-[540px] md:min-h-[580px] lg:h-full relative z-30 flex flex-col items-center justify-center overflow-hidden px-3 sm:px-5 md:px-6",
             leftBgClass
           )}
           style={
@@ -486,7 +632,7 @@ export function FeatureCarousel({
         </div>
 
         {/* Right Side: Visual Image Preview Card with Depth & Slide Animation */}
-        <div className="flex-1 min-h-[500px] md:min-h-[580px] lg:h-full relative bg-[#fcf8f2] flex items-center justify-center py-10 md:py-14 px-6 md:px-10 lg:px-10 overflow-hidden border-t lg:border-t-0 lg:border-l border-neutral-200/80">
+        <div className="flex-1 min-h-[460px] sm:min-h-[500px] md:min-h-[580px] lg:h-full relative bg-[#fcf8f2] flex items-center justify-center py-8 sm:py-10 md:py-14 px-4 sm:px-8 md:px-10 lg:px-10 overflow-hidden border-t lg:border-t-0 lg:border-l border-neutral-200/80">
           <div className="relative w-full max-w-[440px] aspect-[4/5] flex items-center justify-center">
             {activeFeatures.map((feature, index) => {
               const status = getCardStatus(index);

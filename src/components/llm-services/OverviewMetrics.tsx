@@ -2,7 +2,6 @@
 
 import React from "react";
 import {
-  Sparkles,
   Settings,
   HelpCircle,
   Cloud,
@@ -20,29 +19,29 @@ import {
 
 export default function OverviewMetrics() {
   return (
-    <section className="relative w-full py-20 sm:py-28 bg-[#fdfaf6] border-t border-neutral-200/70 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 sm:px-8">
+    <section className="relative w-full py-16 sm:py-24 lg:py-28 bg-[#fdfaf6] border-t border-neutral-200/70 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8">
         {/* Top Header: Left Title, Right Description */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start mb-12 sm:mb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-start mb-10 sm:mb-16">
           <div className="lg:col-span-7 flex flex-col">
             {/* Main Heading */}
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#12141a] leading-[1.18]">
-              Custom LLM Development Backed by 15+ Years of Experience
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-[#12141a] leading-[1.18]">
+              Custom LLM Development Services India: Engineered for Reliable Production
             </h2>
           </div>
 
-          <div className="lg:col-span-5 flex flex-col justify-center lg:pt-3 text-neutral-600 text-sm sm:text-base leading-relaxed space-y-4">
+          <div className="lg:col-span-5 flex flex-col justify-center lg:pt-2 text-neutral-600 text-xs sm:text-sm md:text-base leading-relaxed space-y-3 sm:space-y-4">
             <p>
-              Off-the-shelf language models may not meet every business requirement. Custom LLM development adapts language models to specific tasks, connects them to your company data, and integrates them with existing software to improve information retrieval and automate workflows.
+              Webnox Digital is a large language model development company focused on solving real business problems. While free or basic AI tools often crash and make mistakes, our custom AI is built to do real work. It handles heavy customer inquiries, finds information in seconds and protects your company data completely.
             </p>
             <p>
-              As an AI-native company, Webnox Digital brings 15+ years of experience in software development, digital products, website development and digital marketing. With 2,570+ clients across 20+ countries and 20+ in-house products, we combine LLM engineering with software development expertise to build practical AI applications.
+              With our custom LLM development services in India, you don&apos;t need to be a technology expert. We handle everything from selecting affordable AI for your budget, organizing your business files and ensuring the AI always tells the truth on your own private system. Through our proven generative AI development services, our team in India builds reliable enterprise LLM solutions in India that help your business work faster, reduce costly errors and protect your bottom line.
             </p>
           </div>
         </div>
 
         {/* Third paragraph banner note */}
-        <div className="mb-10 p-5 sm:p-6 rounded-2xl bg-orange-50/70 border border-orange-200/70 text-neutral-700 text-sm sm:text-[15px] leading-relaxed">
+        <div className="mb-8 sm:mb-10 p-4 sm:p-6 rounded-xl sm:rounded-2xl bg-orange-50/70 border border-orange-200/70 text-neutral-700 text-xs sm:text-sm md:text-[15px] leading-relaxed">
           <p>
             Our LLM development services include model API integration, retrieval-augmented generation (RAG), fine-tuning and workflow integration. We assess your business requirements, data and technical needs to choose the right approach. Before deployment, we test response quality, reliability, speed and security to help ensure the application works reliably and can be updated as your business grows.
           </p>
@@ -50,7 +49,7 @@ export default function OverviewMetrics() {
 
         {/* Middle Feature Banner: Webnox Orange Gradient 2:2 Card with Center Divider */}
         <div
-          className="relative w-full rounded-[28px] sm:rounded-[34px] p-8 sm:p-10 lg:p-14 text-white shadow-[0_16px_40px_rgba(255,114,48,0.22)] overflow-hidden border border-white/20 mb-8 sm:mb-10"
+          className="relative w-full rounded-[22px] sm:rounded-[34px] p-6 sm:p-10 lg:p-14 text-white shadow-[0_16px_40px_rgba(255,114,48,0.22)] overflow-hidden border border-white/20 mb-8 sm:mb-10"
           style={{
             background:
               "linear-gradient(96.82deg, #FF7230 8.11%, #FF6A2F 28.74%, #FF7631 43.14%, #FF8935 63.76%, #FF532B 87.55%)",
@@ -62,7 +61,7 @@ export default function OverviewMetrics() {
           {/* 2:2 Grid with Center Divider */}
           <div className="grid grid-cols-1 md:grid-cols-2 relative z-10">
             {/* Left Column: 01 (Up) & 03 (Down) */}
-            <div className="flex flex-col gap-10 sm:gap-12 md:pr-12 lg:pr-16 md:border-r border-white/30 pb-8 md:pb-0 border-b md:border-b-0 border-white/30">
+            <div className="flex flex-col gap-8 sm:gap-12 md:pr-10 lg:pr-16 md:border-r border-white/30 pb-6 md:pb-0 border-b md:border-b-0 border-white/30">
               {/* 01: Rapid AI Product Delivery (Up) */}
               <div className="flex flex-col">
                 <span className="text-xs uppercase tracking-widest font-semibold text-white/80 mb-3">

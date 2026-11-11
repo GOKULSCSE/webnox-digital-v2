@@ -79,12 +79,10 @@ export default function Testimonials() {
         {/* Heading */}
         <div className="text-center max-w-4xl mx-auto">
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-semibold text-white tracking-tight leading-[1.16]">
-            We’re proud to partner with visionaries and businesses. Their feedback
-            inspires digital experiences that make impact.
+            What Businesses Say About Webnox AI Solutions
           </h2>
           <p className="mt-4 sm:mt-5 text-white/85 text-base sm:text-lg md:text-xl font-normal leading-relaxed max-w-2xl mx-auto">
-            While the world talks about AI possibilities, we engineer the autonomous
-            systems that actually run your business.
+            Visionaries and enterprises rely on Webnox to engineer, deploy, and scale autonomous AI solutions and production-grade software.
           </p>
         </div>
 

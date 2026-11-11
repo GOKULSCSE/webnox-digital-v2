@@ -9,10 +9,10 @@ export default function Navbar() {
       leftLinks={[
         { label: "Ai", href: "/ai-application-development-services" },
         { label: "Resources", href: "#resources" },
-        { label: "Contact", href: "#contact" },
+        { label: "Contact", href: "/contact" },
       ]}
       rightLinks={[
-        { label: "About", href: "#about" },
+        { label: "About", href: "/about" },
         { label: "Services", href: "#services" },
         { label: "Solution", href: "/solutions" },
       ]}

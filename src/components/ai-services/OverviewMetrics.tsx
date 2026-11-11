@@ -16,18 +16,18 @@ import {
 
 export default function OverviewMetrics() {
   return (
-    <section className="relative w-full py-20 sm:py-28 bg-[#fdfaf6] border-t border-neutral-200/70 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 sm:px-8">
+    <section className="relative w-full py-16 sm:py-24 lg:py-28 bg-[#fdfaf6] border-t border-neutral-200/70 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8">
         {/* Top Header: Left Title, Right Description */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start mb-12 sm:mb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-start mb-10 sm:mb-16">
           <div className="lg:col-span-7 flex flex-col">
             {/* Main Heading */}
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#12141a] leading-[1.18]">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-[#12141a] leading-[1.18]">
               AI Application Development Company for Business Solutions
             </h2>
           </div>
 
-          <div className="lg:col-span-5 flex flex-col justify-center lg:pt-1 text-neutral-600 text-sm sm:text-base leading-relaxed">
+          <div className="lg:col-span-5 flex flex-col justify-center lg:pt-1 text-neutral-600 text-xs sm:text-sm md:text-base leading-relaxed">
             <p>
               With 15+ years of experience, 570+ clients, a presence across 20+
               countries and 15+ awards and recognitions, Webnox Digital develops
@@ -39,7 +39,7 @@ export default function OverviewMetrics() {
 
         {/* Middle Feature Banner: Webnox Orange Gradient 2:2 Card with Center Divider */}
         <div
-          className="relative w-full rounded-[28px] sm:rounded-[34px] p-8 sm:p-10 lg:p-14 text-white shadow-[0_16px_40px_rgba(255,114,48,0.22)] overflow-hidden border border-white/20 mb-8 sm:mb-10"
+          className="relative w-full rounded-[22px] sm:rounded-[34px] p-6 sm:p-10 lg:p-14 text-white shadow-[0_16px_40px_rgba(255,114,48,0.22)] overflow-hidden border border-white/20 mb-8 sm:mb-10"
           style={{
             background:
               "linear-gradient(96.82deg, #FF7230 8.11%, #FF6A2F 28.74%, #FF7631 43.14%, #FF8935 63.76%, #FF532B 87.55%)",
@@ -51,7 +51,7 @@ export default function OverviewMetrics() {
           {/* 2:2 Grid with Center Divider */}
           <div className="grid grid-cols-1 md:grid-cols-2 relative z-10">
             {/* Left Column: 01 (Up) & 03 (Down) */}
-            <div className="flex flex-col gap-10 sm:gap-12 md:pr-12 lg:pr-16 md:border-r border-white/30 pb-8 md:pb-0 border-b md:border-b-0 border-white/30">
+            <div className="flex flex-col gap-8 sm:gap-12 md:pr-10 lg:pr-16 md:border-r border-white/30 pb-6 md:pb-0 border-b md:border-b-0 border-white/30">
               {/* 01: Time to First Release (Up) */}
               <div className="flex flex-col">
                 <span className="text-xs uppercase tracking-widest font-semibold text-white/80 mb-3">

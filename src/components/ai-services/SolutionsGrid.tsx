@@ -143,17 +143,17 @@ const BENTO_SOLUTIONS: MagicBentoItem[] = [
 
 export default function SolutionsGrid() {
   return (
-    <section className="relative w-full py-24 sm:py-32 bg-[#fcf8f2] border-t border-b border-neutral-200/80 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 sm:px-8">
+    <section className="relative w-full py-16 sm:py-24 lg:py-32 bg-[#fcf8f2] border-t border-b border-neutral-200/80 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8">
         {/* Section Header */}
-        <div className="max-w-4xl mb-14">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#ff5e00]/10 border border-[#ff5e00]/20 mb-4">
+        <div className="max-w-4xl mb-10 sm:mb-14">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#ff5e00]/10 border border-[#ff5e00]/20 mb-3 sm:mb-4">
             <Sparkles className="w-3.5 h-3.5 text-[#ff5e00]" />
             <span className="text-xs font-semibold text-[#ff5e00] tracking-wide uppercase">
               Proven Solutions
             </span>
           </div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#12141a]">
+          <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#12141a]">
             AI Application Development Solutions We’ve Built for Businesses
           </h2>
         </div>
