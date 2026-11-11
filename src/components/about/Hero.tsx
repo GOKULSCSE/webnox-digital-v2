@@ -2,47 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { ArrowRight, Users } from "lucide-react";
-
-interface AwardBadge {
-  src: string;
-  alt: string;
-  platform: string;
-}
-
-const AWARD_BADGES: AwardBadge[] = [
-  {
-    src: "/images/Award 1.png",
-    alt: "SoftwareSuggest Top Software Company 2026",
-    platform: "SoftwareSuggest",
-  },
-  {
-    src: "/images/Award 2.png",
-    alt: "AppFutura Top App Development Company in India 2023",
-    platform: "AppFutura",
-  },
-  {
-    src: "/images/Award 3.png",
-    alt: "Capterra Best Ease of Use 2023",
-    platform: "Capterra",
-  },
-  {
-    src: "/images/Award 4.png",
-    alt: "GoodFirms Top 50 Enterprise Products Best Software Awards 2023",
-    platform: "GoodFirms",
-  },
-  {
-    src: "/images/Award 5.png",
-    alt: "ITFirms Top Software Development Company 2023",
-    platform: "ITFirms",
-  },
-  {
-    src: "/images/Award 6.png",
-    alt: "DesignRush Top Web Design Agency 2023",
-    platform: "DesignRush",
-  },
-];
 
 export default function Hero() {
   return (
@@ -112,7 +72,7 @@ export default function Hero() {
           </h1>
 
           {/* Description */}
-          <p className="text-neutral-300 text-sm sm:text-base md:text-lg lg:text-xl font-light leading-relaxed max-w-3xl mb-10 text-neutral-300/95">
+          <p className="text-neutral-300/95 text-sm sm:text-base md:text-lg lg:text-xl font-light leading-relaxed max-w-3xl mb-10">
             Backed by 15+ years of software experience, Webnox Digital builds
             custom software and smart AI tools. We replace slow, manual office
             tasks with automated AI systems that answer customers fast, prevent
@@ -120,7 +80,7 @@ export default function Hero() {
           </p>
 
           {/* Primary & Secondary CTAs */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto mb-16 sm:mb-20">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto">
             {/* Primary CTA */}
             <Link
               href="/solutions"
@@ -138,30 +98,6 @@ export default function Hero() {
               <Users className="w-4 h-4 text-[#ff7230]" />
               <span>Meet Our Engineering Team</span>
             </a>
-          </div>
-
-          {/* Award Badges Row */}
-          <div className="w-full pt-8 border-t border-white/10">
-            <p className="text-xs font-mono uppercase tracking-widest text-neutral-400 mb-6">
-              Recognized for Software Stability & Enterprise Engineering
-            </p>
-            <div className="grid grid-cols-3 sm:grid-cols-6 gap-6 sm:gap-8 items-center justify-items-center opacity-85 hover:opacity-100 transition-opacity">
-              {AWARD_BADGES.map((badge, idx) => (
-                <div
-                  key={idx}
-                  className="flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300 hover:scale-105"
-                  title={badge.alt}
-                >
-                  <Image
-                    src={badge.src}
-                    alt={badge.alt}
-                    width={110}
-                    height={40}
-                    className="h-9 sm:h-10 w-auto object-contain"
-                  />
-                </div>
-              ))}
-            </div>
           </div>
         </div>
       </div>

@@ -38,14 +38,6 @@ export default function ConversionCta() {
       />
 
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-8 text-center flex flex-col items-center">
-        {/* Top Eyebrow Badge */}
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/[0.06] border border-[#ff5e00]/40 backdrop-blur-md mb-6 shadow-[0_0_24px_rgba(255,94,0,0.18)]">
-          <span className="w-2 h-2 rounded-full bg-[#ff7230] shadow-[0_0_8px_#ff7230]" />
-          <span className="text-[11px] sm:text-xs font-semibold tracking-[0.2em] uppercase text-neutral-200">
-            ENGINEERING CONSULTATION
-          </span>
-        </div>
-
         {/* Heading */}
         <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-[1.12] mb-6">
           Ready to Build Your Next{" "}
