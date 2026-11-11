@@ -90,7 +90,7 @@ const BENTO_LLM_SOLUTIONS: MagicBentoItem[] = [
 
 export default function SolutionsGrid() {
   return (
-    <section className="relative w-full py-24 sm:py-32 bg-[#fcf8f2] border-t border-b border-neutral-200/80 overflow-hidden">
+    <section className="relative w-full py-16 sm:py-24 lg:py-32 bg-[#fcf8f2] border-t border-b border-neutral-200/80 overflow-hidden">
       {/* Scoped Keyframes for LLM Visual Animations */}
       <style>{`
         @keyframes laserScan {
@@ -105,13 +105,13 @@ export default function SolutionsGrid() {
         }
       `}</style>
 
-      <div className="max-w-7xl mx-auto px-6 sm:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8">
         {/* Section Header */}
-        <div className="max-w-4xl mb-14">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#12141a]">
+        <div className="max-w-4xl mb-10 sm:mb-14">
+          <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#12141a]">
             LLM-Powered Solutions for Real-World Applications
           </h2>
-          <p className="mt-4 text-neutral-600 text-base sm:text-lg leading-relaxed">
+          <p className="mt-3 sm:mt-4 text-neutral-600 text-sm sm:text-base md:text-lg leading-relaxed">
             Practical AI solutions engineered with large language models, retrieval pipelines, and enterprise software connections to solve complex business challenges.
           </p>
         </div>

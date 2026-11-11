@@ -1141,3 +1141,27 @@
     opacity: 1;
   }
 }
+
+@media (max-width: 768px) {
+  .magic-bento {
+    grid-template-columns: 1fr !important;
+    grid-auto-rows: minmax(280px, auto) !important;
+  }
+  .magic-bento__cell {
+    grid-column: span 1 !important;
+    grid-row: span 1 !important;
+  }
+  .magic-bento__card {
+    min-height: 280px;
+    height: auto !important;
+  }
+  .magic-bento__title {
+    font-size: 16px;
+    line-height: 22px;
+  }
+  .magic-bento__description {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+}
+

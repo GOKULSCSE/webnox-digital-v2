@@ -428,3 +428,25 @@
     transition-duration: 0.01ms;
   }
 }
+
+@media (max-width: 640px) {
+  .stepper__segment {
+    padding: 0 4px;
+    gap: 4px;
+  }
+  .stepper__text {
+    display: none;
+  }
+  .stepper__badge {
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
+    font-weight: 700;
+  }
+  .stepper__button {
+    font-size: 12.5px;
+    padding: 0 10px;
+    height: 36px;
+  }
+}
+

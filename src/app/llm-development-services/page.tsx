@@ -10,19 +10,20 @@ import SolutionsGrid from "@/components/llm-services/SolutionsGrid";
 import WhyChooseUs from "@/components/llm-services/WhyChooseUs";
 import ProcessTimeline from "@/components/llm-services/ProcessTimeline";
 import ConversionCta from "@/components/llm-services/ConversionCta";
-import TechStack from "@/components/llm-services/TechStack";
+import ArchitectureGuide from "@/components/llm-services/ArchitectureGuide";
 import IndustryApplications from "@/components/llm-services/IndustryApplications";
+import TechStack from "@/components/llm-services/TechStack";
 import FaqAccordion from "@/components/llm-services/FaqAccordion";
 import Footer from "@/components/ai-services/Footer";
 
 export const metadata: Metadata = {
-  title: "LLM Development Services | Webnox Digital",
+  title: "LLM Development Services in India for High Uptime Enterprise Systems | Webnox Digital",
   description:
-    "Webnox Digital is an LLM development company offering LLM development services, including custom LLM applications, RAG, fine-tuning, AI agents and integration.",
+    "We design, fine-tune, and deploy custom large language models that automate complex enterprise operations. From self-hosted open-source models to hybrid RAG pipelines with 2-week working sandbox delivery.",
   openGraph: {
-    title: "LLM Development Services | Webnox Digital",
+    title: "LLM Development Services in India for High Uptime Enterprise Systems | Webnox Digital",
     description:
-      "Webnox Digital is an LLM development company offering LLM development services, including custom LLM applications, RAG, fine-tuning, AI agents and integration.",
+      "Enterprise LLM development company in India. We design, fine-tune, and deploy custom large language models for high uptime business operations.",
     url: "https://webnox.in/llm-development-services",
     siteName: "Webnox Digital",
     type: "website",
@@ -36,13 +37,13 @@ export default function LlmDevelopmentServicesPage() {
         {/* Navigation Bar */}
         <Navbar />
 
-        {/* Hero Section with H1, Description, CTAs, and Awards */}
+        {/* Hero Section with H1, Description, CTAs, and Enterprise Governance Standards */}
         <Hero />
 
-        {/* Company Overview & Key Metrics */}
+        {/* H2: Custom LLM Development Services India: Engineered for Reliable Production */}
         <OverviewMetrics />
 
-        {/* 6 Core LLM Engineering Services with Feature Carousel */}
+        {/* H2: Custom LLM Development Services in India Built for Your Business (5 Services) */}
         <ServicesRange />
 
         {/* Google Client Testimonials */}
@@ -51,25 +52,28 @@ export default function LlmDevelopmentServicesPage() {
         {/* Featured Case Studies */}
         <ProjectsShowcase />
 
-        {/* 6 Real-World LLM Solutions with Magic Bento */}
+        {/* Real-World LLM Solutions Grid */}
         <SolutionsGrid />
 
-        {/* Why Choose Webnox - Dark Obsidian Section with 3-Column Interactive Layout */}
-        <WhyChooseUs />
-
-        {/* 6-Step LLM Engineering Process with Stepper */}
-        <ProcessTimeline />
-
-        {/* Mid-Page Call-To-Action Banner */}
+        {/* H2: Ready to Build a Custom AI for Your Business? (Mid-Page Conversion Banner) */}
         <ConversionCta />
 
-        {/* Technology Stack Grid with FolderFloat Interactive Explorer */}
-        <TechStack />
+        {/* H2: Why Choose Webnox Digital as Your LLM Development Company in India? (6 Pillars) */}
+        <WhyChooseUs />
 
-        {/* Industry Specific Applications with CardSwap 3D Interactive Stack */}
+        {/* H2: Our Step by Step Custom LLM Development Process (4 Phases) */}
+        <ProcessTimeline />
+
+        {/* H2: Industries We Serve with Custom LLM Solutions in India (6 Industries) */}
         <IndustryApplications />
 
-        {/* 10 Frequently Asked Questions Accordion */}
+        {/* H3: Architecture Guide for Enterprise LLM Solutions in India (4 Tiers) */}
+        <ArchitectureGuide />
+
+        {/* H2: Technology Behind Your Custom AI System */}
+        <TechStack />
+
+        {/* H2: Frequently Asked Questions About LLM Development Services (6 Questions in H5) */}
         <FaqAccordion />
 
         {/* Footer */}

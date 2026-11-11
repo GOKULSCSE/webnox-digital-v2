@@ -105,18 +105,18 @@ export default function ProcessTimeline() {
   return (
     <section
       id="process"
-      className="relative w-full py-24 sm:py-32 bg-[#fdfaf6] overflow-hidden"
+      className="relative w-full py-16 sm:py-24 lg:py-32 bg-[#fdfaf6] overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto px-6 sm:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8">
         {/* Section Header */}
-        <div className="max-w-4xl mb-14 sm:mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-orange-100/80 border border-orange-200 text-[#ff5e00] text-xs font-semibold uppercase tracking-wider mb-4">
+        <div className="max-w-4xl mb-10 sm:mb-16">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-orange-100/80 border border-orange-200 text-[#ff5e00] text-xs font-semibold uppercase tracking-wider mb-3 sm:mb-4">
             Production Engineering Process
           </div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#12141a] leading-tight">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-[#12141a] leading-tight">
             From AI Concept to Production-Ready Application Our Process
           </h2>
-          <p className="mt-4 text-neutral-600 text-base sm:text-lg leading-relaxed">
+          <p className="mt-3 sm:mt-4 text-neutral-600 text-xs sm:text-sm md:text-base leading-relaxed">
             Our systematic 6-step lifecycle guides your project from initial use-case discovery to enterprise-grade deployment and real-time operational optimization.
           </p>
         </div>

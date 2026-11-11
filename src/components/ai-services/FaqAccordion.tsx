@@ -69,17 +69,17 @@ export default function FaqAccordion() {
   };
 
   return (
-    <section id="faq" className="relative w-full py-24 sm:py-32 bg-[#fcf8f2] border-t border-neutral-200/80 overflow-hidden">
-      <div className="max-w-4xl mx-auto px-6 sm:px-8">
+    <section id="faq" className="relative w-full py-16 sm:py-24 lg:py-32 bg-[#fcf8f2] border-t border-neutral-200/80 overflow-hidden">
+      <div className="max-w-4xl mx-auto px-4 sm:px-8">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#12141a]">
+        <div className="text-center mb-10 sm:mb-16">
+          <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#12141a]">
             Frequently Asked Questions About AI Application Development Services
           </h2>
         </div>
 
         {/* 10 Accordion Items */}
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-3 sm:gap-4">
           {FAQS_LIST.map((faq, index) => {
             const isOpen = openIndex === index;
             return (
@@ -94,10 +94,10 @@ export default function FaqAccordion() {
                 <button
                   type="button"
                   onClick={() => toggleFaq(index)}
-                  className="w-full text-left p-6 sm:p-7 flex items-center justify-between gap-4 cursor-pointer"
+                  className="w-full text-left p-4 sm:p-7 flex items-center justify-between gap-3 sm:gap-4 cursor-pointer"
                   aria-expanded={isOpen}
                 >
-                  <span className="text-base sm:text-lg font-bold text-neutral-900 tracking-tight">
+                  <span className="text-sm sm:text-base md:text-lg font-bold text-neutral-900 tracking-tight">
                     {faq.question}
                   </span>
                   <div
@@ -120,8 +120,8 @@ export default function FaqAccordion() {
                 </button>
 
                 {isOpen && (
-                  <div className="px-6 pb-6 sm:px-7 sm:pb-7 pt-0 text-sm sm:text-base text-neutral-600 leading-relaxed border-t border-neutral-100 mt-2">
-                    <p className="pt-4">{faq.answer}</p>
+                  <div className="px-4 pb-4 sm:px-7 sm:pb-7 pt-0 text-xs sm:text-sm md:text-base text-neutral-600 leading-relaxed border-t border-neutral-100 mt-2">
+                    <p className="pt-3 sm:pt-4">{faq.answer}</p>
                   </div>
                 )}
               </div>

@@ -43,6 +43,7 @@ export interface FolderFloatProps {
   spread?: number;
   lift?: number;
   tilt?: number;
+  rowHeight?: number;
   flapAngle?: number;
   restAngle?: number;
   openDuration?: number;
@@ -75,7 +76,8 @@ const layout = (
   spread: number,
   lift: number,
   tilt: number,
-  sizes: { w: number; h: number }[]
+  sizes: { w: number; h: number }[],
+  rowHeight: number = ROW
 ) => {
   const rows: { items: { i: number; pw: number }[]; width: number }[] = [];
   let row: { i: number; pw: number }[] = [];
@@ -97,12 +99,12 @@ const layout = (
   const pos: { x: number; y: number; r: number }[] = [];
   rows.forEach((r, ri) => {
     let x = -r.width / 2;
-    const shift = (ri % 2 ? 1 : -1) * Math.min(16, spread * 0.1);
+    const shift = (ri % 2 ? 1 : -1) * Math.min(14, spread * 0.08);
     r.items.forEach(({ i, pw }) => {
       const j = jitter(i);
       pos[i] = {
-        x: x + pw / 2 + shift + (j - 0.5) * 6,
-        y: -lift - ri * ROW - j * 6,
+        x: x + pw / 2 + shift + (j - 0.5) * 4,
+        y: -lift - ri * rowHeight - j * 4,
         r: tilt * (j * 2 - 1),
       };
       x += pw + GAP;
@@ -134,6 +136,7 @@ export default function FolderFloat({
   spread = 180,
   lift = 26,
   tilt = 8,
+  rowHeight = 52,
   flapAngle = 34,
   restAngle = 16,
   openDuration = 520,
@@ -198,7 +201,7 @@ export default function FolderFloat({
     typeof item === "string" ? { label: item, value: item } : item
   );
   const n = list.length;
-  const pos = layout(list, spread, lift, tilt, sizes);
+  const pos = layout(list, spread, lift, tilt, sizes, rowHeight);
 
   const labelsKey = list.map((item) => item.label).join("|");
 
@@ -206,7 +209,9 @@ export default function FolderFloat({
     const measure = () => {
       const next = pillRefs.current
         .slice(0, n)
-        .map((el) => (el ? { w: el.offsetWidth, h: el.offsetHeight } : null));
+        .map((el) =>
+          el ? { w: el.scrollWidth || el.offsetWidth, h: el.offsetHeight } : null
+        );
       if (next.some((s) => !s)) return;
       setSizes((prev) =>
         prev.length === next.length &&
@@ -407,7 +412,7 @@ export default function FolderFloat({
 
   const down = (e: React.PointerEvent<HTMLButtonElement>, i: number) => {
     const w = world.current;
-    if (!w.live || e.button !== 0) return;
+    if (!w.live || e.button !== 0 || e.pointerType === "touch") return;
     const b = w.bodies[i];
     if (!b) return;
     const p = pointerAt(e);
@@ -473,10 +478,18 @@ export default function FolderFloat({
       data-live={live ? "" : undefined}
       data-physics={physics ? "" : undefined}
       data-trigger={trigger}
-      onPointerEnter={hover ? () => set(true) : undefined}
+      onPointerEnter={
+        hover
+          ? (e) => {
+              if (e.pointerType === "touch") return;
+              set(true);
+            }
+          : undefined
+      }
       onPointerLeave={
         hover
-          ? () => {
+          ? (e) => {
+              if (e.pointerType === "touch") return;
               if (!world.current.drag) set(false);
             }
           : undefined
@@ -561,7 +574,10 @@ export default function FolderFloat({
           className="folder-float__trigger"
           aria-expanded={open}
           aria-label={label}
-          onClick={() => set(!open)}
+          onClick={(e) => {
+            e.stopPropagation();
+            set(!open);
+          }}
         />
       </div>
     </div>

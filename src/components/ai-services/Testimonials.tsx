@@ -14,12 +14,31 @@ const getInitials = (name: string) => {
 export default function Testimonials() {
   const [activeIndex, setActiveIndex] = useState(1);
   const [isPaused, setIsPaused] = useState(false);
+  const [touchStart, setTouchStart] = useState<number | null>(null);
 
   const reviews = defaultWebnoxReviews;
 
   const handleNext = useCallback(() => {
     setActiveIndex((prev) => (prev + 1) % reviews.length);
   }, [reviews.length]);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setIsPaused(true);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStart === null) return;
+    const touchEnd = e.changedTouches[0].clientX;
+    const distance = touchStart - touchEnd;
+    if (distance > 45) {
+      setActiveIndex((prev) => (prev + 1) % reviews.length);
+    } else if (distance < -45) {
+      setActiveIndex((prev) => (prev - 1 + reviews.length) % reviews.length);
+    }
+    setTouchStart(null);
+    setIsPaused(false);
+  };
 
   // Subtle auto-advance when user is not hovering
   useEffect(() => {
@@ -30,17 +49,17 @@ export default function Testimonials() {
 
   return (
     <section
-      className="relative w-full py-24 sm:py-32 md:py-36 overflow-hidden"
+      className="relative w-full py-16 sm:py-28 md:py-36 overflow-hidden"
       style={{
         background:
           "linear-gradient(96.82deg, #FF7230 8.11%, #FF6A2F 28.74%, #FF7631 43.14%, #FF8935 63.76%, #FF532B 87.55%)",
       }}
     >
-      <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-8">
         {/* Section Header with original title preserved */}
-        <div className="text-center max-w-4xl mx-auto mb-14 sm:mb-18">
+        <div className="text-center max-w-4xl mx-auto mb-10 sm:mb-18">
           {/* What clients say about us? pill tag */}
-          <div className="inline-flex items-center gap-2 mb-5">
+          <div className="inline-flex items-center gap-2 mb-3 sm:mb-5">
             <span className="w-1.5 h-1.5 rounded-full bg-white" />
             <span className="text-white/95 text-xs sm:text-sm font-medium tracking-wide">
               What clients say about us?
@@ -48,7 +67,7 @@ export default function Testimonials() {
           </div>
 
           {/* Original Existing Headline */}
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-[52px] font-bold text-white text-center leading-[1.2] tracking-tight">
+          <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-[52px] font-bold text-white text-center leading-[1.2] tracking-tight">
             Trusted by Businesses. Proven by Results.
           </h2>
         </div>
@@ -59,10 +78,12 @@ export default function Testimonials() {
         className="relative w-full z-10 overflow-hidden py-4"
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
         style={
           {
             "--card-w": "min(86vw, 420px)",
-            "--gap": "24px",
+            "--gap": "20px",
           } as React.CSSProperties
         }
       >
@@ -81,9 +102,9 @@ export default function Testimonials() {
                 key={idx}
                 onClick={() => setActiveIndex(idx)}
                 style={{ width: "var(--card-w)" }}
-                className={`flex-shrink-0 cursor-pointer select-none rounded-[28px] sm:rounded-[32px] p-7 sm:p-8 h-[340px] sm:h-[350px] flex flex-col justify-between transition-all duration-500 ease-out ${
+                className={`flex-shrink-0 cursor-pointer select-none rounded-[24px] sm:rounded-[32px] p-5 sm:p-8 min-h-[330px] h-auto sm:h-[350px] flex flex-col justify-between transition-all duration-500 ease-out ${
                   isActive
-                    ? "bg-white text-neutral-900 z-20"
+                    ? "bg-white text-neutral-900 z-20 shadow-xl"
                     : "bg-white/[0.08] backdrop-blur-md border border-white/35 text-white opacity-75 hover:opacity-100 z-10"
                 }`}
               >

@@ -1,206 +1,158 @@
 "use client";
 
-import React from "react";
-import Stepper, { Step } from "@/components/ui/Stepper";
-import { HugeiconsIcon } from "@hugeicons/react";
-import { Tick02Icon, ArrowRight01Icon } from "@hugeicons/core-free-icons";
+import React, { useState } from "react";
+import { CheckCircle2, Clock, Check, ArrowRight, Layers, FileCheck2, Cpu, Activity } from "lucide-react";
 
-interface ProcessStepData {
-  number: string;
-  shortTitle: string;
-  stageName: string;
-  fullTitle: string;
+interface ProcessPhase {
+  id: string;
+  phaseNumber: string;
+  weeks: string;
+  title: string;
   summary: string;
-  highlights: { label: string; value: string }[];
+  whatWeDo: string;
+  whatYouReceive: string;
+  icon: React.ComponentType<{ className?: string }>;
 }
 
-const LLM_STEPS_DATA: ProcessStepData[] = [
+const PROCESS_PHASES: ProcessPhase[] = [
   {
-    number: "01",
-    shortTitle: "Discovery",
-    stageName: "Stage 01 • Scoping & Feasibility",
-    fullTitle: "01. Discovery and Requirement Analysis",
+    id: "phase-1",
+    phaseNumber: "PHASE 01",
+    weeks: "Weeks 1–2",
+    title: "Phase 1: Planning & Data Discovery (Weeks 1–2)",
     summary:
-      "We assess business goals, target users, data sources and technical requirements to define the scope and feasibility of your LLM application development project.",
-    highlights: [
-      { label: "Goals", value: "Business Objectives" },
-      { label: "Users", value: "Target Persona Needs" },
-      { label: "Data", value: "Data Sources Audit" },
-      { label: "Output", value: "Scope & Feasibility" },
-    ],
+      "We connect with your team to understand your business goals, review your company files and documents and pick the most affordable, effective AI tools for your budget.",
+    whatWeDo:
+      "We map out what tasks the AI will handle, check if your business files are ready and choose the right AI technology.",
+    whatYouReceive:
+      "A step-by-step project blueprint, data review report and timeline.",
+    icon: Layers,
   },
   {
-    number: "02",
-    shortTitle: "Selection",
-    stageName: "Stage 02 • Model & Stack Architecture",
-    fullTitle: "02. LLM Model Selection and Architecture",
+    id: "phase-2",
+    phaseNumber: "PHASE 02",
+    weeks: "Weeks 3–4",
+    title: "Phase 2: Working Test Prototype (Weeks 3–4)",
     summary:
-      "We evaluate suitable large language models, RAG approaches, APIs and infrastructure based on application requirements, security needs, expected performance and operating costs.",
-    highlights: [
-      { label: "Models", value: "Foundation Model Benchmarks" },
-      { label: "RAG", value: "Retrieval Architecture" },
-      { label: "Security", value: "Enterprise API Guardrails" },
-      { label: "Cost", value: "Token & Compute Modeling" },
-    ],
+      "We build a private, working prototype using your real company data so you can test it yourself and verify that it gives accurate answers before spending on full rollout.",
+    whatWeDo:
+      "We create a secure test app, run real customer questions through it and ensure it answers quickly without making things up.",
+    whatYouReceive:
+      "A working private test app you can click and try, along with accuracy and speed test reports.",
+    icon: Cpu,
   },
   {
-    number: "03",
-    shortTitle: "Data & RAG",
-    stageName: "Stage 03 • Knowledge Engineering",
-    fullTitle: "03. Data Preparation and RAG Development",
+    id: "phase-3",
+    phaseNumber: "PHASE 03",
+    weeks: "Weeks 5–8",
+    title: "Phase 3: Software Connection & Launch (Weeks 5–8)",
     summary:
-      "We organise relevant data, structure knowledge sources and build retrieval pipelines where needed to support context aware responses and relevant information retrieval.",
-    highlights: [
-      { label: "Chunking", value: "Document Structuring" },
-      { label: "Vectors", value: "Embeddings & Indexing" },
-      { label: "Search", value: "Hybrid Vector Search" },
-      { label: "Grounding", value: "Context Verification" },
-    ],
+      "We connect the tested AI directly into the software your team already uses every day (like your CRM, website or customer database) and add strict privacy locks to keep your data safe.",
+    whatWeDo:
+      "We integrate the AI into your daily tools, test it for fast response times and ensure sensitive customer information is completely protected.",
+    whatYouReceive:
+      "A fully functioning, live AI system connected to your everyday business software.",
+    icon: FileCheck2,
   },
   {
-    number: "04",
-    shortTitle: "Development",
-    stageName: "Stage 04 • Application & Workflows",
-    fullTitle: "04. LLM Application Development and Integration",
+    id: "phase-4",
+    phaseNumber: "PHASE 04",
+    weeks: "Ongoing",
+    title: "Phase 4: Ongoing Monitoring & Updates (Ongoing)",
     summary:
-      "We develop application interfaces, model workflows, APIs and software integrations to connect LLM capabilities with existing systems and business processes.",
-    highlights: [
-      { label: "Frontend", value: "User Interfaces & UX" },
-      { label: "APIs", value: "FastAPI & Backend Logic" },
-      { label: "Tools", value: "Function Calling & Tools" },
-      { label: "Systems", value: "CRM & ERP Integrations" },
-    ],
-  },
-  {
-    number: "05",
-    shortTitle: "Testing",
-    stageName: "Stage 05 • Evaluation & Safety",
-    fullTitle: "05. LLM Testing and Evaluation",
-    summary:
-      "We evaluate response quality, factual consistency, task completion, latency and security against defined criteria to identify issues and improve application reliability.",
-    highlights: [
-      { label: "Quality", value: "Factual Grounding" },
-      { label: "Safety", value: "Prompt Injection Audits" },
-      { label: "Speed", value: "Latency Benchmarking" },
-      { label: "Metrics", value: "Automated Eval Datasets" },
-    ],
-  },
-  {
-    number: "06",
-    shortTitle: "Deployment",
-    stageName: "Stage 06 • Deployment & Telemetry",
-    fullTitle: "06. LLM Deployment and Optimization",
-    summary:
-      "We deploy the LLM application in the selected environment, monitor performance and usage costs, and refine the system through ongoing evaluation and feedback.",
-    highlights: [
-      { label: "Hosting", value: "Cloud, Private, or Hybrid" },
-      { label: "Observability", value: "Tracing & Logging" },
-      { label: "Tokens", value: "Usage-Cost Analytics" },
-      { label: "Feedback", value: "Continuous Optimization" },
-    ],
+      "We don’t disappear after launch. We monitor your live AI system to keep it fast and accurate and update it as your business introduces new products, services, or policies.",
+    whatWeDo:
+      "We track how the AI answers customer questions, fix any tricky edge cases, and refresh its knowledge base as your business grows.",
+    whatYouReceive:
+      "Regular performance reports, continuous accuracy tuning, and dependable long-term technical support.",
+    icon: Activity,
   },
 ];
 
 export default function ProcessTimeline() {
+  const [activePhase, setActivePhase] = useState<string>("phase-1");
+
   return (
-    <section
-      id="process"
-      className="relative w-full py-24 sm:py-32 bg-[#fdfaf6] overflow-hidden"
-    >
-      <div className="max-w-7xl mx-auto px-6 sm:px-8">
+    <section id="process" className="relative w-full py-20 sm:py-28 bg-[#fdfaf6] text-neutral-900 border-t border-neutral-200/70 overflow-hidden">
+      {/* Background Accent Glow */}
+      <div
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-[#ff5e00]/[0.035] rounded-full blur-[100px] pointer-events-none"
+        aria-hidden="true"
+      />
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-8">
         {/* Section Header */}
-        <div className="max-w-4xl mb-14 sm:mb-16">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#12141a] leading-tight">
-            Our LLM Development Process: From Planning to Deployment
+        <div className="flex flex-col items-center text-center max-w-3xl mx-auto mb-16 sm:mb-20">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#ff5e00]/10 border border-[#ff5e00]/25 text-[#ff5e00] text-xs font-semibold uppercase tracking-wider mb-4">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#ff5e00]" />
+            STEP-BY-STEP ROADMAP
+          </div>
+
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#12141a] leading-tight mb-4">
+            Our Step by Step Custom LLM Development Process
           </h2>
-          <p className="mt-4 text-neutral-600 text-base sm:text-lg leading-relaxed">
-            A structured, disciplined engineering path that takes large language models from initial use-case discovery and RAG pipeline construction to production-grade deployment and real-time monitoring.
+
+          <p className="text-neutral-600 text-sm sm:text-base md:text-lg leading-relaxed font-normal">
+            From initial data discovery to long-term autonomous monitoring, every phase is built around measurable checkpoints and working prototypes.
           </p>
         </div>
 
-        {/* Interactive React Bits Stepper Component */}
-        <div className="w-full flex justify-center">
-          <Stepper
-            initialStep={1}
-            theme="light"
-            accentColor="#ff5e00"
-            width="100%"
-            radius={28}
-            frame={true}
-            linear={false}
-            indicator="numbers"
-            orientation="horizontal"
-            transition="slide"
-            backButtonText="Previous Step"
-            nextButtonText="Next Step"
-            completeButtonText="Finish Review"
-            className="w-full max-w-4xl shadow-xl border border-neutral-200/90 bg-white/95"
-            contentClassName="px-4 sm:px-8"
-            completedContent={
-              <div className="py-10 text-center flex flex-col items-center">
-                <div className="w-14 h-14 rounded-full bg-orange-100 text-[#ff5e00] flex items-center justify-center mb-4 shadow-inner">
-                  <HugeiconsIcon icon={Tick02Icon} size={28} strokeWidth={2.5} />
+        {/* 4 Phases Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-7">
+          {PROCESS_PHASES.map((phase) => (
+            <div
+              key={phase.id}
+              className="group bg-white rounded-3xl p-7 border border-neutral-200/90 hover:border-[#ff5e00]/40 shadow-[0_4px_24px_rgba(0,0,0,0.03)] hover:shadow-[0_16px_36px_rgba(255,114,48,0.12)] transition-all duration-300 flex flex-col justify-between"
+            >
+              <div>
+                {/* Top Row: Phase Number & Duration Badge */}
+                <div className="flex items-center justify-between mb-5">
+                  <span className="font-mono text-xs font-bold text-[#ff7230] uppercase tracking-wider bg-[#ff7230]/10 px-2.5 py-1 rounded-md">
+                    {phase.phaseNumber}
+                  </span>
+                  <span className="inline-flex items-center gap-1.5 text-[11px] font-mono text-neutral-500 bg-neutral-100 px-2.5 py-1 rounded-md font-semibold">
+                    <Clock className="w-3 h-3 text-[#ff7230]" />
+                    {phase.weeks}
+                  </span>
                 </div>
-                <h3 className="text-2xl sm:text-3xl font-bold text-neutral-900 tracking-tight mb-3">
-                  Ready to Build Your LLM Solution?
+
+                {/* H3 Heading */}
+                <h3 className="text-lg sm:text-xl font-bold text-neutral-900 group-hover:text-[#ff5e00] transition-colors mb-3 leading-snug">
+                  {phase.title}
                 </h3>
-                <p className="text-neutral-600 text-sm sm:text-base max-w-xl mb-7 leading-relaxed">
-                  Our structured process guarantees enterprise alignment, context awareness, and production resilience from day one.
+
+                {/* Summary */}
+                <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed font-normal mb-6">
+                  {phase.summary}
                 </p>
-                <a
-                  href="#contact"
-                  className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full bg-gradient-to-r from-[#ff5e00] to-[#ff7230] text-white font-bold text-sm sm:text-base shadow-lg shadow-orange-500/25 hover:shadow-orange-500/40 hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer"
-                >
-                  <span>Discuss Your LLM Project</span>
-                  <HugeiconsIcon icon={ArrowRight01Icon} size={18} strokeWidth={2} />
-                </a>
               </div>
-            }
-          >
-            {LLM_STEPS_DATA.map((step) => (
-              <Step
-                key={step.number}
-                title={step.shortTitle}
-                description={step.fullTitle}
-              >
-                <div className="py-4 sm:py-6 text-left">
-                  {/* Step Stage Tag */}
-                  <div className="flex items-center gap-2 mb-3">
-                    <span className="px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider bg-orange-100 text-[#ff5e00]">
-                      {step.stageName}
-                    </span>
-                  </div>
 
-                  {/* Main Title */}
-                  <h3 className="text-2xl sm:text-3xl font-bold text-neutral-900 tracking-tight mb-4 leading-snug">
-                    {step.fullTitle}
-                  </h3>
-
-                  {/* Description Paragraph */}
-                  <p className="text-neutral-600 text-base sm:text-lg leading-relaxed mb-8">
-                    {step.summary}
+              {/* What We Do & What You Receive Sub-Cards */}
+              <div className="pt-5 border-t border-neutral-100 space-y-3.5">
+                {/* What We Do */}
+                <div className="p-3.5 rounded-xl bg-neutral-50 border border-neutral-100">
+                  <span className="block text-[11px] font-bold uppercase tracking-wider text-neutral-900 mb-1 flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#ff5e00]" />
+                    What We Do:
+                  </span>
+                  <p className="text-xs text-neutral-600 leading-relaxed">
+                    {phase.whatWeDo}
                   </p>
-
-                  {/* Key Highlights Grid */}
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-5 border-t border-neutral-200/80">
-                    {step.highlights.map((item, hIdx) => (
-                      <div
-                        key={hIdx}
-                        className="bg-neutral-50/90 p-3.5 rounded-2xl border border-neutral-200/70"
-                      >
-                        <span className="text-[10px] font-bold text-[#ff5e00] uppercase tracking-wider block mb-1">
-                          {item.label}
-                        </span>
-                        <span className="text-xs sm:text-[13px] font-bold text-neutral-800 leading-tight block">
-                          {item.value}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
                 </div>
-              </Step>
-            ))}
-          </Stepper>
+
+                {/* What You Receive */}
+                <div className="p-3.5 rounded-xl bg-emerald-50/70 border border-emerald-200/60">
+                  <span className="block text-[11px] font-bold uppercase tracking-wider text-emerald-800 mb-1 flex items-center gap-1.5">
+                    <Check className="w-3 h-3 stroke-[3] text-emerald-600" />
+                    What You Receive:
+                  </span>
+                  <p className="text-xs text-emerald-950 font-medium leading-relaxed">
+                    {phase.whatYouReceive}
+                  </p>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>

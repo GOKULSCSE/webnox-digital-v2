@@ -33,12 +33,12 @@ export default function Footer() {
         <div className="absolute inset-x-0 bottom-0 h-36 sm:h-44 bg-gradient-to-t from-[#fdfaf6] via-[#fdfaf6]/60 to-transparent pointer-events-none" />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-8">
         {/* Main 4-Column Navigation Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 lg:gap-12 mb-14">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 sm:gap-10 lg:gap-12 mb-12 sm:mb-14">
           {/* Column 1: Brand & Social Links */}
           <div className="md:col-span-4 lg:col-span-4 flex flex-col items-start">
-            <Link href="/" className="inline-block mb-4">
+            <Link href="/" className="inline-block mb-3 sm:mb-4">
               <Image
                 src="/images/Webnox Logo v2.png"
                 alt="Webnox"
@@ -49,13 +49,12 @@ export default function Footer() {
               />
             </Link>
 
-            <p className="text-[13.5px] text-neutral-600 leading-relaxed max-w-xs mb-6">
-              AI-powered portfolio template designed to help SaaS founders, creators launch stunning
-              sites effortlessly and fast.
+            <p className="text-[13.5px] text-neutral-600 leading-relaxed max-w-sm mb-5">
+              Production-grade AI application development, custom LLM systems, autonomous agent workflows, and private enterprise RAG architectures.
             </p>
 
-            {/* Social Icons in Solar Orange circular outlines */}
-            <div className="flex items-center gap-3">
+            {/* Social Icons & Quick Contact in Solar Orange */}
+            <div className="flex flex-wrap items-center gap-2.5 sm:gap-3">
               {/* WhatsApp */}
               <a
                 href="https://wa.me/919786557739"
@@ -143,83 +142,94 @@ export default function Footer() {
                   <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
                 </svg>
               </a>
+
+              <a
+                href="mailto:contact@webnox.in"
+                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-orange-50/90 border border-orange-200/90 text-[#ff5e00] text-xs font-semibold hover:bg-orange-100/90 transition-colors"
+              >
+                <span className="w-1.5 h-1.5 rounded-full bg-[#ff5e00] animate-pulse" />
+                contact@webnox.in
+              </a>
             </div>
           </div>
 
-          {/* Column 2: Solutions */}
-          <div className="md:col-span-2 lg:col-span-2">
-            <h4 className="text-[15px] font-bold text-neutral-900 mb-4 tracking-tight">
-              Solutions
-            </h4>
-            <ul className="flex flex-col gap-3 text-[13.5px] text-neutral-600 font-medium">
-              <li>
-                <Link href="/solutions" className="hover:text-[#ff5e00] transition-colors">
-                  AI Agents
-                </Link>
-              </li>
-              <li>
-                <Link href="/solutions" className="hover:text-[#ff5e00] transition-colors">
-                  LLM Tuning
-                </Link>
-              </li>
-              <li>
-                <Link href="/solutions" className="hover:text-[#ff5e00] transition-colors">
-                  Private RAG
-                </Link>
-              </li>
-              <li>
-                <Link href="/solutions" className="hover:text-[#ff5e00] transition-colors">
-                  Custom AI Apps
-                </Link>
-              </li>
-              <li>
-                <Link href="/solutions" className="hover:text-[#ff5e00] transition-colors">
-                  Architecture
-                </Link>
-              </li>
-            </ul>
-          </div>
+          {/* Solutions & Company: Side-by-side on mobile (grid-cols-2), unrolled on desktop (md:contents) */}
+          <div className="grid grid-cols-2 gap-6 sm:gap-8 md:contents">
+            {/* Column 2: Solutions */}
+            <div className="md:col-span-2 lg:col-span-2">
+              <h4 className="text-[14px] sm:text-[15px] font-bold text-neutral-900 mb-3.5 sm:mb-4 tracking-tight">
+                Solutions
+              </h4>
+              <ul className="flex flex-col gap-2.5 sm:gap-3 text-[13px] sm:text-[13.5px] text-neutral-600 font-medium">
+                <li>
+                  <Link href="/solutions" className="hover:text-[#ff5e00] transition-colors">
+                    AI Agents
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/solutions" className="hover:text-[#ff5e00] transition-colors">
+                    LLM Tuning
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/solutions" className="hover:text-[#ff5e00] transition-colors">
+                    Private RAG
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/solutions" className="hover:text-[#ff5e00] transition-colors">
+                    Custom AI Apps
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/solutions" className="hover:text-[#ff5e00] transition-colors">
+                    Architecture
+                  </Link>
+                </li>
+              </ul>
+            </div>
 
-          {/* Column 3: Company */}
-          <div className="md:col-span-3 lg:col-span-3">
-            <h4 className="text-[15px] font-bold text-neutral-900 mb-4 tracking-tight">
-              Company
-            </h4>
-            <ul className="flex flex-col gap-3 text-[13.5px] text-neutral-600 font-medium">
-              <li>
-                <a href="#process" className="hover:text-[#ff5e00] transition-colors">
-                  Our 7-Step Process
-                </a>
-              </li>
-              <li>
-                <a href="#about" className="hover:text-[#ff5e00] transition-colors">
-                  About Webnox
-                </a>
-              </li>
-              <li>
-                <a href="#projects" className="hover:text-[#ff5e00] transition-colors">
-                  Case Studies
-                </a>
-              </li>
-              <li className="flex items-center">
-                <Link href="#careers" className="hover:text-[#ff5e00] transition-colors">
-                  Careers
-                </Link>
-                <span className="ml-2 text-[10px] font-semibold text-[#ff5e00] bg-orange-100/70 border border-orange-200/80 px-2 py-0.5 rounded-full">
-                  We&apos;re hiring
-                </span>
-              </li>
-              <li>
-                <a href="#contact" className="hover:text-[#ff5e00] transition-colors">
-                  Contact Us
-                </a>
-              </li>
-            </ul>
+            {/* Column 3: Company */}
+            <div className="md:col-span-3 lg:col-span-3">
+              <h4 className="text-[14px] sm:text-[15px] font-bold text-neutral-900 mb-3.5 sm:mb-4 tracking-tight">
+                Company
+              </h4>
+              <ul className="flex flex-col gap-2.5 sm:gap-3 text-[13px] sm:text-[13.5px] text-neutral-600 font-medium">
+                <li>
+                  <a href="#process" className="hover:text-[#ff5e00] transition-colors">
+                    Our 7-Step Process
+                  </a>
+                </li>
+                <li>
+                  <Link href="/about" className="hover:text-[#ff5e00] transition-colors">
+                    About Webnox
+                  </Link>
+                </li>
+                <li>
+                  <a href="#projects" className="hover:text-[#ff5e00] transition-colors">
+                    Case Studies
+                  </a>
+                </li>
+                <li className="flex flex-wrap items-center gap-1.5">
+                  <Link href="#careers" className="hover:text-[#ff5e00] transition-colors">
+                    Careers
+                  </Link>
+                  <span className="text-[9.5px] font-bold text-[#ff5e00] bg-orange-100/80 border border-orange-200/90 px-1.5 py-0.5 rounded-full whitespace-nowrap">
+                    We&apos;re hiring
+                  </span>
+                </li>
+                <li>
+                  <a href="#contact" className="hover:text-[#ff5e00] transition-colors">
+                    Contact Us
+                  </a>
+                </li>
+              </ul>
+            </div>
           </div>
 
           {/* Column 4: Newsletter */}
           <div className="md:col-span-3 lg:col-span-3">
-            <h4 className="text-[15px] font-bold text-neutral-900 mb-4 tracking-tight">
+            <h4 className="text-[14px] sm:text-[15px] font-bold text-neutral-900 mb-3 sm:mb-4 tracking-tight">
               Newsletter
             </h4>
             <p className="text-[13px] text-neutral-600 leading-relaxed mb-4">
@@ -236,7 +246,7 @@ export default function Footer() {
                 type="email"
                 placeholder="Email address"
                 required
-                className="w-full bg-transparent text-[13px] text-neutral-800 placeholder-neutral-400 outline-none pr-2"
+                className="min-w-0 flex-1 bg-transparent text-[13px] text-neutral-800 placeholder-neutral-400 outline-none pr-2"
               />
               <button
                 type="submit"
@@ -252,9 +262,9 @@ export default function Footer() {
         <div className="w-full border-t border-neutral-300/60 my-8" />
 
         {/* Bottom Copyright & Legal Links */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-[12px] sm:text-[12.5px] text-neutral-500 font-medium">
-          <p>@ 2026 Webnox Technologies Inc. All rights reserved.</p>
-          <div className="flex flex-wrap items-center gap-6">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left text-[12px] sm:text-[12.5px] text-neutral-500 font-medium">
+          <p>© 2026 Webnox Technologies Inc. All rights reserved.</p>
+          <div className="flex flex-wrap items-center justify-center sm:justify-start gap-4 sm:gap-6">
             <Link href="#privacy" className="hover:text-neutral-900 transition-colors">
               Privacy Policy
             </Link>

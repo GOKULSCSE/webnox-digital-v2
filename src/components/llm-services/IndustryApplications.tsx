@@ -5,174 +5,179 @@ import {
   HeartPulse,
   Landmark,
   ShoppingCart,
-  GraduationCap,
-  Cpu,
+  Factory,
   Truck,
+  Scale,
+  CheckCircle2,
 } from "lucide-react";
-import CardSwap, { Card } from "@/components/ui/CardSwap";
 
 interface IndustrySector {
   id: number;
+  number: string;
   title: string;
-  sector: string;
-  content: string;
-  category: string;
+  sectorTag: string;
+  description: string;
+  topUseCases: string;
   icon: React.ComponentType<{ className?: string }>;
-  image: string;
 }
 
-const LLM_INDUSTRY_SECTORS: IndustrySector[] = [
+const LLM_INDUSTRIES: IndustrySector[] = [
   {
     id: 1,
-    title: "Healthcare",
-    sector: "Sector 01",
-    content:
-      "Support healthcare information management with clinical document summarisation, medical knowledge retrieval, and administrative workflow assistance.",
-    category: "Healthcare",
+    number: "01",
+    title: "1. Healthcare & Life Sciences",
+    sectorTag: "HEALTHCARE",
+    description:
+      "Secure, private AI assistants that search medical records, summarize doctor notes and answer patient inquiries 24/7 keeping sensitive health records strictly confidential and protected from public leaks.",
+    topUseCases:
+      "Clinical note summarization, patient inquiry triage and internal medical document search.",
     icon: HeartPulse,
-    image:
-      "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=900&q=80&auto=format&fit=crop",
   },
   {
     id: 2,
-    title: "Banking and Finance",
-    sector: "Sector 02",
-    content:
-      "Apply LLM technology to financial document analysis, internal knowledge search, report summarisation, and compliance-related workflows with appropriate human oversight.",
-    category: "Banking & Finance",
+    number: "02",
+    title: "2. Banking, Finance & Insurance",
+    sectorTag: "FINTECH & BFSI",
+    description:
+      "Intelligent AI systems that speed up loan reviews, answer policy questions instantly and search complex financial regulations across thousands of documents without human error.",
+    topUseCases:
+      "Policy & claims inquiry automation, financial report analysis and regulatory compliance checks.",
     icon: Landmark,
-    image:
-      "https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=900&q=80&auto=format&fit=crop",
   },
   {
     id: 3,
-    title: "Retail and E-commerce",
-    sector: "Sector 03",
-    content:
-      "Enhance customer experiences with AI shopping assistants, product discovery, product information search, and automated customer support.",
-    category: "Retail & E-commerce",
+    number: "03",
+    title: "3. Retail & E-Commerce",
+    sectorTag: "E-COMMERCE",
+    description:
+      "Smart conversational shopping assistants that guide customers to the right products, resolve order and refund questions instantly and deliver personalized shopping experiences that drive sales.",
+    topUseCases:
+      "24/7 conversational customer care, smart product recommendations, and automated return processing.",
     icon: ShoppingCart,
-    image:
-      "https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=900&q=80&auto=format&fit=crop",
   },
   {
     id: 4,
-    title: "Education and E-learning",
-    sector: "Sector 04",
-    content:
-      "Build AI learning assistants, educational content tools, and knowledge retrieval applications that help learners and educators access relevant information.",
-    category: "Education & EdTech",
-    icon: GraduationCap,
-    image:
-      "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=900&q=80&auto=format&fit=crop",
+    number: "04",
+    title: "4. Manufacturing & Operations",
+    sectorTag: "MANUFACTURING",
+    description:
+      "AI tools that allow technicians to search thick machinery manuals in seconds, monitor inventory levels, and automate vendor follow-up emails to keep factory production moving smoothly.",
+    topUseCases:
+      "Equipment troubleshooting search, procurement follow-ups and inventory status assistants.",
+    icon: Factory,
   },
   {
     id: 5,
-    title: "SaaS and Technology",
-    sector: "Sector 05",
-    content:
-      "Integrate large language models into SaaS products for natural-language search, intelligent assistants, content generation, and AI-powered product features.",
-    category: "SaaS & Technology",
-    icon: Cpu,
-    image:
-      "https://images.unsplash.com/photo-1518770660439-4636190af475?w=900&q=80&auto=format&fit=crop",
+    number: "05",
+    title: "5. Logistics & Supply Chain",
+    sectorTag: "SUPPLY CHAIN",
+    description:
+      "Automated AI workflows that track shipments, answer delivery inquiries in real time, and coordinate supplier communications to eliminate costly operational delays.",
+    topUseCases:
+      "Real-time delivery status bots, vendor communication triage and freight document parsing.",
+    icon: Truck,
   },
   {
     id: 6,
-    title: "Manufacturing and Logistics",
-    sector: "Sector 06",
-    content:
-      "Use LLM applications to search technical documentation, retrieve operational knowledge, summarise reports, and support access to process information.",
-    category: "Manufacturing & Logistics",
-    icon: Truck,
-    image:
-      "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=900&q=80&auto=format&fit=crop",
+    number: "06",
+    title: "6. Legal & Professional Services",
+    sectorTag: "LEGAL",
+    description:
+      "AI assistants that analyze contracts, summarize lengthy legal filings in seconds and search internal case databases accurately saving your team hundreds of manual research hours.",
+    topUseCases:
+      "Contract review assistance, legal document summarization and internal knowledge search.",
+    icon: Scale,
   },
 ];
 
 export default function IndustryApplications() {
   return (
-    <section className="relative w-full py-24 sm:py-32 bg-[#080503] text-white overflow-hidden border-t border-white/[0.08]">
-      {/* Background ambient lighting */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-[#FF7230]/[0.05] blur-[160px] pointer-events-none rounded-full" />
+    <section id="industries" className="relative w-full py-20 sm:py-28 bg-[#100602] text-white overflow-hidden selection:bg-[#ff5e00] selection:text-white">
+      {/* Background Ambience */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse at 50% 30%, #200d04 0%, #110602 60%, #0a0301 100%)",
+        }}
+        aria-hidden="true"
+      />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8">
-        {/* Section Header - Top Center */}
-        <div className="text-center max-w-4xl mx-auto mb-12 sm:mb-16">
+      <div
+        className="absolute left-[-10%] top-[40%] w-[600px] h-[600px] rounded-full pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(circle, rgba(255, 94, 0, 0.12) 0%, transparent 65%)",
+          filter: "blur(90px)",
+        }}
+        aria-hidden="true"
+      />
 
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-[48px] font-bold tracking-tight text-white leading-tight">
-            Industries We Serve with{" "}
-            <span className="text-[#FF7230]">LLM Development</span> Service
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-8">
+        {/* Section Header */}
+        <div className="flex flex-col items-center text-center max-w-3xl mx-auto mb-16 sm:mb-20">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#ff5e00]/15 border border-[#ff5e00]/30 text-[#ff8935] text-xs font-semibold uppercase tracking-wider mb-4">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#ff5e00]" />
+            VERTICAL DEPLOYMENTS
+          </div>
+
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white leading-tight mb-4">
+            Industries We Serve with Custom LLM Solutions in India
           </h2>
+
+          <p className="text-neutral-300 text-sm sm:text-base md:text-lg leading-relaxed font-light">
+            Every industry has unique compliance boundaries, terminology, and operational workflows. We build models fine-tuned to your vertical.
+          </p>
         </div>
 
-        {/* 2-Column: Text on Left, CardSwap on Right */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-          {/* Left Column: Text Content */}
-          <div className="lg:col-span-5 flex flex-col justify-center">
-            <p className="text-neutral-300 text-base sm:text-lg md:text-xl leading-relaxed font-normal">
-              Webnox Digital develops LLM-powered applications that help businesses process information, improve knowledge access, and streamline industry-specific workflows.
-            </p>
-            <p className="text-neutral-400 text-sm sm:text-base leading-relaxed font-light mt-4">
-              From regulated banking and healthcare environments requiring strict audit trails to rapid-scale SaaS platforms, we tailor retrieval, fine-tuning, and deployment to meet compliance and operational targets.
-            </p>
-          </div>
-
-          {/* Right Column: CardSwap 3D Interactive Stack */}
-          <div className="lg:col-span-7 relative w-full h-[540px] sm:h-[600px] lg:h-[640px] rounded-[2rem] sm:rounded-[2.5rem] lg:rounded-[3rem] border border-white/10 bg-[#0d0906]/90 overflow-hidden shadow-2xl flex items-center justify-center p-4">
-            <CardSwap
-              width={440}
-              height={320}
-              cardDistance={48}
-              verticalDistance={55}
-              depth={75}
-              skewAmount={5}
-              visibleCards={4}
-              delay={4000}
-              theme="dark"
+        {/* 6 Industry Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 sm:gap-8">
+          {LLM_INDUSTRIES.map((industry) => (
+            <div
+              key={industry.id}
+              className="group relative bg-gradient-to-b from-white/[0.08] to-white/[0.02] rounded-3xl p-8 border border-white/10 hover:border-[#ff7230]/40 transition-all duration-300 flex flex-col justify-between shadow-[0_16px_40px_rgba(0,0,0,0.2)]"
             >
-              {LLM_INDUSTRY_SECTORS.map((sector) => {
-                const Icon = sector.icon;
-                return (
-                  <Card
-                    key={sector.id}
-                    className="overflow-hidden relative flex flex-col justify-between group rounded-[18px] border border-white/10"
-                  >
-                    {/* Background Image with Cinematic Gradient Overlay */}
-                    <div className="absolute inset-0 z-0">
-                      <img
-                        src={sector.image}
-                        alt={sector.title}
-                        className="w-full h-full object-cover object-center brightness-[0.7] group-hover:scale-105 transition-transform duration-700 pointer-events-none select-none"
-                        draggable={false}
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#0d0906] via-[#0d0906]/65 to-[#0d0906]/35" />
-                    </div>
+              <div>
+                {/* Top Row: Icon + Sector Tag */}
+                <div className="flex items-center justify-between mb-6">
+                  <div className="w-12 h-12 rounded-2xl bg-[#ff7230]/15 border border-[#ff7230]/30 flex items-center justify-center text-[#ff7230] group-hover:bg-[#ff7230] group-hover:text-white transition-all duration-300 shadow-sm">
+                    <industry.icon className="w-5 h-5 text-current transition-colors" />
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-[10px] font-mono uppercase tracking-wider font-semibold text-[#ff8935] bg-[#ff5e00]/15 border border-[#ff5e00]/25 px-2.5 py-1 rounded-md">
+                      {industry.sectorTag}
+                    </span>
+                    <span className="font-mono text-xs font-bold text-neutral-400">
+                      {industry.number}
+                    </span>
+                  </div>
+                </div>
 
-                    {/* Top Bar: Sector Tag + Icon */}
-                    <div className="relative z-10 p-5 flex items-center justify-between">
-                      <span className="px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/15 text-xs font-semibold text-neutral-300">
-                        {sector.sector}
-                      </span>
-                      <div className="w-9 h-9 rounded-full bg-[#FF7230]/20 backdrop-blur-md border border-[#FF7230]/40 flex items-center justify-center text-[#FF7230] shadow-[0_0_12px_rgba(255,114,48,0.35)]">
-                        <Icon className="w-4 h-4" />
-                      </div>
-                    </div>
+                {/* H3 Heading */}
+                <h3 className="text-xl sm:text-2xl font-bold text-white group-hover:text-[#ff8935] transition-colors mb-3 leading-snug">
+                  {industry.title}
+                </h3>
 
-                    {/* Bottom Content: Title + Description */}
-                    <div className="relative z-10 p-5 sm:p-6 bg-gradient-to-t from-black via-black/85 to-transparent">
-                      <h3 className="text-xl sm:text-2xl font-bold text-white mb-2 tracking-tight">
-                        {sector.title}
-                      </h3>
-                      <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed font-normal line-clamp-3">
-                        {sector.content}
-                      </p>
-                    </div>
-                  </Card>
-                );
-              })}
-            </CardSwap>
-          </div>
+                {/* Description */}
+                <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed font-light mb-6">
+                  {industry.description}
+                </p>
+              </div>
+
+              {/* Top Use Cases Card */}
+              <div className="pt-5 border-t border-white/10">
+                <div className="p-4 rounded-2xl bg-white/[0.04] border border-white/10">
+                  <span className="text-[11px] font-mono uppercase tracking-wider text-[#ff8935] font-semibold block mb-1.5 flex items-center gap-1.5">
+                    <CheckCircle2 className="w-3.5 h-3.5" />
+                    Top Use Cases:
+                  </span>
+                  <p className="text-xs text-neutral-200 font-light leading-relaxed">
+                    {industry.topUseCases}
+                  </p>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>
