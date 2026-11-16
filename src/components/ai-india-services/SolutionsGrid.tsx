@@ -27,7 +27,7 @@ const BENTO_AI_ARCHITECTURE: MagicBentoItem[] = [
     title: "1. Application Layer",
     description:
       "Receives user requests through websites, mobile apps, and APIs. Provides low-latency, intuitive conversational and interface components.",
-    visual: <CustomerSupportVisual />,
+    visual: <WorkflowAutomationVisual />,
     colSpan: 2,
     rowSpan: 1,
   },
@@ -49,7 +49,7 @@ const BENTO_AI_ARCHITECTURE: MagicBentoItem[] = [
     title: "3. Data and Knowledge Layer",
     description:
       "Connects RAG, databases, and business documents to provide relevant, grounded information with zero hallucinations and source citations.",
-    visual: <EnterpriseRagVisual />,
+    visual: <ResearchContentVisual />,
     colSpan: 1,
     rowSpan: 1,
   },
@@ -60,7 +60,7 @@ const BENTO_AI_ARCHITECTURE: MagicBentoItem[] = [
     title: "4. Integration Layer",
     description:
       "Connects AI applications with CRM, ERP, and other business systems through bi-directional APIs, webhooks, and secure event buses.",
-    visual: <WorkflowAutomationVisual />,
+    visual: <SaasCopilotVisual />,
     colSpan: 1,
     rowSpan: 1,
   },
@@ -71,7 +71,7 @@ const BENTO_AI_ARCHITECTURE: MagicBentoItem[] = [
     title: "5. Security and Validation Layer",
     description:
       "Applies access controls, business rules, and output checks to help protect confidential data and manage errors with strict zero-leakage standards.",
-    visual: <SaasCopilotVisual />,
+    visual: <CustomerSupportVisual />,
     colSpan: 1,
     rowSpan: 1,
   },
@@ -82,7 +82,7 @@ const BENTO_AI_ARCHITECTURE: MagicBentoItem[] = [
     title: "6. Output and Monitoring Layer",
     description:
       "Delivers results and monitors performance, latency, and token cost to support ongoing evaluation, compliance auditing, and continuous improvement.",
-    visual: <ResearchContentVisual />,
+    visual: <EnterpriseRagVisual />,
     colSpan: 2,
     rowSpan: 1,
   },
@@ -114,11 +114,20 @@ export default function SolutionsGrid() {
           <MagicBento
             items={BENTO_AI_ARCHITECTURE}
             columns={3}
-            gap={24}
-            radius={28}
+            rowHeight={340}
+            gap={22}
+            radius={24}
             theme="light"
-            glowColor="rgba(255, 94, 0, 0.16)"
-            particleCount={16}
+            glowColor="#ff5e00"
+            enableBorderGlow={true}
+            enableSpotlight={true}
+            spotlightRadius={340}
+            enableStars={false}
+            enableTilt={true}
+            enableMagnetism={true}
+            clickEffect={true}
+            textAutoHide={false}
+            intro={true}
           />
         </div>
       </div>

@@ -61,7 +61,7 @@ export default function OverviewMetrics() {
           {/* 2:2 Grid with Center Divider */}
           <div className="grid grid-cols-1 md:grid-cols-2 relative z-10">
             {/* Left Column: 01 (Up) & 03 (Down) */}
-            <div className="flex flex-col gap-8 sm:gap-12 md:pr-10 lg:pr-16 md:border-r border-white/30 pb-6 md:pb-0 border-b md:border-b-0 border-white/30">
+            <div className="flex flex-col gap-6 sm:gap-12 md:pr-10 lg:pr-16 md:border-r border-white/30 pb-6 md:pb-0 border-b md:border-b-0 border-white/30">
               {/* 01: Rapid AI Product Delivery (Up) */}
               <div className="flex flex-col">
                 <span className="text-xs uppercase tracking-widest font-semibold text-white/80 mb-3">
@@ -116,7 +116,7 @@ export default function OverviewMetrics() {
             </div>
 
             {/* Right Column: 02 (Up) & 04 (Down) */}
-            <div className="flex flex-col gap-10 sm:gap-12 md:pl-12 lg:pl-16 pt-8 md:pt-0">
+            <div className="flex flex-col gap-6 sm:gap-12 md:pl-12 lg:pl-16 pt-6 md:pt-0">
               {/* 02: Software Engineering Experience (Up) */}
               <div className="flex flex-col">
                 <span className="text-xs uppercase tracking-widest font-semibold text-white/80 mb-3">

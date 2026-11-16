@@ -54,7 +54,7 @@ const ARCHITECTURE_TIERS: ArchitectureTier[] = [
 
 export default function ArchitectureGuide() {
   return (
-    <section id="architecture-guide" className="relative w-full py-20 sm:py-28 bg-[#fdfaf6] text-neutral-900 border-t border-neutral-200/70 overflow-hidden">
+    <section id="architecture-guide" className="relative w-full py-16 sm:py-24 lg:py-28 bg-[#fdfaf6] text-neutral-900 border-t border-neutral-200/70 overflow-hidden">
       {/* Background Accent Glow */}
       <div
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[750px] h-[400px] bg-[#ff5e00]/[0.035] rounded-full blur-[100px] pointer-events-none"
@@ -128,9 +128,9 @@ export default function ArchitectureGuide() {
         </div>
 
         {/* Mobile / Tablet Card View (below lg) */}
-        <div className="lg:hidden flex flex-col gap-6">
+        <div className="lg:hidden flex flex-col gap-5 sm:gap-6">
           {ARCHITECTURE_TIERS.map((tier) => (
-            <div key={tier.id} className="bg-white rounded-3xl p-6 sm:p-7 border border-neutral-200 shadow-sm flex flex-col gap-4">
+            <div key={tier.id} className="bg-white rounded-3xl p-5 sm:p-7 border border-neutral-200 shadow-sm flex flex-col gap-4">
               <div className="flex items-center justify-between pb-3 border-b border-neutral-100">
                 <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#ff7230] bg-[#ff7230]/10 px-2 py-0.5 rounded">
                   {tier.tag}

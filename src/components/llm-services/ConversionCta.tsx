@@ -123,6 +123,7 @@ export default function ConversionCta() {
                 width={140}
                 height={28}
                 className="h-6 sm:h-7 w-auto object-contain"
+                style={{ width: "auto" }}
                 priority
               />
             </div>
@@ -190,7 +191,7 @@ export default function ConversionCta() {
                   WebkitClipPath: "polygon(-10% -10%, 110% -10%, 110% 71.5%, -10% 98.4%)",
                   transformOrigin: "50% 84.95%",
                 }}
-                className="relative z-10 w-full h-auto object-contain scale-145 sm:scale-155 lg:scale-170 xl:scale-185 2xl:scale-195 transform transition-transform duration-500 hover:brightness-110"
+                className="relative z-10 w-full h-auto object-contain scale-110 sm:scale-145 lg:scale-170 xl:scale-185 2xl:scale-195 transform transition-transform duration-500 hover:brightness-110"
                 priority
               />
             </div>
