@@ -45,6 +45,7 @@ export default function Footer() {
                 width={140}
                 height={32}
                 className="h-8 w-auto object-contain"
+                style={{ width: "auto" }}
                 priority
               />
             </Link>
@@ -162,28 +163,28 @@ export default function Footer() {
               </h4>
               <ul className="flex flex-col gap-2.5 sm:gap-3 text-[13px] sm:text-[13.5px] text-neutral-600 font-medium">
                 <li>
-                  <Link href="/solutions" className="hover:text-[#ff5e00] transition-colors">
-                    AI Agents
+                  <Link href="/ai-application-development-services" className="hover:text-[#ff5e00] transition-colors">
+                    AI Applications
                   </Link>
                 </li>
                 <li>
-                  <Link href="/solutions" className="hover:text-[#ff5e00] transition-colors">
-                    LLM Tuning
+                  <Link href="/ai-chatbot-development-services-india" className="hover:text-[#ff5e00] transition-colors">
+                    AI Chatbot India
                   </Link>
                 </li>
                 <li>
-                  <Link href="/solutions" className="hover:text-[#ff5e00] transition-colors">
-                    Private RAG
+                  <Link href="/ai-consulting-services" className="hover:text-[#ff5e00] transition-colors">
+                    AI Consulting
                   </Link>
                 </li>
                 <li>
-                  <Link href="/solutions" className="hover:text-[#ff5e00] transition-colors">
-                    Custom AI Apps
+                  <Link href="/llm-development-services" className="hover:text-[#ff5e00] transition-colors">
+                    LLM Development
                   </Link>
                 </li>
                 <li>
-                  <Link href="/solutions" className="hover:text-[#ff5e00] transition-colors">
-                    Architecture
+                  <Link href="/ai-development-company-india" className="hover:text-[#ff5e00] transition-colors">
+                    AI Company India
                   </Link>
                 </li>
               </ul>
@@ -219,9 +220,9 @@ export default function Footer() {
                   </span>
                 </li>
                 <li>
-                  <a href="#contact" className="hover:text-[#ff5e00] transition-colors">
+                  <Link href="/contact" className="hover:text-[#ff5e00] transition-colors">
                     Contact Us
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>

@@ -1,21 +1,19 @@
 "use client";
 
 import React from "react";
-import { Cpu, Network, Database, Terminal, CheckCircle2 } from "lucide-react";
+import FolderFloat from "@/components/ui/FolderFloat";
+import MobileTechStack, { MobileTechCategory } from "@/components/ui/MobileTechStack";
 
-interface TechCategory {
+interface TechCategory extends MobileTechCategory {
   title: string;
-  categoryTag: string;
   technologies: string[];
-  icon: React.ComponentType<{ className?: string }>;
-  description: string;
+  shortTitle?: string;
 }
 
 const TECH_CATEGORIES: TechCategory[] = [
   {
     title: "Foundation Models & Open Weights",
-    categoryTag: "CORE INTELLIGENCE",
-    description: "Multi-modal foundation engines and private sovereign open weights tuned for enterprise workloads.",
+    shortTitle: "Foundation Models",
     technologies: [
       "Meta Llama 3.3",
       "Mistral Large",
@@ -25,12 +23,10 @@ const TECH_CATEGORIES: TechCategory[] = [
       "Claude 3.5 Sonnet",
       "GPT-4o",
     ],
-    icon: Cpu,
   },
   {
     title: "Model Orchestration & Agent Frameworks",
-    categoryTag: "AGENTIC WORKFLOWS",
-    description: "Multi-agent runtime environments, structured outputs, and dynamic prompt optimization compilers.",
+    shortTitle: "Agentic Workflows",
     technologies: [
       "LangChain",
       "LlamaIndex",
@@ -40,12 +36,10 @@ const TECH_CATEGORIES: TechCategory[] = [
       "Semantic Kernel",
       "Outlines",
     ],
-    icon: Network,
   },
   {
     title: "Vector Databases & Search Engines",
-    categoryTag: "KNOWLEDGE RETRIEVAL",
-    description: "Ultra-fast semantic search, hybrid sparse-dense indexing, and sub-millisecond similarity recall.",
+    shortTitle: "Vector & Search",
     technologies: [
       "Pinecone",
       "Milvus",
@@ -55,12 +49,10 @@ const TECH_CATEGORIES: TechCategory[] = [
       "Elasticsearch",
       "ChromaDB",
     ],
-    icon: Database,
   },
   {
     title: "Inference Optimization & LLMOps",
-    categoryTag: "PRODUCTION SERVING",
-    description: "High-throughput model serving engines, continuous RAG benchmarking, and containerized orchestration.",
+    shortTitle: "Serving & LLMOps",
     technologies: [
       "vLLM",
       "TensorRT-LLM",
@@ -71,79 +63,68 @@ const TECH_CATEGORIES: TechCategory[] = [
       "Docker",
       "Kubernetes",
     ],
-    icon: Terminal,
   },
 ];
 
 export default function TechStack() {
   return (
-    <section id="tech-stack" className="relative w-full py-20 sm:py-28 bg-[#100602] text-white overflow-hidden selection:bg-[#ff5e00] selection:text-white">
-      {/* Background Ambience */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(ellipse at 50% 30%, #200d04 0%, #110602 60%, #0a0301 100%)",
-        }}
-        aria-hidden="true"
-      />
-
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-8">
+    <section
+      id="tech-stack"
+      className="relative w-full py-14 sm:py-20 lg:py-28 bg-[#fcf8f2] border-t border-b border-neutral-200/80 overflow-hidden"
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-8">
         {/* Section Header */}
-        <div className="flex flex-col items-center text-center max-w-3xl mx-auto mb-16 sm:mb-20">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#ff5e00]/15 border border-[#ff5e00]/30 text-[#ff8935] text-xs font-semibold uppercase tracking-wider mb-4">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#ff5e00]" />
-            PRODUCTION TOOLING
+        <div className="max-w-4xl mb-8 sm:mb-14 lg:mb-18">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-orange-100/80 border border-orange-200 text-[#ff5e00] text-xs font-semibold uppercase tracking-wider mb-3 sm:mb-4">
+            Interactive Stack Explorer
           </div>
-
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white leading-tight mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-[#12141a]">
             Technology Behind Your Custom AI System
           </h2>
-
-          <p className="text-neutral-300 text-sm sm:text-base md:text-lg leading-relaxed font-light">
-            We use proven, production-grade frameworks and open-source models that avoid single-vendor lock-in and keep operational costs strictly controlled.
+          <p className="mt-3 sm:mt-4 text-neutral-600 text-xs sm:text-sm md:text-base lg:text-lg leading-relaxed">
+            We use proven, production-grade frameworks and open-source models that avoid single-vendor lock-in and keep operational costs strictly controlled. Hover or tap any category folder to reveal the underlying technologies.
           </p>
         </div>
 
-        {/* 4 Categories Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
+        {/* Mobile Tech Stack Explorer (visible below md) */}
+        <MobileTechStack
+          categories={TECH_CATEGORIES}
+          sectionTitle="Technology Behind Your Custom AI System"
+        />
+
+        {/* Desktop 4 Technology Categories Grid with FolderFloat (visible on md and up) */}
+        <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-x-8 lg:gap-x-10 gap-y-24 sm:gap-y-32 pt-16 sm:pt-24 pb-8 sm:pb-12">
           {TECH_CATEGORIES.map((cat, idx) => (
             <div
               key={idx}
-              className="bg-gradient-to-b from-white/[0.08] to-white/[0.02] rounded-3xl p-8 sm:p-10 border border-white/10 hover:border-[#ff7230]/40 transition-all duration-300 flex flex-col justify-between shadow-[0_16px_40px_rgba(0,0,0,0.2)] group"
+              className="relative flex flex-col items-center justify-end group z-10 hover:z-30 transition-[z-index]"
             >
-              <div>
-                {/* Header */}
-                <div className="flex items-center justify-between mb-6">
-                  <div className="w-12 h-12 rounded-2xl bg-[#ff7230]/15 border border-[#ff7230]/30 flex items-center justify-center text-[#ff7230] group-hover:bg-[#ff7230] group-hover:text-white transition-all duration-300 shadow-sm">
-                    <cat.icon className="w-5 h-5 text-current transition-colors" />
-                  </div>
-                  <span className="text-[10px] font-mono uppercase tracking-wider font-semibold text-[#ff8935] bg-[#ff5e00]/15 border border-[#ff5e00]/25 px-2.5 py-1 rounded-md">
-                    {cat.categoryTag}
-                  </span>
-                </div>
-
-                <h3 className="text-xl sm:text-2xl font-bold text-white group-hover:text-[#ff8935] transition-colors mb-2 leading-snug">
-                  {cat.title}
-                </h3>
-
-                <p className="text-xs sm:text-sm text-neutral-300 font-light leading-relaxed mb-6">
-                  {cat.description}
-                </p>
+              <div className="w-full flex justify-center">
+                <FolderFloat
+                  items={cat.technologies}
+                  label={cat.shortTitle || cat.title}
+                  trigger="hover"
+                  physics={true}
+                  drift={0.6}
+                  folderColor="#D34B16"
+                  frontColor="#FF6A2F"
+                  paperColor="#FFFFFF"
+                  itemColor="#FFFFFF"
+                  itemTextColor="#12141A"
+                  labelColor="#FFFFFF"
+                  width={240}
+                  height={160}
+                  radius={18}
+                  spread={140}
+                  lift={32}
+                  openDuration={480}
+                  stagger={40}
+                  className="mx-auto"
+                />
               </div>
-
-              {/* Technologies Chips */}
-              <div className="pt-6 border-t border-white/10 flex flex-wrap gap-2">
-                {cat.technologies.map((tech, tIdx) => (
-                  <span
-                    key={tIdx}
-                    className="inline-flex items-center gap-1.5 text-xs font-mono font-medium px-3 py-1.5 rounded-lg bg-white/[0.05] hover:bg-white/[0.1] text-neutral-200 border border-white/10 transition-colors"
-                  >
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#ff7230]" />
-                    {tech}
-                  </span>
-                ))}
-              </div>
+              <h3 className="mt-5 text-center text-sm font-bold text-[#12141a] leading-snug max-w-[240px]">
+                {cat.title}
+              </h3>
             </div>
           ))}
         </div>

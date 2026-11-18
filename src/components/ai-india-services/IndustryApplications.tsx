@@ -97,17 +97,17 @@ export default function IndustryApplications() {
       const w = window.innerWidth;
       if (w < 420) {
         setCardDims({
-          width: Math.max(280, w - 48),
-          height: 250,
-          cardDistance: 26,
-          verticalDistance: 36,
+          width: Math.max(270, w - 40),
+          height: 295,
+          cardDistance: 22,
+          verticalDistance: 32,
         });
       } else if (w < 640) {
         setCardDims({
-          width: Math.min(360, w - 64),
-          height: 275,
-          cardDistance: 34,
-          verticalDistance: 44,
+          width: Math.min(360, w - 56),
+          height: 305,
+          cardDistance: 32,
+          verticalDistance: 40,
         });
       } else if (w < 1024) {
         setCardDims({
@@ -201,7 +201,7 @@ export default function IndustryApplications() {
           </div>
 
           {/* Right Column: CardSwap 3D Interactive Stack */}
-          <div className="lg:col-span-7 relative w-full h-[460px] sm:h-[540px] lg:h-[640px] flex items-center justify-center">
+          <div className="lg:col-span-7 relative w-full h-[380px] sm:h-[480px] lg:h-[600px] flex items-center justify-center">
             <CardSwap
               width={cardDims.width}
               height={cardDims.height}

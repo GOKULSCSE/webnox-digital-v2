@@ -8,7 +8,7 @@ export default function Navbar() {
       logoSrc="/images/Webnox logo White.png"
       leftLinks={[
         { label: "Ai", href: "/ai-application-development-services" },
-        { label: "Resources", href: "#resources" },
+        { label: "Process", href: "#process" },
         { label: "Contact", href: "/contact" },
       ]}
       rightLinks={[

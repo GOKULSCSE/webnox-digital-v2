@@ -142,13 +142,13 @@ export default function Hero() {
           </div>
 
           {/* Right Column: Floating 3D Isometric Architecture Visual */}
-          <div className="lg:col-span-6 relative flex items-center justify-center lg:justify-end mt-6 lg:mt-0">
+          <div className="lg:col-span-6 relative flex items-center justify-center lg:justify-end mt-2 lg:mt-0">
             <div
               className="absolute inset-0 bg-gradient-to-r from-[#FF7230]/25 via-[#FF6A2F]/20 to-transparent blur-[100px] rounded-full pointer-events-none"
               aria-hidden="true"
             />
 
-            <div className="relative w-full max-w-[340px] sm:max-w-[480px] lg:max-w-[620px] xl:max-w-[660px] flex items-center justify-center">
+            <div className="relative w-full max-w-[260px] sm:max-w-[440px] lg:max-w-[620px] xl:max-w-[660px] flex items-center justify-center">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/images/cybersecurity_technology_assurance.svg?v=transparent"
@@ -162,14 +162,14 @@ export default function Hero() {
         </div>
 
         {/* Global Industry Recognition & Awards Bar */}
-        <div className="w-full mt-12 sm:mt-16 lg:mt-20 pt-8 sm:pt-10 border-t border-white/10">
-          <div className="grid grid-cols-3 sm:grid-cols-6 gap-2.5 sm:gap-5 md:gap-8 items-center justify-items-center max-w-6xl mx-auto px-1 sm:px-4">
+        <div className="w-full mt-8 sm:mt-16 lg:mt-20 pt-6 sm:pt-10 border-t border-white/10">
+          <div className="grid grid-cols-3 sm:grid-cols-6 gap-2.5 sm:gap-5 md:gap-8 items-center justify-items-center max-w-6xl mx-auto px-0 sm:px-4">
             {AWARD_BADGES.map((badge, index) => (
               <div
                 key={index}
-                className="w-full flex items-center justify-center p-1 sm:p-2 rounded-xl transition-all duration-300 group"
+                className="w-full flex items-center justify-center py-2 px-2 sm:p-2 rounded-xl bg-white/[0.04] sm:bg-transparent border border-white/10 sm:border-transparent transition-all duration-300 group"
               >
-                <div className="relative w-24 sm:w-32 md:w-36 lg:w-40 h-16 sm:h-22 md:h-24 lg:h-28 flex items-center justify-center">
+                <div className="relative w-20 sm:w-32 md:w-36 lg:w-40 h-14 sm:h-20 md:h-24 lg:h-28 flex items-center justify-center">
                   <Image
                     src={badge.src}
                     alt={badge.alt}

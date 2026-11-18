@@ -128,8 +128,8 @@ export default function WhyChooseUs() {
 
         {/* 3-Column Showcase Layout matching other pages */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 items-stretch">
-          {/* Left Column: Selector List (5 items) */}
-          <div className="lg:col-span-3 flex flex-col gap-2.5 sm:gap-3 justify-between">
+          {/* Left Column: Selector List (2-col on mobile, 3-col on sm, 1-col on lg) */}
+          <div className="lg:col-span-3 grid grid-cols-2 sm:grid-cols-3 lg:flex lg:flex-col gap-2.5 sm:gap-3 justify-between">
             {CAPABILITIES.map((item, index) => {
               const isActive = index === activeIndex;
 

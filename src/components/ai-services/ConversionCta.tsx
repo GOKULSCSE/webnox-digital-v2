@@ -122,6 +122,7 @@ export default function ConversionCta() {
                 width={140}
                 height={28}
                 className="h-6 sm:h-7 w-auto object-contain"
+                style={{ width: "auto" }}
                 priority
               />
             </div>

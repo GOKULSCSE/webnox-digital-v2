@@ -120,17 +120,17 @@ export default function SolutionsGrid() {
         <MagicBento
           items={BENTO_LLM_SOLUTIONS}
           columns={3}
-          rowHeight={310}
+          rowHeight={340}
           gap={22}
           radius={24}
           theme="light"
           glowColor="#ff5e00"
           enableBorderGlow={true}
           enableSpotlight={true}
-          spotlightRadius={320}
+          spotlightRadius={340}
           enableStars={false}
-          enableTilt={false}
-          enableMagnetism={false}
+          enableTilt={true}
+          enableMagnetism={true}
           clickEffect={true}
           textAutoHide={false}
           intro={true}
