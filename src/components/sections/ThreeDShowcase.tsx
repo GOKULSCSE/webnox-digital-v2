@@ -136,6 +136,7 @@ export default function ThreeDShowcase() {
 
         {/* Top Fade-in Text */}
         <div ref={topTextRef} className="absolute top-16 left-0 right-0 z-20 flex flex-col items-center text-center opacity-0 pointer-events-none">
+          <h1 className="sr-only">AI Native Company Building AI Solutions — Webnox Digital</h1>
           <h2 className="text-white text-5xl md:text-6xl font-semibold tracking-tight mb-4" style={{ textShadow: '0 2px 10px rgba(0,0,0,0.1)' }}>Who We Are</h2>
           <p className="text-white text-lg font-medium max-w-2xl text-center leading-relaxed opacity-90">
             15+ years of software mastery engineered with next-gen AI<br/>

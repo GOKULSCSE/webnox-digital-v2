@@ -63,11 +63,11 @@ export default function FaqAccordion() {
       className="relative w-full py-16 sm:py-24 lg:py-32 bg-[#fcf8f2] border-t border-neutral-200/80 overflow-hidden"
     >
       <div className="max-w-4xl mx-auto px-4 sm:px-8">
-        {/* Section Header (H5 as requested) */}
+        {/* Section Header */}
         <div className="text-center mb-10 sm:mb-16">
-          <h5 className="text-2xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#12141a]">
+          <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#12141a]">
             Frequently Asked Questions About AI Consulting Services
-          </h5>
+          </h2>
         </div>
 
         {/* 8 Accordion Items (All Questions in H6 as requested) */}
@@ -89,9 +89,9 @@ export default function FaqAccordion() {
                   className="w-full text-left p-4 sm:p-7 flex items-center justify-between gap-3 sm:gap-4 cursor-pointer"
                   aria-expanded={isOpen}
                 >
-                  <h6 className="text-sm sm:text-base md:text-lg font-bold text-neutral-900 tracking-tight">
+                  <h3 className="text-sm sm:text-base md:text-lg font-bold text-neutral-900 tracking-tight">
                     {faq.question}
-                  </h6>
+                  </h3>
                   <span
                     className={`flex-shrink-0 w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center transition-colors ${
                       isOpen

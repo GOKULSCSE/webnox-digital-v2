@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 import { Geist, Geist_Mono, Russo_One } from "next/font/google";
+import { SITE_URL, SITE_NAME, DEFAULT_OG_IMAGE } from "@/lib/seo";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -20,9 +21,31 @@ const russoOne = Russo_One({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: "AI Native Company | Webnox Digital",
   description:
-    "Webnox Digital is an AI native company building AI agents, generative AI and enterprise AI software for 2,570+ clients in 20+ countries.",
+    "Webnox Digital is an AI native company building AI agents, generative AI and enterprise AI software for 2,570+ clients across 20+ countries.",
+  robots: {
+    index: true,
+    follow: true,
+  },
+  openGraph: {
+    siteName: SITE_NAME,
+    locale: "en_IN",
+    type: "website",
+    images: [
+      {
+        url: DEFAULT_OG_IMAGE,
+        width: 1200,
+        height: 800,
+        alt: "Webnox Digital — AI Native Engineering Company",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: [DEFAULT_OG_IMAGE],
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

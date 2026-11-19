@@ -264,9 +264,9 @@ export default function ArchitectureTechStack() {
             <span className="text-xs uppercase tracking-widest font-semibold text-[#ff5e00]">
               Technology Layer &amp; Tools
             </span>
-            <h4 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-[#12141a] mt-2">
+            <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-[#12141a] mt-2">
               AI Technologies and Frameworks We Use
-            </h4>
+            </h3>
             <p className="mt-2 text-neutral-600 text-sm sm:text-base">
               A robust, enterprise-tested ecosystem spanning foundation models, agent frameworks, vector retrieval, and secure cloud platforms.
             </p>
@@ -292,10 +292,9 @@ export default function ArchitectureTechStack() {
                       </span>
                     </div>
 
-                    {/* H5 Heading */}
-                    <h5 className="text-base sm:text-lg font-bold text-[#12141a] tracking-tight leading-snug">
+                    <h4 className="text-base sm:text-lg font-bold text-[#12141a] tracking-tight leading-snug">
                       {cat.title}
-                    </h5>
+                    </h4>
 
                     {/* Tools Chips */}
                     <div className="flex flex-wrap gap-1.5 sm:gap-2 mt-4">

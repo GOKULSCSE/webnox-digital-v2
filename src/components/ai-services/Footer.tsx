@@ -158,9 +158,9 @@ export default function Footer() {
           <div className="grid grid-cols-2 gap-6 sm:gap-8 md:contents">
             {/* Column 2: Solutions */}
             <div className="md:col-span-2 lg:col-span-2">
-              <h4 className="text-[14px] sm:text-[15px] font-bold text-neutral-900 mb-3.5 sm:mb-4 tracking-tight">
+              <p className="text-[14px] sm:text-[15px] font-bold text-neutral-900 mb-3.5 sm:mb-4 tracking-tight">
                 Solutions
-              </h4>
+              </p>
               <ul className="flex flex-col gap-2.5 sm:gap-3 text-[13px] sm:text-[13.5px] text-neutral-600 font-medium">
                 <li>
                   <Link href="/ai-application-development-services" className="hover:text-[#ff5e00] transition-colors">
@@ -192,9 +192,9 @@ export default function Footer() {
 
             {/* Column 3: Company */}
             <div className="md:col-span-3 lg:col-span-3">
-              <h4 className="text-[14px] sm:text-[15px] font-bold text-neutral-900 mb-3.5 sm:mb-4 tracking-tight">
+              <p className="text-[14px] sm:text-[15px] font-bold text-neutral-900 mb-3.5 sm:mb-4 tracking-tight">
                 Company
-              </h4>
+              </p>
               <ul className="flex flex-col gap-2.5 sm:gap-3 text-[13px] sm:text-[13.5px] text-neutral-600 font-medium">
                 <li>
                   <a href="#process" className="hover:text-[#ff5e00] transition-colors">
@@ -230,9 +230,9 @@ export default function Footer() {
 
           {/* Column 4: Newsletter */}
           <div className="md:col-span-3 lg:col-span-3">
-            <h4 className="text-[14px] sm:text-[15px] font-bold text-neutral-900 mb-3 sm:mb-4 tracking-tight">
+            <p className="text-[14px] sm:text-[15px] font-bold text-neutral-900 mb-3 sm:mb-4 tracking-tight">
               Newsletter
-            </h4>
+            </p>
             <p className="text-[13px] text-neutral-600 leading-relaxed mb-4">
               Get weekly insights on applied AI engineering, architecture patterns, and industry
               trends.

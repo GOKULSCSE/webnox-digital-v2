@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { buildPageMetadata, getServicePageSchema } from "@/lib/seo";
+import JsonLd from "@/components/seo/JsonLd";
 import SmoothScroll from "@/components/SmoothScroll";
 import Navbar from "@/components/ai-india-services/Navbar";
 import Hero from "@/components/ai-india-services/Hero";
@@ -15,26 +17,28 @@ import IndustryApplications from "@/components/ai-india-services/IndustryApplica
 import FaqAccordion from "@/components/ai-india-services/FaqAccordion";
 import Footer from "@/components/ai-services/Footer";
 
-export const metadata: Metadata = {
-  title: "AI Development Company in India | Webnox Digital",
-  description:
-    "Webnox Digital is an AI development company in India. We combine 15+ years of software engineering to build custom AI software, AI agents and GenAI solutions.",
-  alternates: {
-    canonical: "https://webnox.in/ai-development-company-india/",
-  },
-  openGraph: {
-    title: "AI Development Company in India | Webnox Digital",
-    description:
-      "Webnox Digital is an AI development company in India. We combine 15+ years of software engineering to build custom AI software, AI agents and GenAI solutions.",
-    url: "https://webnox.in/ai-development-company-india/",
-    siteName: "Webnox Digital",
-    type: "website",
-  },
-};
+const PAGE_TITLE = "AI Development Company in India | Webnox Digital";
+const PAGE_DESC =
+  "Webnox Digital is an AI development company in India. We combine 15+ years of software engineering to build custom AI software, AI agents and GenAI solutions.";
+
+export const metadata: Metadata = buildPageMetadata({
+  title: PAGE_TITLE,
+  description: PAGE_DESC,
+  path: "/ai-development-company-india/",
+});
 
 export default function AiDevelopmentCompanyIndiaPage() {
   return (
     <SmoothScroll>
+      <JsonLd
+        data={getServicePageSchema({
+          name: PAGE_TITLE,
+          description: PAGE_DESC,
+          path: "/ai-development-company-india/",
+          serviceType: "AI Development Services in India",
+          areaServed: "IN",
+        })}
+      />
       <main className="w-full min-h-screen bg-[#fdfaf6] text-neutral-900 selection:bg-[#ff5e00] selection:text-white">
         {/* Navigation Bar */}
         <Navbar />

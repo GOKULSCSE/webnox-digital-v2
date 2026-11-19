@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { buildPageMetadata, getServicePageSchema } from "@/lib/seo";
+import JsonLd from "@/components/seo/JsonLd";
 import SmoothScroll from "@/components/SmoothScroll";
 import Navbar from "@/components/generative-ai-services/Navbar";
 import Hero from "@/components/generative-ai-services/Hero";
@@ -16,23 +18,27 @@ import IndustryApplications from "@/components/generative-ai-services/IndustryAp
 import FaqAccordion from "@/components/generative-ai-services/FaqAccordion";
 import Footer from "@/components/generative-ai-services/Footer";
 
-export const metadata: Metadata = {
-  title: "Generative AI Development Services | Webnox Digital",
-  description:
-    "Webnox Digital is a Generative AI Development Company delivering custom Generative AI solutions, LLM applications, RAG, AI agents, copilots, multimodal AI and enterprise Generative AI integration.",
-  openGraph: {
-    title: "Generative AI Development Services | Webnox Digital",
-    description:
-      "Webnox Digital is a Generative AI Development Company delivering custom Generative AI solutions, LLM applications, RAG, AI agents, copilots, multimodal AI and enterprise Generative AI integration.",
-    url: "https://webnox.in/generative-ai-development-services",
-    siteName: "Webnox Digital",
-    type: "website",
-  },
-};
+const PAGE_TITLE = "Generative AI Development Services | Webnox Digital";
+const PAGE_DESC =
+  "Build production Generative AI solutions with custom LLMs, private RAG architectures, AI agents, enterprise copilots, and multimodal workflows on your cloud.";
+
+export const metadata: Metadata = buildPageMetadata({
+  title: PAGE_TITLE,
+  description: PAGE_DESC,
+  path: "/generative-ai-development-services/",
+});
 
 export default function GenerativeAiDevelopmentServicesPage() {
   return (
     <SmoothScroll>
+      <JsonLd
+        data={getServicePageSchema({
+          name: PAGE_TITLE,
+          description: PAGE_DESC,
+          path: "/generative-ai-development-services/",
+          serviceType: "Generative AI Development Services",
+        })}
+      />
       <main className="w-full min-h-screen bg-[#fdfaf6] text-neutral-900 selection:bg-[#ff5e00] selection:text-white">
         {/* Navigation Bar */}
         <Navbar />

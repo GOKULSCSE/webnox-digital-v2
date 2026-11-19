@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { buildPageMetadata, getServicePageSchema } from "@/lib/seo";
+import JsonLd from "@/components/seo/JsonLd";
 import SmoothScroll from "@/components/SmoothScroll";
 import Navbar from "@/components/ai-services/Navbar";
 import Hero from "@/components/llm-services/Hero";
@@ -16,23 +18,28 @@ import TechStack from "@/components/llm-services/TechStack";
 import FaqAccordion from "@/components/llm-services/FaqAccordion";
 import Footer from "@/components/ai-services/Footer";
 
-export const metadata: Metadata = {
-  title: "LLM Development Services in India for High Uptime Enterprise Systems | Webnox Digital",
-  description:
-    "We design, fine-tune, and deploy custom large language models that automate complex enterprise operations. From self-hosted open-source models to hybrid RAG pipelines with 2-week working sandbox delivery.",
-  openGraph: {
-    title: "LLM Development Services in India for High Uptime Enterprise Systems | Webnox Digital",
-    description:
-      "Enterprise LLM development company in India. We design, fine-tune, and deploy custom large language models for high uptime business operations.",
-    url: "https://webnox.in/llm-development-services",
-    siteName: "Webnox Digital",
-    type: "website",
-  },
-};
+const PAGE_TITLE = "LLM Development Services in India | Webnox Digital";
+const PAGE_DESC =
+  "Design, fine-tune, and deploy private large language models and hybrid RAG systems with 2-week sandbox delivery and full source ownership for enterprise ops.";
+
+export const metadata: Metadata = buildPageMetadata({
+  title: PAGE_TITLE,
+  description: PAGE_DESC,
+  path: "/llm-development-services/",
+});
 
 export default function LlmDevelopmentServicesPage() {
   return (
     <SmoothScroll>
+      <JsonLd
+        data={getServicePageSchema({
+          name: PAGE_TITLE,
+          description: PAGE_DESC,
+          path: "/llm-development-services/",
+          serviceType: "LLM Development Services in India",
+          areaServed: "IN",
+        })}
+      />
       <main className="w-full min-h-screen bg-[#fdfaf6] text-neutral-900 selection:bg-[#ff5e00] selection:text-white">
         {/* Navigation Bar */}
         <Navbar />

@@ -95,9 +95,9 @@ export default function TechStack() {
       <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12">
         {/* Section Header */}
         <div className="max-w-4xl mb-8 sm:mb-14">
-          <h4 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-[#12141a] leading-tight">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-[#12141a] leading-tight">
             Technologies We Use for Generative AI Development
-          </h4>
+          </h2>
           <p className="mt-4 text-neutral-600 text-sm sm:text-base md:text-lg leading-relaxed">
             We select technologies based on the application architecture, model requirements, integration needs, security and deployment environment.
           </p>
@@ -124,9 +124,9 @@ export default function TechStack() {
                   physics={true}
                 />
               </div>
-              <h5 className="mt-4 text-sm font-bold text-[#12141a] text-center">
+              <h3 className="mt-4 text-sm font-bold text-[#12141a] text-center">
                 {cat.shortTitle}
-              </h5>
+              </h3>
               <p className="mt-1 text-center text-xs sm:text-sm text-neutral-600 max-w-xs">
                 {cat.body}
               </p>

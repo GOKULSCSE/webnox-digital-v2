@@ -331,7 +331,7 @@ const HeroScreenContent = ({ pxHeight }: { pxHeight: number }) => {
         </div>
 
         {/* Hero Title */}
-        <h1
+        <div
           className="hero-title"
           aria-label="AI Native Company Building AI Solutions"
         >
@@ -379,7 +379,7 @@ const HeroScreenContent = ({ pxHeight }: { pxHeight: number }) => {
             {renderRgmChars('AI')}{' '}
             {renderRgmChars('Solutions')}
           </div>
-        </h1>
+        </div>
 
         {/* Hero Subtitle Description */}
         <p className="hero-description">

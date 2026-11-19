@@ -148,9 +148,9 @@ export default function Footer() {
 
           {/* Column 2: AI Services */}
           <div className="md:col-span-2 lg:col-span-2">
-            <h4 className="text-[15px] font-bold text-neutral-900 mb-4 tracking-tight">
+            <p className="text-[15px] font-bold text-neutral-900 mb-4 tracking-tight">
               AI Services
-            </h4>
+            </p>
             <ul className="flex flex-col gap-3 text-[13.5px] text-neutral-600 font-medium">
               <li>
                 <a href="#services" className="hover:text-[#ff5e00] transition-colors">
@@ -182,9 +182,9 @@ export default function Footer() {
 
           {/* Column 3: Company */}
           <div className="md:col-span-3 lg:col-span-3">
-            <h4 className="text-[15px] font-bold text-neutral-900 mb-4 tracking-tight">
+            <p className="text-[15px] font-bold text-neutral-900 mb-4 tracking-tight">
               Company
-            </h4>
+            </p>
             <ul className="flex flex-col gap-3 text-[13.5px] text-neutral-600 font-medium">
               <li>
                 <a href="#process" className="hover:text-[#ff5e00] transition-colors">
@@ -216,9 +216,9 @@ export default function Footer() {
 
           {/* Column 4: Newsletter */}
           <div className="md:col-span-3 lg:col-span-3">
-            <h4 className="text-[15px] font-bold text-neutral-900 mb-4 tracking-tight">
+            <p className="text-[15px] font-bold text-neutral-900 mb-4 tracking-tight">
               Newsletter
-            </h4>
+            </p>
             <p className="text-[13px] text-neutral-600 leading-relaxed mb-4">
               Get weekly insights on applied AI engineering, architecture patterns, and enterprise AI trends.
             </p>

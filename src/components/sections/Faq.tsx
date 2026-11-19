@@ -125,10 +125,10 @@ export default function Faq() {
                   aria-expanded={isOpen}
                   className="w-full flex items-center justify-between p-5 sm:p-6 md:p-7 text-left transition-colors duration-200 group cursor-pointer"
                 >
-                  {/* Question rendered in h6 as explicitly instructed */}
-                  <h6 className="text-[#1a1410] font-semibold text-base sm:text-lg md:text-[18.5px] leading-snug pr-4 m-0 group-hover:text-[#ff5e00] transition-colors">
+                  {/* Question rendered in h3 for valid heading hierarchy */}
+                  <h3 className="text-[#1a1410] font-semibold text-base sm:text-lg md:text-[18.5px] leading-snug pr-4 m-0 group-hover:text-[#ff5e00] transition-colors">
                     {item.id}. {item.question}
-                  </h6>
+                  </h3>
                   <span className="shrink-0 text-[#1a1410] transition-transform duration-300 ease-out">
                     <svg
                       className={`w-5 h-5 sm:w-5.5 sm:h-5.5 transition-transform duration-300 ${

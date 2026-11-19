@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { buildPageMetadata, getStandardPageSchema } from "@/lib/seo";
+import JsonLd from "@/components/seo/JsonLd";
 import SmoothScroll from "@/components/SmoothScroll";
 import Navbar from "@/components/ai-services/Navbar";
 import Hero from "@/components/about/Hero";
@@ -10,23 +12,28 @@ import HowWeWork from "@/components/about/HowWeWork";
 import ConversionCta from "@/components/about/ConversionCta";
 import Footer from "@/components/ai-services/Footer";
 
-export const metadata: Metadata = {
-  title: "About Us | Webnox Digital — The AI-Native Engineering Company",
-  description:
-    "Backed by 15+ years of software experience, Webnox Digital builds custom software and smart AI tools. Re-engineered for the AI Era with production-grade AI engineering and connected performance marketing.",
-  openGraph: {
-    title: "About Us | Webnox Digital — The AI-Native Engineering Company",
-    description:
-      "15 Years of Software Heritage. Re-engineered for the AI Era. Explore how Webnox Digital operates on AI-first workflows.",
-    url: "https://webnox.in/about",
-    siteName: "Webnox Digital",
-    type: "website",
-  },
-};
+const PAGE_TITLE = "About Webnox Digital | AI-Native Engineering Company";
+const PAGE_DESC =
+  "Backed by 15+ years of software engineering and 2,570+ client projects, Webnox Digital builds custom AI systems and connected digital products worldwide.";
+
+export const metadata: Metadata = buildPageMetadata({
+  title: PAGE_TITLE,
+  description: PAGE_DESC,
+  path: "/about/",
+});
 
 export default function AboutPage() {
   return (
     <SmoothScroll>
+      <JsonLd
+        data={getStandardPageSchema({
+          pageType: "AboutPage",
+          name: PAGE_TITLE,
+          breadcrumbName: "About Us",
+          description: PAGE_DESC,
+          path: "/about/",
+        })}
+      />
       <main className="w-full min-h-screen bg-[#fdfaf6] text-neutral-900 selection:bg-[#ff5e00] selection:text-white">
         {/* Navigation Bar */}
         <Navbar />

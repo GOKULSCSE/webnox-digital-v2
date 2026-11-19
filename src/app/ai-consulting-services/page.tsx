@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { buildPageMetadata, getServicePageSchema } from "@/lib/seo";
+import JsonLd from "@/components/seo/JsonLd";
 import SmoothScroll from "@/components/SmoothScroll";
 import Navbar from "@/components/ai-services/Navbar";
 import Hero from "@/components/ai-consulting-services/Hero";
@@ -15,26 +17,27 @@ import IndustryApplications from "@/components/ai-consulting-services/IndustryAp
 import FaqAccordion from "@/components/ai-consulting-services/FaqAccordion";
 import Footer from "@/components/ai-services/Footer";
 
-export const metadata: Metadata = {
-  title: "AI Consulting Services | Webnox Digital",
-  description:
-    "Webnox Digital is a leading AI consulting company offering enterprise AI strategy consulting, generative AI consulting services and machine learning solutions.",
-  alternates: {
-    canonical: "https://webnox.in/ai-consulting-services/",
-  },
-  openGraph: {
-    title: "AI Consulting Services | Webnox Digital",
-    description:
-      "Webnox Digital is a leading AI consulting company offering enterprise AI strategy consulting, generative AI consulting services and machine learning solutions.",
-    url: "https://webnox.in/ai-consulting-services/",
-    siteName: "Webnox Digital",
-    type: "website",
-  },
-};
+const PAGE_TITLE = "AI Consulting Services | Webnox Digital";
+const PAGE_DESC =
+  "Webnox Digital is a leading AI consulting company offering enterprise AI strategy consulting, generative AI consulting services and machine learning solutions.";
+
+export const metadata: Metadata = buildPageMetadata({
+  title: PAGE_TITLE,
+  description: PAGE_DESC,
+  path: "/ai-consulting-services/",
+});
 
 export default function AiConsultingServicesPage() {
   return (
     <SmoothScroll>
+      <JsonLd
+        data={getServicePageSchema({
+          name: PAGE_TITLE,
+          description: PAGE_DESC,
+          path: "/ai-consulting-services/",
+          serviceType: "AI Consulting Services",
+        })}
+      />
       <main className="w-full min-h-screen bg-[#fdfaf6] text-neutral-900 selection:bg-[#ff5e00] selection:text-white">
         {/* Navigation Bar */}
         <Navbar />

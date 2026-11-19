@@ -128,10 +128,9 @@ export default function TechStack() {
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-orange-100/80 border border-orange-200 text-[#ff5e00] text-xs font-semibold uppercase tracking-wider mb-3 sm:mb-4">
             Interactive Stack Explorer
           </div>
-          {/* H4 Heading as requested */}
-          <h4 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-[#12141a]">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-[#12141a]">
             AI Technologies and Frameworks We Use
-          </h4>
+          </h2>
           <p className="mt-3 sm:mt-4 text-neutral-600 text-xs sm:text-sm md:text-base lg:text-lg leading-relaxed">
             We select technologies based on your application requirements, data infrastructure,
             integration needs and deployment environment. Hover or tap any category folder to reveal
@@ -177,10 +176,9 @@ export default function TechStack() {
                 />
               </div>
 
-              {/* H5 Category Title below the folder */}
-              <h5 className="mt-6 text-sm sm:text-base font-bold text-neutral-800 text-center tracking-tight">
+              <h3 className="mt-6 text-sm sm:text-base font-bold text-neutral-800 text-center tracking-tight">
                 {cat.title}
-              </h5>
+              </h3>
             </div>
           ))}
         </div>

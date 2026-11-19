@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { buildPageMetadata, getHomeSchema } from "@/lib/seo";
+import JsonLd from "@/components/seo/JsonLd";
 import SmoothScroll from "@/components/SmoothScroll";
 import Navbar from "@/components/ai-services/Navbar";
 import ThreeDShowcase from "@/components/sections/ThreeDShowcase";
@@ -19,15 +21,17 @@ import LetsGrowTogether from "@/components/sections/LetsGrowTogether";
 import Faq from "@/components/sections/Faq";
 import Footer from "@/components/ai-services/Footer";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "AI Native Company | Webnox Digital",
   description:
-    "Webnox Digital is an AI native company building AI agents, generative AI and enterprise AI software for 2,570+ clients in 20+ countries.",
-};
+    "Webnox Digital is an AI native company building AI agents, generative AI and enterprise AI software for 2,570+ clients across 20+ countries.",
+  path: "/",
+});
 
 export default function Home() {
   return (
     <SmoothScroll>
+      <JsonLd data={getHomeSchema()} />
       <main className="w-full bg-[#fdfaf6]">
         {/* Navigation Bar */}
         <Navbar />

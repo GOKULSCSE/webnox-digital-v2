@@ -91,9 +91,9 @@ export default function FaqAccordion() {
                   aria-expanded={isOpen}
                 >
                   {/* H5 for Questions as specified in prompt */}
-                  <h5 className="text-base sm:text-lg font-bold text-[#12141a] tracking-tight leading-snug">
+                  <h3 className="text-base sm:text-lg font-bold text-[#12141a] tracking-tight leading-snug">
                     {faq.question}
-                  </h5>
+                  </h3>
                   <div
                     className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-transform duration-300 ${
                       isOpen

@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { buildPageMetadata, getServicePageSchema } from "@/lib/seo";
+import JsonLd from "@/components/seo/JsonLd";
 import SmoothScroll from "@/components/SmoothScroll";
 import Navbar from "@/components/ai-services/Navbar";
 import Hero from "@/components/ai-services/Hero";
@@ -15,23 +17,27 @@ import IndustryApplications from "@/components/ai-services/IndustryApplications"
 import FaqAccordion from "@/components/ai-services/FaqAccordion";
 import Footer from "@/components/ai-services/Footer";
 
-export const metadata: Metadata = {
-  title: "AI Application Development Services | Webnox Digital",
-  description:
-    "Webnox Digital is an AI application development company offering AI application development services for custom AI apps, AI agents, generative AI solutions and business automation.",
-  openGraph: {
-    title: "AI Application Development Services | Webnox Digital",
-    description:
-      "Webnox Digital is an AI application development company offering AI application development services for custom AI apps, AI agents, generative AI solutions and business automation.",
-    url: "https://webnox.in/ai-application-development-services",
-    siteName: "Webnox Digital",
-    type: "website",
-  },
-};
+const PAGE_TITLE = "AI Application Development Services | Webnox Digital";
+const PAGE_DESC =
+  "Partner with our engineering team for custom AI application development, autonomous AI agents, generative AI products, and enterprise workflow automation.";
+
+export const metadata: Metadata = buildPageMetadata({
+  title: PAGE_TITLE,
+  description: PAGE_DESC,
+  path: "/ai-application-development-services/",
+});
 
 export default function AiApplicationDevelopmentServicesPage() {
   return (
     <SmoothScroll>
+      <JsonLd
+        data={getServicePageSchema({
+          name: PAGE_TITLE,
+          description: PAGE_DESC,
+          path: "/ai-application-development-services/",
+          serviceType: "AI Application Development Services",
+        })}
+      />
       <main className="w-full min-h-screen bg-[#fdfaf6] text-neutral-900 selection:bg-[#ff5e00] selection:text-white">
         {/* Navigation Bar */}
         <Navbar />

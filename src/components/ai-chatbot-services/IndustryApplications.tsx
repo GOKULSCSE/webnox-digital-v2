@@ -190,10 +190,10 @@ export default function IndustryApplications() {
             </span>
           </div>
 
-          <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-[48px] font-bold tracking-tight text-white leading-tight">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[48px] font-bold tracking-tight text-white leading-tight">
             Industries We Serve with{" "}
             <span className="text-[#FF7230]">Custom AI Chatbots</span> in India
-          </h3>
+          </h2>
         </div>
 
         {/* 2-Column: Text on Left, CardSwap on Right */}
@@ -249,16 +249,16 @@ export default function IndustryApplications() {
 
                     {/* Bottom Content: Title + Description + Top Use Cases */}
                     <div className="relative z-10 p-4 sm:p-6 bg-gradient-to-t from-black/90 via-black/60 to-transparent pt-6 sm:pt-10">
-                      <h4 className="text-lg sm:text-xl font-bold text-white mb-1.5 tracking-tight drop-shadow-md leading-snug">
+                      <h3 className="text-lg sm:text-xl font-bold text-white mb-1.5 tracking-tight drop-shadow-md leading-snug">
                         {sector.title}
-                      </h4>
+                      </h3>
                       <p className="text-xs sm:text-sm text-neutral-200 leading-relaxed font-normal line-clamp-2 drop-shadow-sm mb-2.5">
                         {sector.content}
                       </p>
                       <div className="pt-2 border-t border-white/15">
-                        <h5 className="text-[10px] font-mono uppercase tracking-wider text-[#ff8935] font-semibold">
+                        <h4 className="text-[10px] font-mono uppercase tracking-wider text-[#ff8935] font-semibold">
                           Top Use Cases:
-                        </h5>
+                        </h4>
                         <p className="text-[11px] sm:text-xs text-neutral-200 leading-snug mt-0.5 line-clamp-1">
                           {sector.topUseCases}
                         </p>

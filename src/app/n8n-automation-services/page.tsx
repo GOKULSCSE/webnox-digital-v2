@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { buildPageMetadata, getServicePageSchema } from "@/lib/seo";
+import JsonLd from "@/components/seo/JsonLd";
 import SmoothScroll from "@/components/SmoothScroll";
 import Navbar from "@/components/n8n-automation-services/Navbar";
 import Hero from "@/components/n8n-automation-services/Hero";
@@ -12,26 +14,27 @@ import IndustriesSection from "@/components/n8n-automation-services/IndustriesSe
 import FaqAccordion from "@/components/n8n-automation-services/FaqAccordion";
 import Footer from "@/components/ai-services/Footer";
 
-export const metadata: Metadata = {
-  title: "n8n Automation Services | Webnox Digital",
-  description:
-    "Automate business workflows with Webnox Digital n8n automation services. Build AI agents, connect APIs, integrate business systems and deploy secure n8n workflows.",
-  alternates: {
-    canonical: "/n8n-automation-services/",
-  },
-  openGraph: {
-    title: "n8n Automation Services | Webnox Digital",
-    description:
-      "Automate business workflows with Webnox Digital n8n automation services. Build AI agents, connect APIs, integrate business systems and deploy secure n8n workflows.",
-    url: "/n8n-automation-services/",
-    siteName: "Webnox Digital",
-    type: "website",
-  },
-};
+const PAGE_TITLE = "n8n Automation Services | Webnox Digital";
+const PAGE_DESC =
+  "Automate business workflows with custom n8n engineering. Connect APIs, CRMs, ERPs, and AI agents through secure, self-hosted or cloud n8n architectures.";
+
+export const metadata: Metadata = buildPageMetadata({
+  title: PAGE_TITLE,
+  description: PAGE_DESC,
+  path: "/n8n-automation-services/",
+});
 
 export default function N8nAutomationServicesPage() {
   return (
     <SmoothScroll>
+      <JsonLd
+        data={getServicePageSchema({
+          name: PAGE_TITLE,
+          description: PAGE_DESC,
+          path: "/n8n-automation-services/",
+          serviceType: "n8n Workflow Automation Services",
+        })}
+      />
       <main className="w-full min-h-screen bg-[#fdfaf6] text-neutral-900 selection:bg-[#ff5e00] selection:text-white">
         <Navbar />
         <Hero />

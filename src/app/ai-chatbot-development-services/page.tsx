@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { buildPageMetadata, getServicePageSchema } from "@/lib/seo";
+import JsonLd from "@/components/seo/JsonLd";
 import SmoothScroll from "@/components/SmoothScroll";
 import Navbar from "@/components/ai-chatbot-development-services/Navbar";
 import Hero from "@/components/ai-chatbot-development-services/Hero";
@@ -13,26 +15,27 @@ import IndustriesSection from "@/components/ai-chatbot-development-services/Indu
 import FaqAccordion from "@/components/ai-chatbot-development-services/FaqAccordion";
 import Footer from "@/components/ai-services/Footer";
 
-export const metadata: Metadata = {
-  title: "AI Chatbot Development Services | Webnox Digital",
-  description:
-    "Explore AI chatbot development services for custom AI chatbots, LLM integration, Generative AI, RAG and business process automation.",
-  alternates: {
-    canonical: "/ai-chatbot-development-services/",
-  },
-  openGraph: {
-    title: "AI Chatbot Development Services | Webnox Digital",
-    description:
-      "Explore AI chatbot development services for custom AI chatbots, LLM integration, Generative AI, RAG and business process automation.",
-    url: "/ai-chatbot-development-services/",
-    siteName: "Webnox Digital",
-    type: "website",
-  },
-};
+const PAGE_TITLE = "AI Chatbot Development Services | Webnox Digital";
+const PAGE_DESC =
+  "Explore AI chatbot development services for custom AI chatbots, LLM integration, Generative AI, RAG and business process automation.";
+
+export const metadata: Metadata = buildPageMetadata({
+  title: PAGE_TITLE,
+  description: PAGE_DESC,
+  path: "/ai-chatbot-development-services/",
+});
 
 export default function AiChatbotDevelopmentServicesPage() {
   return (
     <SmoothScroll>
+      <JsonLd
+        data={getServicePageSchema({
+          name: PAGE_TITLE,
+          description: PAGE_DESC,
+          path: "/ai-chatbot-development-services/",
+          serviceType: "AI Chatbot Development Services",
+        })}
+      />
       <main className="w-full min-h-screen bg-[#fdfaf6] text-neutral-900 selection:bg-[#ff5e00] selection:text-white">
         <Navbar />
         <Hero />

@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { buildPageMetadata, getServicePageSchema } from "@/lib/seo";
+import JsonLd from "@/components/seo/JsonLd";
 import SmoothScroll from "@/components/SmoothScroll";
 import Navbar from "@/components/ai-integration-services-india/Navbar";
 import Hero from "@/components/ai-integration-services-india/Hero";
@@ -12,26 +14,28 @@ import ConversionCta from "@/components/ai-integration-services-india/Conversion
 import FaqAccordion from "@/components/ai-integration-services-india/FaqAccordion";
 import Footer from "@/components/ai-services/Footer";
 
-export const metadata: Metadata = {
-  title: "AI Integration Services in India | Webnox Digital",
-  description:
-    "Webnox Digital offers AI integration services in India, uniting LLM integration services, RAG and AI agents with ERP & CRM. Book a scoping call today.",
-  alternates: {
-    canonical: "/ai-integration-services-india/",
-  },
-  openGraph: {
-    title: "AI Integration Services in India | Webnox Digital",
-    description:
-      "Webnox Digital offers AI integration services in India, uniting LLM integration services, RAG and AI agents with ERP & CRM. Book a scoping call today.",
-    url: "/ai-integration-services-india/",
-    siteName: "Webnox Digital",
-    type: "website",
-  },
-};
+const PAGE_TITLE = "AI Integration Services in India | Webnox Digital";
+const PAGE_DESC =
+  "Webnox Digital offers AI integration services in India, uniting LLM integration services, RAG and AI agents with ERP & CRM. Book a scoping call today.";
+
+export const metadata: Metadata = buildPageMetadata({
+  title: PAGE_TITLE,
+  description: PAGE_DESC,
+  path: "/ai-integration-services-india/",
+});
 
 export default function AiIntegrationServicesIndiaPage() {
   return (
     <SmoothScroll>
+      <JsonLd
+        data={getServicePageSchema({
+          name: PAGE_TITLE,
+          description: PAGE_DESC,
+          path: "/ai-integration-services-india/",
+          serviceType: "AI Integration Services in India",
+          areaServed: "IN",
+        })}
+      />
       <main className="w-full min-h-screen bg-[#fdfaf6] text-neutral-900 selection:bg-[#ff5e00] selection:text-white">
         <Navbar />
         <Hero />

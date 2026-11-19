@@ -79,9 +79,9 @@ export default function FaqAccordion() {
                   className="w-full text-left p-4 sm:p-7 flex items-center justify-between gap-3 sm:gap-4 cursor-pointer"
                   aria-expanded={isOpen}
                 >
-                  <h5 className="text-sm sm:text-base md:text-lg font-bold text-neutral-900 tracking-tight">
+                  <h3 className="text-sm sm:text-base md:text-lg font-bold text-neutral-900 tracking-tight">
                     {faq.question}
-                  </h5>
+                  </h3>
                   <span
                     className={`flex-shrink-0 w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center transition-colors ${
                       isOpen
