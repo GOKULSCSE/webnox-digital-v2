@@ -10,6 +10,8 @@ const INDEXABLE_ROUTES = [
   { path: "/generative-ai-development-company-india/", priority: 0.9, changeFrequency: "weekly" as const },
   { path: "/llm-development-services/", priority: 0.9, changeFrequency: "weekly" as const },
   { path: "/rag-development-services/", priority: 0.9, changeFrequency: "weekly" as const },
+  { path: "/rag-development-services-india/", priority: 0.9, changeFrequency: "weekly" as const },
+  { path: "/ai-copilot-development-services/", priority: 0.9, changeFrequency: "weekly" as const },
   { path: "/ai-chatbot-development-services/", priority: 0.9, changeFrequency: "weekly" as const },
   { path: "/ai-chatbot-development-services-india/", priority: 0.9, changeFrequency: "weekly" as const },
   { path: "/ai-integration-services/", priority: 0.9, changeFrequency: "weekly" as const },
