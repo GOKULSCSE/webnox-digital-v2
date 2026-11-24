@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
 import {
   Cpu,
   Database,
@@ -73,7 +72,6 @@ const CAPABILITIES: CapabilityItem[] = [
 
 export default function WhyChooseUs() {
   const [activeIndex, setActiveIndex] = useState(0);
-  const activeItem = CAPABILITIES[activeIndex];
 
   return (
     <section
@@ -145,7 +143,7 @@ export default function WhyChooseUs() {
 
           {/* Middle Column: The Brown Card */}
           <div
-            className="lg:col-span-5 relative rounded-[22px] sm:rounded-[34px] border border-white/10 p-5 sm:p-8 md:p-10 flex flex-col justify-between overflow-hidden shadow-2xl min-h-[360px] sm:min-h-[420px] lg:min-h-[460px]"
+            className="lg:col-span-5 relative rounded-[22px] sm:rounded-[34px] border border-white/10 p-5 sm:p-8 md:p-10 grid overflow-hidden shadow-2xl min-h-[360px] sm:min-h-[420px] lg:min-h-[460px]"
             style={{
               background:
                 "linear-gradient(152.18deg, #60290B -16.91%, #140B06 99.34%)",
@@ -164,38 +162,43 @@ export default function WhyChooseUs() {
               <polyline points="7 7 17 7 17 17" />
             </svg>
 
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeItem.id}
-                initial={{ opacity: 0, y: 14 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -14 }}
-                transition={{ duration: 0.3, ease: "easeOut" }}
-                className="relative z-10 flex flex-col h-full justify-between"
-              >
-                <div>
-                  <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white tracking-tight leading-snug mb-4 sm:mb-6">
-                    {activeItem.heading}
-                  </h3>
+            {CAPABILITIES.map((item, index) => {
+              const isActive = index === activeIndex;
+              return (
+                <div
+                  key={item.id}
+                  aria-hidden={!isActive}
+                  className={`col-start-1 row-start-1 relative z-10 flex flex-col h-full justify-between transition-all duration-300 ${
+                    isActive
+                      ? "opacity-100 translate-y-0"
+                      : "opacity-0 translate-y-2 pointer-events-none"
+                  }`}
+                >
+                  <div>
+                    <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white tracking-tight leading-snug mb-4 sm:mb-6">
+                      {item.heading}
+                    </h3>
 
-                  <p className="text-sm sm:text-base text-neutral-200/90 leading-relaxed font-normal">
-                    {activeItem.description}
-                  </p>
-                </div>
+                    <p className="text-sm sm:text-base text-neutral-200/90 leading-relaxed font-normal">
+                      {item.description}
+                    </p>
+                  </div>
 
-                <div className="pt-6 border-t border-white/10 mt-6">
-                  <a
-                    href="#contact"
-                    className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-[#FF8935] hover:text-white transition-colors"
-                  >
-                    <span>
-                      Discuss Your AI Integration Requirements with Webnox Digital
-                    </span>
-                    <ArrowRight className="w-4 h-4 shrink-0" />
-                  </a>
+                  <div className="pt-6 border-t border-white/10 mt-6">
+                    <a
+                      href="#contact"
+                      tabIndex={isActive ? 0 : -1}
+                      className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-[#FF8935] hover:text-white transition-colors"
+                    >
+                      <span>
+                        Discuss Your AI Integration Requirements with Webnox Digital
+                      </span>
+                      <ArrowRight className="w-4 h-4 shrink-0" />
+                    </a>
+                  </div>
                 </div>
-              </motion.div>
-            </AnimatePresence>
+              );
+            })}
           </div>
 
           {/* Right Column: AI Crystal Sphere Orb Card */}
@@ -208,16 +211,6 @@ export default function WhyChooseUs() {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
           </div>
-        </div>
-
-        {/* Semantic SEO Block so all 6 H3s & descriptions remain present in DOM */}
-        <div className="sr-only">
-          {CAPABILITIES.map((cap) => (
-            <div key={cap.id}>
-              <h3>{cap.heading}</h3>
-              <p>{cap.description}</p>
-            </div>
-          ))}
         </div>
 
         {/* Bottom CTA Button */}

@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
 import {
   Calendar,
   Cpu,
@@ -109,7 +108,6 @@ const CAPABILITIES: CapabilityItem[] = [
 
 export default function WhyChooseUs() {
   const [activeIndex, setActiveIndex] = useState(0);
-  const activeItem = CAPABILITIES[activeIndex];
 
   return (
     <section className="relative w-full py-16 sm:py-24 lg:py-32 bg-[#080503] text-white overflow-hidden">
@@ -180,7 +178,7 @@ export default function WhyChooseUs() {
 
           {/* Middle Column: The Brown Card */}
           <div
-            className="lg:col-span-6 relative rounded-[22px] sm:rounded-[34px] border border-white/10 p-5 sm:p-8 md:p-10 flex flex-col justify-between overflow-hidden shadow-2xl min-h-[300px] sm:min-h-[380px] lg:min-h-[460px]"
+            className="lg:col-span-6 relative rounded-[22px] sm:rounded-[34px] border border-white/10 p-5 sm:p-8 md:p-10 grid overflow-hidden shadow-2xl min-h-[300px] sm:min-h-[380px] lg:min-h-[460px]"
             style={{
               background:
                 "linear-gradient(152.18deg, #60290B -16.91%, #140B06 99.34%)",
@@ -198,69 +196,75 @@ export default function WhyChooseUs() {
               <polyline points="7 7 17 7 17 17" />
             </svg>
 
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeItem.id}
-                initial={{ opacity: 0, y: 14 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -14 }}
-                transition={{ duration: 0.3, ease: "easeOut" }}
-                className="relative z-10 flex flex-col h-full justify-between"
-              >
-                <div>
-                  <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white tracking-tight leading-snug mb-3 sm:mb-4">
-                    {activeItem.heading}
-                  </h3>
+            {CAPABILITIES.map((item, index) => {
+              const isActive = index === activeIndex;
+              const paintId = `paint0_linear_consulting_why_${item.id}`;
+              const clipId = `clip0_consulting_why_${item.id}`;
+              return (
+                <div
+                  key={item.id}
+                  aria-hidden={!isActive}
+                  className={`col-start-1 row-start-1 relative z-10 flex flex-col h-full justify-between transition-all duration-300 ${
+                    isActive
+                      ? "opacity-100 translate-y-0"
+                      : "opacity-0 translate-y-2 pointer-events-none"
+                  }`}
+                >
+                  <div>
+                    <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white tracking-tight leading-snug mb-3 sm:mb-4">
+                      {item.heading}
+                    </h3>
 
-                  <p className="text-xs sm:text-sm text-neutral-200/90 leading-relaxed font-normal mb-6 sm:mb-8">
-                    {activeItem.description}
-                  </p>
-                </div>
+                    <p className="text-xs sm:text-sm text-neutral-200/90 leading-relaxed font-normal mb-6 sm:mb-8">
+                      {item.description}
+                    </p>
+                  </div>
 
-                <div className="flex flex-col gap-3 pt-4 border-t border-white/10">
-                  {activeItem.bullets.map((bullet, bIdx) => (
-                    <div key={bIdx} className="flex items-start gap-2.5 sm:gap-3">
-                      <svg
-                        className="w-3.5 h-3.5 flex-shrink-0 mt-0.5 sm:mt-1"
-                        viewBox="0 0 15 15"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                        aria-hidden="true"
-                      >
-                        <g clipPath="url(#clip0_consulting_why)">
-                          <path
-                            d="M15 15H8L1 8H8L15 15ZM15 8H8L1 1H8L15 8Z"
-                            fill="url(#paint0_linear_consulting_why)"
-                          />
-                        </g>
-                        <defs>
-                          <linearGradient
-                            id="paint0_linear_consulting_why"
-                            x1="1"
-                            y1="11.64"
-                            x2="13.3208"
-                            y2="13.1127"
-                            gradientUnits="userSpaceOnUse"
-                          >
-                            <stop stopColor="#FF7230" />
-                            <stop offset="0.258735" stopColor="#FF6A2F" />
-                            <stop offset="0.439271" stopColor="#FF7631" />
-                            <stop offset="0.697859" stopColor="#FF8935" />
-                            <stop offset="0.996331" stopColor="#FF532B" />
-                          </linearGradient>
-                          <clipPath id="clip0_consulting_why">
-                            <rect width="15" height="15" fill="white" />
-                          </clipPath>
-                        </defs>
-                      </svg>
-                      <span className="text-xs sm:text-[13px] text-neutral-300 font-medium leading-relaxed">
-                        {bullet}
-                      </span>
-                    </div>
-                  ))}
+                  <div className="flex flex-col gap-3 pt-4 border-t border-white/10">
+                    {item.bullets.map((bullet, bIdx) => (
+                      <div key={bIdx} className="flex items-start gap-2.5 sm:gap-3">
+                        <svg
+                          className="w-3.5 h-3.5 flex-shrink-0 mt-0.5 sm:mt-1"
+                          viewBox="0 0 15 15"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                          aria-hidden="true"
+                        >
+                          <g clipPath={`url(#${clipId})`}>
+                            <path
+                              d="M15 15H8L1 8H8L15 15ZM15 8H8L1 1H8L15 8Z"
+                              fill={`url(#${paintId})`}
+                            />
+                          </g>
+                          <defs>
+                            <linearGradient
+                              id={paintId}
+                              x1="1"
+                              y1="11.64"
+                              x2="13.3208"
+                              y2="13.1127"
+                              gradientUnits="userSpaceOnUse"
+                            >
+                              <stop stopColor="#FF7230" />
+                              <stop offset="0.258735" stopColor="#FF6A2F" />
+                              <stop offset="0.439271" stopColor="#FF7631" />
+                              <stop offset="0.697859" stopColor="#FF8935" />
+                              <stop offset="0.996331" stopColor="#FF532B" />
+                            </linearGradient>
+                            <clipPath id={clipId}>
+                              <rect width="15" height="15" fill="white" />
+                            </clipPath>
+                          </defs>
+                        </svg>
+                        <span className="text-xs sm:text-[13px] text-neutral-300 font-medium leading-relaxed">
+                          {bullet}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </motion.div>
-            </AnimatePresence>
+              );
+            })}
           </div>
 
           {/* Right Column: AI Crystal Sphere Orb Card */}

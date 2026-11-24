@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
 import {
   Users,
   Code2,
@@ -64,7 +63,6 @@ const CAPABILITIES: CapabilityItem[] = [
 
 export default function WhyChooseUs() {
   const [activeIndex, setActiveIndex] = useState(0);
-  const activeItem = CAPABILITIES[activeIndex];
 
   return (
     <section
@@ -136,7 +134,7 @@ export default function WhyChooseUs() {
 
           {/* Right Column: Active Detail Card */}
           <div className="lg:col-span-7 flex">
-            <div className="w-full rounded-[28px] bg-[#120b07] border border-white/10 p-7 sm:p-10 flex flex-col justify-between relative overflow-hidden">
+            <div className="w-full rounded-[28px] bg-[#120b07] border border-white/10 p-7 sm:p-10 grid relative overflow-hidden">
               <div
                 className="absolute -top-24 -right-24 w-64 h-64 rounded-full pointer-events-none"
                 style={{
@@ -147,41 +145,46 @@ export default function WhyChooseUs() {
                 aria-hidden="true"
               />
 
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={activeItem.id}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.25 }}
-                  className="relative z-10 flex flex-col justify-between h-full"
-                >
-                  <div>
-                    <div className="w-12 h-12 rounded-2xl bg-[#FF7230]/15 border border-[#FF7230]/30 flex items-center justify-center text-[#FF7230] mb-6">
-                      {activeItem.icon}
+              {CAPABILITIES.map((item, index) => {
+                const isActive = index === activeIndex;
+                return (
+                  <div
+                    key={item.id}
+                    aria-hidden={!isActive}
+                    className={`col-start-1 row-start-1 relative z-10 flex flex-col justify-between h-full transition-all duration-250 ${
+                      isActive
+                        ? "opacity-100 translate-y-0"
+                        : "opacity-0 translate-y-2 pointer-events-none"
+                    }`}
+                  >
+                    <div>
+                      <div className="w-12 h-12 rounded-2xl bg-[#FF7230]/15 border border-[#FF7230]/30 flex items-center justify-center text-[#FF7230] mb-6">
+                        {item.icon}
+                      </div>
+                      <h3 className="text-2xl sm:text-3xl font-bold text-white tracking-tight mb-4">
+                        {item.heading}
+                      </h3>
+                      <p className="text-neutral-300 text-base sm:text-lg leading-relaxed font-light">
+                        {item.description}
+                      </p>
                     </div>
-                    <h3 className="text-2xl sm:text-3xl font-bold text-white tracking-tight mb-4">
-                      {activeItem.heading}
-                    </h3>
-                    <p className="text-neutral-300 text-base sm:text-lg leading-relaxed font-light">
-                      {activeItem.description}
-                    </p>
-                  </div>
 
-                  <div className="mt-10 pt-6 border-t border-white/10 flex flex-wrap items-center justify-between gap-4">
-                    <span className="text-xs uppercase tracking-widest text-neutral-400 font-semibold">
-                      0{activeIndex + 1} / 0{CAPABILITIES.length}
-                    </span>
-                    <a
-                      href="#contact"
-                      className="inline-flex items-center gap-2 text-sm font-semibold text-[#FF7230] hover:text-[#FF8935] transition-colors"
-                    >
-                      <span>Book an Architecture Scoping Call</span>
-                      <ArrowRight className="w-4 h-4" />
-                    </a>
+                    <div className="mt-10 pt-6 border-t border-white/10 flex flex-wrap items-center justify-between gap-4">
+                      <span className="text-xs uppercase tracking-widest text-neutral-400 font-semibold">
+                        0{index + 1} / 0{CAPABILITIES.length}
+                      </span>
+                      <a
+                        href="#contact"
+                        tabIndex={isActive ? 0 : -1}
+                        className="inline-flex items-center gap-2 text-sm font-semibold text-[#FF7230] hover:text-[#FF8935] transition-colors"
+                      >
+                        <span>Book an Architecture Scoping Call</span>
+                        <ArrowRight className="w-4 h-4" />
+                      </a>
+                    </div>
                   </div>
-                </motion.div>
-              </AnimatePresence>
+                );
+              })}
             </div>
           </div>
         </div>

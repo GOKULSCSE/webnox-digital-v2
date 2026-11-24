@@ -236,54 +236,70 @@ export default function WhyChooseUs() {
 
           {/* Middle Column: Feature Details Card */}
           <div className="lg:col-span-5 xl:col-span-5 flex">
-            <div className="w-full relative overflow-hidden rounded-[26px] bg-gradient-to-b from-[#22160d]/95 via-[#160e08]/95 to-[#0f0905]/98 border border-[#ff5e00]/25 p-7 sm:p-9 lg:p-10 flex flex-col justify-between shadow-[0_20px_50px_rgba(0,0,0,0.6)]">
+            <div className="w-full relative overflow-hidden rounded-[26px] bg-gradient-to-b from-[#22160d]/95 via-[#160e08]/95 to-[#0f0905]/98 border border-[#ff5e00]/25 p-7 sm:p-9 lg:p-10 grid shadow-[0_20px_50px_rgba(0,0,0,0.6)]">
               {/* Background Ambient Gradient inside Card */}
               <div className="absolute top-0 right-0 w-80 h-80 bg-[radial-gradient(circle_at_top_right,rgba(255,94,0,0.12),transparent_70%)] pointer-events-none" />
 
-              {/* Upper Text Content */}
-              <div className="relative z-10">
-                <span className="font-mono text-xs font-bold text-[#ff5e00] tracking-wider block mb-2">
-                  PILLAR {activeItem.number}
-                </span>
-                <h3 className="text-2xl sm:text-[26px] lg:text-[28px] font-bold text-white tracking-tight leading-[1.22] mb-4">
-                  {activeItem.title}
-                </h3>
-                <p className="text-neutral-300 text-xs sm:text-[13.5px] leading-relaxed mb-6 font-normal">
-                  {activeItem.description}
-                </p>
-
-                {/* Highlights List with Custom Orange Chevron Glyphs */}
-                <ul className="space-y-3">
-                  {activeItem.highlights.map((point, i) => (
-                    <li key={i} className="flex items-start gap-2.5">
-                      <svg
-                        className="w-3.5 h-3.5 text-[#ff5e00] shrink-0 mt-0.5"
-                        viewBox="0 0 16 16"
-                        fill="currentColor"
-                      >
-                        <path d="M3.5 3.5L7.5 8L3.5 12.5H5.5L9.5 8L5.5 3.5H3.5ZM7.5 3.5L11.5 8L7.5 12.5H9.5L13.5 8L9.5 3.5H7.5Z" />
-                      </svg>
-                      <span className="text-neutral-300 text-xs sm:text-[13px] leading-normal font-normal">
-                        {point}
+              {PILLARS_DATA.map((item, index) => {
+                const isActive = activeIndex === index;
+                return (
+                  <div
+                    key={item.id}
+                    aria-hidden={!isActive}
+                    className={`col-start-1 row-start-1 relative z-10 flex flex-col justify-between transition-all duration-300 ${
+                      isActive
+                        ? "opacity-100 translate-y-0"
+                        : "opacity-0 translate-y-2 pointer-events-none"
+                    }`}
+                  >
+                    {/* Upper Text Content */}
+                    <div>
+                      <span className="font-mono text-xs font-bold text-[#ff5e00] tracking-wider block mb-2">
+                        PILLAR {item.number}
                       </span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+                      <h3 className="text-2xl sm:text-[26px] lg:text-[28px] font-bold text-white tracking-tight leading-[1.22] mb-4">
+                        {item.title}
+                      </h3>
+                      <p className="text-neutral-300 text-xs sm:text-[13.5px] leading-relaxed mb-6 font-normal">
+                        {item.description}
+                      </p>
 
-              {/* Bottom Row: Number + CTA */}
-              <div className="relative z-10 pt-6 mt-6 border-t border-white/[0.08] flex items-center justify-between">
-                <span className="font-mono text-xs text-neutral-500">
-                  {activeItem.number} / 0{PILLARS_DATA.length}
-                </span>
-                <button
-                  type="button"
-                  onClick={scrollToContact}
-                  className="inline-flex items-center gap-2 text-xs sm:text-[13px] font-semibold text-[#ff5e00] hover:text-white transition-colors cursor-pointer group"
-                >
-                  <span>Build, Launch and Grow With Webnox →</span>
-                </button>
-              </div>
+                      {/* Highlights List with Custom Orange Chevron Glyphs */}
+                      <ul className="space-y-3">
+                        {item.highlights.map((point, i) => (
+                          <li key={i} className="flex items-start gap-2.5">
+                            <svg
+                              className="w-3.5 h-3.5 text-[#ff5e00] shrink-0 mt-0.5"
+                              viewBox="0 0 16 16"
+                              fill="currentColor"
+                            >
+                              <path d="M3.5 3.5L7.5 8L3.5 12.5H5.5L9.5 8L5.5 3.5H3.5ZM7.5 3.5L11.5 8L7.5 12.5H9.5L13.5 8L9.5 3.5H7.5Z" />
+                            </svg>
+                            <span className="text-neutral-300 text-xs sm:text-[13px] leading-normal font-normal">
+                              {point}
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    {/* Bottom Row: Number + CTA */}
+                    <div className="pt-6 mt-6 border-t border-white/[0.08] flex items-center justify-between">
+                      <span className="font-mono text-xs text-neutral-500">
+                        {item.number} / 0{PILLARS_DATA.length}
+                      </span>
+                      <button
+                        type="button"
+                        tabIndex={isActive ? 0 : -1}
+                        onClick={scrollToContact}
+                        className="inline-flex items-center gap-2 text-xs sm:text-[13px] font-semibold text-[#ff5e00] hover:text-white transition-colors cursor-pointer group"
+                      >
+                        <span>Build, Launch and Grow With Webnox →</span>
+                      </button>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
 

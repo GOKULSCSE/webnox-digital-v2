@@ -205,6 +205,7 @@ export default function Stepper({
   const [internal, setInternal] = useState(initialStep);
   const current = clamp(Math.round(controlled ? step : internal), 1, total + 1);
   const completed = current > total;
+  const totalPanes = completedContent ? total + 1 : total;
   const vertical = orientation === "vertical";
   const kind = vertical ? "numbers" : indicator;
   const labelled = steps.some((entry) => entry.props.title);
@@ -237,8 +238,7 @@ export default function Stepper({
   const markerRefs = useRef<(HTMLElement | null)[]>([]);
   const titleRefs = useRef<(HTMLSpanElement | null)[]>([]);
   const viewportRef = useRef<HTMLDivElement | null>(null);
-  const paneRef = useRef<HTMLDivElement | null>(null);
-  const leavingRef = useRef<HTMLDivElement | null>(null);
+  const paneRefs = useRef<(HTMLDivElement | null)[]>([]);
   const heightRef = useRef(0);
   const labelWidths = useRef<number[]>([]);
   const tightRef = useRef(false);
@@ -310,8 +310,9 @@ export default function Stepper({
   useIsomorphicLayoutEffect(() => {
     if (view.id === 0) return;
     const viewport = viewportRef.current;
-    const pane = paneRef.current;
-    const leaving = leavingRef.current;
+    const pane = paneRefs.current[view.step - 1] ?? null;
+    const leaving =
+      view.previous !== null ? paneRefs.current[view.previous - 1] ?? null : null;
     const id = view.id;
     const reduced =
       typeof window !== "undefined" &&
@@ -327,7 +328,7 @@ export default function Stepper({
       finish();
       return;
     }
-    for (const element of [viewport, pane, leaving])
+    for (const element of [viewport, pane, leaving, ...paneRefs.current])
       element?.getAnimations().forEach((animation) => animation.cancel());
     const from = heightRef.current;
     const to = viewport.offsetHeight;
@@ -631,24 +632,32 @@ export default function Stepper({
           className={`stepper__viewport ${contentClassName}`.trim()}
           aria-live="polite"
         >
-          {view.previous !== null && (
-            <div
-              key={view.id - 1}
-              ref={leavingRef}
-              className="stepper__pane stepper__pane--leaving"
-              aria-hidden="true"
-            >
-              {paneContent(view.previous)}
-            </div>
-          )}
-          <div
-            key={view.id}
-            ref={paneRef}
-            className="stepper__pane"
-            tabIndex={-1}
-          >
-            {paneContent(view.step)}
-          </div>
+          {Array.from(
+            { length: totalPanes },
+            (_, idx) => idx + 1
+          ).map((number) => {
+            const isCurrent = number === view.step;
+            const isLeaving = view.previous !== null && number === view.previous;
+            const paneClass = isCurrent
+              ? "stepper__pane"
+              : isLeaving
+              ? "stepper__pane stepper__pane--leaving"
+              : "stepper__pane stepper__pane--inactive";
+
+            return (
+              <div
+                key={`step-pane-${number}`}
+                ref={(el) => {
+                  paneRefs.current[number - 1] = el;
+                }}
+                className={paneClass}
+                tabIndex={isCurrent ? -1 : undefined}
+                aria-hidden={isCurrent ? undefined : true}
+              >
+                {paneContent(number)}
+              </div>
+            );
+          })}
         </div>
         {showFooter && (
           <div

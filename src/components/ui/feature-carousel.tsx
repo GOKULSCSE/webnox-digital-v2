@@ -672,40 +672,40 @@ export function FeatureCarousel({
                   />
 
                   {/* Information Overlay */}
-                  <AnimatePresence>
-                    {isActive && (
-                      <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 10 }}
-                        className="absolute inset-x-0 bottom-0 p-6 sm:p-7 md:p-8 pt-28 bg-gradient-to-t from-black/95 via-black/60 to-transparent flex flex-col justify-end text-white"
-                      >
-                        {/* Service Badge Tag */}
-                        <div className="bg-white/95 backdrop-blur-md text-[#12141a] px-3.5 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-wider w-fit shadow-md mb-2.5">
-                          {index + 1} • {feature.label}
-                        </div>
-
-                        {/* Description */}
-                        <p className="text-white font-medium text-xs sm:text-sm leading-relaxed drop-shadow-sm tracking-tight mb-4">
-                          {feature.description}
-                        </p>
-
-                        {/* CTA Link */}
-                        <div className="pt-2 border-t border-white/20 flex items-center justify-between">
-                          <a
-                            href={feature.ctaLink || "#contact"}
-                            className="text-xs font-bold text-white hover:text-orange-300 transition-colors inline-flex items-center gap-1.5"
-                          >
-                            <span>{feature.ctaText || "Talk to Our AI Experts"}</span>
-                            <ExternalLink className="w-3.5 h-3.5" />
-                          </a>
-                          <span className="text-[10px] text-white/60">
-                            Production Ready
-                          </span>
-                        </div>
-                      </motion.div>
+                  <div
+                    aria-hidden={!isActive}
+                    className={cn(
+                      "absolute inset-x-0 bottom-0 p-6 sm:p-7 md:p-8 pt-28 bg-gradient-to-t from-black/95 via-black/60 to-transparent flex flex-col justify-end text-white transition-all duration-250 ease-out",
+                      isActive
+                        ? "opacity-100 translate-y-0 pointer-events-auto"
+                        : "opacity-0 translate-y-[20px] pointer-events-none"
                     )}
-                  </AnimatePresence>
+                  >
+                    {/* Service Badge Tag */}
+                    <div className="bg-white/95 backdrop-blur-md text-[#12141a] px-3.5 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-wider w-fit shadow-md mb-2.5">
+                      {index + 1} • {feature.label}
+                    </div>
+
+                    {/* Description */}
+                    <p className="text-white font-medium text-xs sm:text-sm leading-relaxed drop-shadow-sm tracking-tight mb-4">
+                      {feature.description}
+                    </p>
+
+                    {/* CTA Link */}
+                    <div className="pt-2 border-t border-white/20 flex items-center justify-between">
+                      <a
+                        href={feature.ctaLink || "#contact"}
+                        tabIndex={isActive ? 0 : -1}
+                        className="text-xs font-bold text-white hover:text-orange-300 transition-colors inline-flex items-center gap-1.5"
+                      >
+                        <span>{feature.ctaText || "Talk to Our AI Experts"}</span>
+                        <ExternalLink className="w-3.5 h-3.5" />
+                      </a>
+                      <span className="text-[10px] text-white/60">
+                        Production Ready
+                      </span>
+                    </div>
+                  </div>
 
                   {/* Live Status indicator */}
                   <div

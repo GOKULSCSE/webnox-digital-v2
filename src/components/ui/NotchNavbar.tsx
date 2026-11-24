@@ -174,46 +174,41 @@ export default function NotchNavbar({
           <div className="relative w-full h-full flex items-center justify-center px-6 md:px-16 lg:px-24">
             {/* Left Navigation Wing */}
             <div className="flex-1 flex justify-end items-center overflow-hidden h-full pr-4 md:pr-7">
-              <AnimatePresence>
-                {isHovered && (
-                  <motion.nav
-                    key="left-nav-wing"
-                    initial={{ opacity: 0, x: 36, scaleX: 0.7 }}
-                    animate={{ opacity: 1, x: 0, scaleX: 1 }}
-                    exit={{ opacity: 0, x: 36, scaleX: 0.7, filter: "blur(3px)" }}
-                    transition={{
-                      duration: 0.22,
-                      ease: [0.22, 1, 0.36, 1],
-                    }}
-                    style={{ transformOrigin: "right center" }}
-                    className="flex items-center gap-6 md:gap-9 text-[13.5px] font-medium tracking-wide whitespace-nowrap pl-4"
-                  >
-                    {leftLinks.map((link) => {
-                      const isActive = pathname === link.href;
-                      return (
-                        <Link
-                          key={link.label}
-                          href={link.href}
-                          className={`transition-colors duration-200 relative group py-1.5 ${
-                            isActive
-                              ? "text-[#ff5e00] font-semibold"
-                              : "text-white/80 hover:text-white"
-                          }`}
-                        >
-                          <span>{link.label}</span>
-                          <span
-                            className={`absolute bottom-0 left-0 w-full h-[2px] bg-[#ff5e00] rounded-full transition-all duration-300 ${
-                              isActive
-                                ? "opacity-100 scale-x-100"
-                                : "opacity-0 scale-x-0 group-hover:opacity-100 group-hover:scale-x-100"
-                            }`}
-                          />
-                        </Link>
-                      );
-                    })}
-                  </motion.nav>
-                )}
-              </AnimatePresence>
+              <nav
+                key="left-nav-wing"
+                aria-hidden={!isHovered}
+                style={{ transformOrigin: "right center" }}
+                className={`flex items-center gap-6 md:gap-9 text-[13.5px] font-medium tracking-wide whitespace-nowrap pl-4 transition-all duration-[220ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                  isHovered
+                    ? "opacity-100 translate-x-0 scale-x-100 pointer-events-auto"
+                    : "opacity-0 translate-x-[36px] scale-x-[0.7] pointer-events-none"
+                }`}
+              >
+                {leftLinks.map((link) => {
+                  const isActive = pathname === link.href;
+                  return (
+                    <Link
+                      key={link.label}
+                      href={link.href}
+                      tabIndex={isHovered ? 0 : -1}
+                      className={`transition-colors duration-200 relative group py-1.5 ${
+                        isActive
+                          ? "text-[#ff5e00] font-semibold"
+                          : "text-white/80 hover:text-white"
+                      }`}
+                    >
+                      <span>{link.label}</span>
+                      <span
+                        className={`absolute bottom-0 left-0 w-full h-[2px] bg-[#ff5e00] rounded-full transition-all duration-300 ${
+                          isActive
+                            ? "opacity-100 scale-x-100"
+                            : "opacity-0 scale-x-0 group-hover:opacity-100 group-hover:scale-x-100"
+                        }`}
+                      />
+                    </Link>
+                  );
+                })}
+              </nav>
             </div>
 
             {/* Center Logo Anchor */}
@@ -236,46 +231,41 @@ export default function NotchNavbar({
 
             {/* Right Navigation Wing */}
             <div className="flex-1 flex justify-start items-center overflow-hidden h-full pl-4 md:pl-7">
-              <AnimatePresence>
-                {isHovered && (
-                  <motion.nav
-                    key="right-nav-wing"
-                    initial={{ opacity: 0, x: -36, scaleX: 0.7 }}
-                    animate={{ opacity: 1, x: 0, scaleX: 1 }}
-                    exit={{ opacity: 0, x: -36, scaleX: 0.7, filter: "blur(3px)" }}
-                    transition={{
-                      duration: 0.22,
-                      ease: [0.22, 1, 0.36, 1],
-                    }}
-                    style={{ transformOrigin: "left center" }}
-                    className="flex items-center gap-6 md:gap-9 text-[13.5px] font-medium tracking-wide whitespace-nowrap pr-4"
-                  >
-                    {rightLinks.map((link) => {
-                      const isActive = pathname === link.href;
-                      return (
-                        <Link
-                          key={link.label}
-                          href={link.href}
-                          className={`transition-colors duration-200 relative group py-1.5 ${
-                            isActive
-                              ? "text-[#ff5e00] font-semibold"
-                              : "text-white/80 hover:text-white"
-                          }`}
-                        >
-                          <span>{link.label}</span>
-                          <span
-                            className={`absolute bottom-0 left-0 w-full h-[2px] bg-[#ff5e00] rounded-full transition-all duration-300 ${
-                              isActive
-                                ? "opacity-100 scale-x-100"
-                                : "opacity-0 scale-x-0 group-hover:opacity-100 group-hover:scale-x-100"
-                            }`}
-                          />
-                        </Link>
-                      );
-                    })}
-                  </motion.nav>
-                )}
-              </AnimatePresence>
+              <nav
+                key="right-nav-wing"
+                aria-hidden={!isHovered}
+                style={{ transformOrigin: "left center" }}
+                className={`flex items-center gap-6 md:gap-9 text-[13.5px] font-medium tracking-wide whitespace-nowrap pr-4 transition-all duration-[220ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                  isHovered
+                    ? "opacity-100 translate-x-0 scale-x-100 pointer-events-auto"
+                    : "opacity-0 -translate-x-[36px] scale-x-[0.7] pointer-events-none"
+                }`}
+              >
+                {rightLinks.map((link) => {
+                  const isActive = pathname === link.href;
+                  return (
+                    <Link
+                      key={link.label}
+                      href={link.href}
+                      tabIndex={isHovered ? 0 : -1}
+                      className={`transition-colors duration-200 relative group py-1.5 ${
+                        isActive
+                          ? "text-[#ff5e00] font-semibold"
+                          : "text-white/80 hover:text-white"
+                      }`}
+                    >
+                      <span>{link.label}</span>
+                      <span
+                        className={`absolute bottom-0 left-0 w-full h-[2px] bg-[#ff5e00] rounded-full transition-all duration-300 ${
+                          isActive
+                            ? "opacity-100 scale-x-100"
+                            : "opacity-0 scale-x-0 group-hover:opacity-100 group-hover:scale-x-100"
+                        }`}
+                      />
+                    </Link>
+                  );
+                })}
+              </nav>
             </div>
           </div>
         </motion.div>

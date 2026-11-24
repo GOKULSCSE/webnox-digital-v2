@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
 import {
   Cpu,
   Layers,
@@ -72,7 +71,6 @@ const GENAI_CAPABILITIES: CapabilityItem[] = [
 
 export default function WhyChooseUs() {
   const [activeIndex, setActiveIndex] = useState(0);
-  const activeItem = GENAI_CAPABILITIES[activeIndex];
 
   return (
     <section className="relative w-full py-24 sm:py-32 bg-[#030303] text-white overflow-hidden">
@@ -142,7 +140,7 @@ export default function WhyChooseUs() {
 
           {/* Middle Column: The Brown Card (Expanded Width) */}
           <div
-            className="lg:col-span-6 relative rounded-[28px] sm:rounded-[34px] border border-white/10 p-7 sm:p-9 md:p-10 flex flex-col justify-center overflow-hidden shadow-2xl min-h-[460px]"
+            className="lg:col-span-6 relative rounded-[28px] sm:rounded-[34px] border border-white/10 p-7 sm:p-9 md:p-10 grid items-center overflow-hidden shadow-2xl min-h-[460px]"
             style={{
               background:
                 "linear-gradient(152.18deg, #60290B -16.91%, #140B06 99.34%)",
@@ -161,24 +159,28 @@ export default function WhyChooseUs() {
               <polyline points="7 7 17 7 17 17" />
             </svg>
 
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeItem.id}
-                initial={{ opacity: 0, y: 14 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -14 }}
-                transition={{ duration: 0.3, ease: "easeOut" }}
-                className="relative z-10 flex flex-col justify-center"
-              >
-                <h3 className="text-2xl sm:text-3xl font-bold text-white tracking-tight leading-snug mb-4">
-                  {activeItem.heading}
-                </h3>
+            {GENAI_CAPABILITIES.map((item, index) => {
+              const isActive = index === activeIndex;
+              return (
+                <div
+                  key={item.id}
+                  aria-hidden={!isActive}
+                  className={`col-start-1 row-start-1 relative z-10 flex flex-col justify-center transition-all duration-300 ${
+                    isActive
+                      ? "opacity-100 translate-y-0"
+                      : "opacity-0 translate-y-2 pointer-events-none"
+                  }`}
+                >
+                  <h3 className="text-2xl sm:text-3xl font-bold text-white tracking-tight leading-snug mb-4">
+                    {item.heading}
+                  </h3>
 
-                <p className="text-sm sm:text-base text-neutral-200/90 leading-relaxed font-normal">
-                  {activeItem.description}
-                </p>
-              </motion.div>
-            </AnimatePresence>
+                  <p className="text-sm sm:text-base text-neutral-200/90 leading-relaxed font-normal">
+                    {item.description}
+                  </p>
+                </div>
+              );
+            })}
           </div>
 
           {/* Right Column: AI Crystal Sphere Orb Card */}

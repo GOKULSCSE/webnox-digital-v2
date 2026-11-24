@@ -283,6 +283,10 @@
   pointer-events: none;
 }
 
+.stepper__pane--inactive {
+  display: none;
+}
+
 .stepper__step {
   min-width: 0;
 }

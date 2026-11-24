@@ -185,29 +185,45 @@ export default function AiDevelopmentProcess() {
             }}
           >
             {/* Active Step Details Glass Card */}
-            <div className="w-full bg-black/40 backdrop-blur-xl border border-white/20 rounded-2xl p-6 sm:p-7 shadow-[0_12px_40px_rgba(0,0,0,0.4)] text-white">
-              <div className="flex items-center justify-between mb-3">
-                <span className="font-mono text-xs font-bold text-[#ff8d4d] tracking-widest uppercase">
-                  STEP {PROCESS_STEPS[activeIndex].number}
-                </span>
-                <span className="text-xs text-white/60">
-                  {activeIndex + 1} of {PROCESS_STEPS.length}
-                </span>
-              </div>
-              <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight mb-2.5">
-                {PROCESS_STEPS[activeIndex].title}
-              </h3>
-              <p className="text-xs sm:text-sm text-neutral-200/90 leading-relaxed font-light mb-5">
-                {PROCESS_STEPS[activeIndex].description}
-              </p>
-              <button
-                type="button"
-                onClick={scrollToContact}
-                className="inline-flex items-center gap-2 text-xs font-semibold text-[#ff8d4d] hover:text-white transition-colors cursor-pointer group"
-              >
-                <span>Discuss Your Requirement</span>
-                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-              </button>
+            <div className="w-full bg-black/40 backdrop-blur-xl border border-white/20 rounded-2xl p-6 sm:p-7 shadow-[0_12px_40px_rgba(0,0,0,0.4)] text-white grid">
+              {PROCESS_STEPS.map((step, i) => {
+                const isActive = i === activeIndex;
+                return (
+                  <div
+                    key={step.number}
+                    aria-hidden={!isActive}
+                    className={`col-start-1 row-start-1 transition-opacity duration-300 ${
+                      isActive
+                        ? "opacity-100 relative z-10"
+                        : "opacity-0 pointer-events-none"
+                    }`}
+                  >
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="font-mono text-xs font-bold text-[#ff8d4d] tracking-widest uppercase">
+                        STEP {step.number}
+                      </span>
+                      <span className="text-xs text-white/60">
+                        {i + 1} of {PROCESS_STEPS.length}
+                      </span>
+                    </div>
+                    <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight mb-2.5">
+                      {step.title}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-neutral-200/90 leading-relaxed font-light mb-5">
+                      {step.description}
+                    </p>
+                    <button
+                      type="button"
+                      tabIndex={isActive ? 0 : -1}
+                      onClick={scrollToContact}
+                      className="inline-flex items-center gap-2 text-xs font-semibold text-[#ff8d4d] hover:text-white transition-colors cursor-pointer group"
+                    >
+                      <span>Discuss Your Requirement</span>
+                      <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                    </button>
+                  </div>
+                );
+              })}
             </div>
 
             {/* Stepper Dots & Compact Pills */}

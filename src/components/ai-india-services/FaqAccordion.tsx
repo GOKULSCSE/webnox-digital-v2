@@ -105,11 +105,17 @@ export default function FaqAccordion() {
                   </div>
                 </button>
 
-                {isOpen && (
-                  <div className="px-6 sm:px-8 pb-6 pt-1 text-neutral-700 text-sm sm:text-base leading-relaxed border-t border-neutral-100 animate-in fade-in duration-200">
-                    <p>{faq.answer}</p>
+                <div
+                  className={`grid transition-[grid-template-rows,opacity] duration-300 ease-in-out ${
+                    isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+                  }`}
+                >
+                  <div className="overflow-hidden">
+                    <div className="px-6 sm:px-8 pb-6 pt-1 text-neutral-700 text-sm sm:text-base leading-relaxed border-t border-neutral-100">
+                      <p>{faq.answer}</p>
+                    </div>
                   </div>
-                )}
+                </div>
               </div>
             );
           })}

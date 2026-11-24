@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -16,30 +16,18 @@ function syncScrollLayout() {
 }
 
 export default function LabsSectionGate({ children }: { children: ReactNode }) {
-  const [unlocked, setUnlocked] = useState(false);
-
   useEffect(() => {
-    const onUnlock = () => {
-      setUnlocked(true);
+    const onSync = () => {
       syncScrollLayout();
     };
 
-    const onLock = () => {
-      setUnlocked(false);
-      syncScrollLayout();
-    };
-
-    window.addEventListener("webnox:labs-unlocked", onUnlock);
-    window.addEventListener("webnox:labs-locked", onLock);
+    window.addEventListener("webnox:labs-unlocked", onSync);
+    window.addEventListener("webnox:labs-locked", onSync);
     return () => {
-      window.removeEventListener("webnox:labs-unlocked", onUnlock);
-      window.removeEventListener("webnox:labs-locked", onLock);
+      window.removeEventListener("webnox:labs-unlocked", onSync);
+      window.removeEventListener("webnox:labs-locked", onSync);
     };
   }, []);
 
-  return (
-    <div className={unlocked ? undefined : "hidden"} aria-hidden={!unlocked}>
-      {children}
-    </div>
-  );
+  return <div>{children}</div>;
 }

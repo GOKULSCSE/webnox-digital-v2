@@ -384,7 +384,6 @@ const INDUSTRIES_DATA: IndustryItem[] = [
 
 export default function IndustrySolutions() {
   const [activeIndex, setActiveIndex] = useState(0);
-  const activeIndustry = INDUSTRIES_DATA[activeIndex];
 
   const scrollToContact = () => {
     const contactEl =
@@ -438,61 +437,77 @@ export default function IndustrySolutions() {
         </div>
 
         {/* Big White/Cream Showcase Card */}
-        <div className="w-full bg-[#fcfaf7] border border-[#ebe4db] rounded-[32px] sm:rounded-[36px] p-7 sm:p-10 lg:p-12 shadow-[0_15px_50px_rgba(0,0,0,0.04),0_1px_3px_rgba(0,0,0,0.02)] relative overflow-hidden">
-          {/* Header of Active Industry */}
-          <div className="flex flex-col md:flex-row md:items-center justify-between pb-8 mb-8 border-b border-neutral-200 gap-4">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-2xl bg-orange-100 border border-orange-200 flex items-center justify-center text-[#ff5e00] shadow-sm">
-                {activeIndustry.icon}
-              </div>
-              <div>
-                <span className="font-mono text-xs uppercase tracking-wider text-[#ff5e00] font-bold">
-                  Sector {activeIndex + 1 < 10 ? `0${activeIndex + 1}` : activeIndex + 1}
-                </span>
-                <h3 className="text-2xl sm:text-3xl font-bold text-neutral-900 tracking-tight">
-                  {activeIndustry.title}
-                </h3>
-              </div>
-            </div>
-
-            <button
-              type="button"
-              onClick={scrollToContact}
-              className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold bg-[#140803] hover:bg-[#ff5e00] text-white px-5 py-2.5 rounded-full transition-all duration-300 shadow-md cursor-pointer self-start md:self-auto"
-            >
-              <span>Build Industry Solution</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </button>
-          </div>
-
-          {/* 3 Sub-Solutions Cards Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
-            {activeIndustry.solutions.map((sub, sIdx) => (
+        <div className="w-full bg-[#fcfaf7] border border-[#ebe4db] rounded-[32px] sm:rounded-[36px] p-7 sm:p-10 lg:p-12 shadow-[0_15px_50px_rgba(0,0,0,0.04),0_1px_3px_rgba(0,0,0,0.02)] relative overflow-hidden grid">
+          {INDUSTRIES_DATA.map((ind, idx) => {
+            const isActive = activeIndex === idx;
+            return (
               <div
-                key={sIdx}
-                className="group bg-white rounded-2xl p-6 sm:p-7 border border-neutral-200/80 shadow-[0_4px_20px_rgba(0,0,0,0.02)] hover:shadow-[0_12px_32px_rgba(255,94,0,0.08)] hover:border-[#ff5e00]/40 transition-all duration-300 flex flex-col justify-between"
+                key={ind.id}
+                aria-hidden={!isActive}
+                className={`col-start-1 row-start-1 transition-all duration-300 ${
+                  isActive
+                    ? "opacity-100 relative z-10"
+                    : "opacity-0 pointer-events-none"
+                }`}
               >
-                <div>
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="w-8 h-8 rounded-lg bg-orange-50 border border-orange-200/60 flex items-center justify-center font-mono text-xs font-bold text-[#ff5e00]">
-                      0{sIdx + 1}
-                    </span>
-                    <CheckCircle2 className="w-4 h-4 text-emerald-600/80" />
+                {/* Header of Industry */}
+                <div className="flex flex-col md:flex-row md:items-center justify-between pb-8 mb-8 border-b border-neutral-200 gap-4">
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 rounded-2xl bg-orange-100 border border-orange-200 flex items-center justify-center text-[#ff5e00] shadow-sm">
+                      {ind.icon}
+                    </div>
+                    <div>
+                      <span className="font-mono text-xs uppercase tracking-wider text-[#ff5e00] font-bold">
+                        Sector {idx + 1 < 10 ? `0${idx + 1}` : idx + 1}
+                      </span>
+                      <h3 className="text-2xl sm:text-3xl font-bold text-neutral-900 tracking-tight">
+                        {ind.title}
+                      </h3>
+                    </div>
                   </div>
-                  <h4 className="text-lg sm:text-[19px] font-bold text-[#140803] tracking-tight mb-2.5 group-hover:text-[#ff5e00] transition-colors leading-snug">
-                    {sub.title}
-                  </h4>
-                  <p className="text-xs sm:text-[13.5px] text-neutral-600 leading-relaxed font-normal">
-                    {sub.description}
-                  </p>
+
+                  <button
+                    type="button"
+                    tabIndex={isActive ? 0 : -1}
+                    onClick={scrollToContact}
+                    className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold bg-[#140803] hover:bg-[#ff5e00] text-white px-5 py-2.5 rounded-full transition-all duration-300 shadow-md cursor-pointer self-start md:self-auto"
+                  >
+                    <span>Build Industry Solution</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </button>
                 </div>
 
-                <div className="mt-6 pt-4 border-t border-neutral-100 flex items-center text-xs font-semibold text-[#ff5e00] group-hover:underline">
-                  <span>Explore Capabilities →</span>
+                {/* 3 Sub-Solutions Cards Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+                  {ind.solutions.map((sub, sIdx) => (
+                    <div
+                      key={sIdx}
+                      className="group bg-white rounded-2xl p-6 sm:p-7 border border-neutral-200/80 shadow-[0_4px_20px_rgba(0,0,0,0.02)] hover:shadow-[0_12px_32px_rgba(255,94,0,0.08)] hover:border-[#ff5e00]/40 transition-all duration-300 flex flex-col justify-between"
+                    >
+                      <div>
+                        <div className="flex items-center justify-between mb-4">
+                          <span className="w-8 h-8 rounded-lg bg-orange-50 border border-orange-200/60 flex items-center justify-center font-mono text-xs font-bold text-[#ff5e00]">
+                            0{sIdx + 1}
+                          </span>
+                          <CheckCircle2 className="w-4 h-4 text-emerald-600/80" />
+                        </div>
+                        <h4 className="text-lg sm:text-[19px] font-bold text-[#140803] tracking-tight mb-2.5 group-hover:text-[#ff5e00] transition-colors leading-snug">
+                          {sub.title}
+                        </h4>
+                        <p className="text-xs sm:text-[13.5px] text-neutral-600 leading-relaxed font-normal">
+                          {sub.description}
+                        </p>
+                      </div>
+
+                      <div className="mt-6 pt-4 border-t border-neutral-100 flex items-center text-xs font-semibold text-[#ff5e00] group-hover:underline">
+                        <span>Explore Capabilities →</span>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
-            ))}
-          </div>
+            );
+          })}
         </div>
       </div>
     </section>
