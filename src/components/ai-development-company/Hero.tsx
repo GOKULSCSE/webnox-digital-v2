@@ -145,30 +145,7 @@ export default function Hero() {
             </div>
           </div>
         </div>
-
-        {/* Bottom Client / Partner Bar */}
-        <div className="w-full mt-20 sm:mt-24 pt-10 border-t border-white/10">
-          <p className="text-xs sm:text-sm text-neutral-400 font-normal tracking-wide text-center mb-8">
-            We collaborate closely with our clients to deliver the highest level of service:
-          </p>
-
-          {/* Partner Brand Logos with Vertical Dividers */}
-          <div className="flex flex-wrap items-center justify-center gap-y-4 gap-x-6 sm:gap-x-8 max-w-5xl mx-auto px-4">
-            {PARTNER_CLIENTS.map((partner, index) => (
-              <React.Fragment key={partner.name}>
-                <div className="flex items-center gap-2 text-neutral-400 hover:text-white transition-colors duration-300">
-                  <span className="font-semibold text-xs sm:text-sm tracking-wider uppercase">
-                    {partner.name}
-                  </span>
-                </div>
-                {index < PARTNER_CLIENTS.length - 1 && (
-                  <span className="hidden sm:inline-block w-px h-3.5 bg-white/15" aria-hidden="true" />
-                )}
-              </React.Fragment>
-            ))}
-          </div>
-
-          {/* Industry Recognitions Pill Row */}
+         {/* Industry Recognitions Pill Row */}
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2.5 sm:gap-3 max-w-5xl mx-auto mt-8 pt-6 border-t border-white/5">
             {AWARDS_LIST.map((award, index) => (
               <div
@@ -187,7 +164,7 @@ export default function Hero() {
               </div>
             ))}
           </div>
-        </div>
+      
       </div>
     </section>
   );
